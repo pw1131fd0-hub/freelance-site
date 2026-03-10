@@ -1,52 +1,6 @@
-export default function Home() {
-  const projects = [
-    {
-      id: 'openclaw-fps',
-      name: 'OpenClaw FPS',
-      description: '3D WebGL 第一人稱射擊遊戲 - 實時物理引擎、敵人 AI、波次管理系統',
-      tech: ['TypeScript', 'Three.js', 'Cannon.js', 'Vite'],
-      url: 'https://github.com/pw1131fd0-hub/openclaw-fps',
-      status: '✅ 生產就緒',
-      emoji: '🎮'
-    },
-    {
-      id: 'k8s-copilot',
-      name: 'K8s Copilot',
-      description: 'Kubernetes 自動化平台 - 自動化部署、叢集監控、GitOps 整合',
-      tech: ['Node.js', 'Kubernetes', 'Docker', 'GitHub Actions'],
-      url: 'https://github.com/pw1131fd0-hub/k8s-copilot',
-      status: '✅ 生產就緒',
-      emoji: '☸️'
-    },
-    {
-      id: 'crm',
-      name: 'Openclaw CRM',
-      description: '企業級 CRM 系統 - 客戶管理、銷售管道、資料分析儀表板',
-      tech: ['Next.js', 'React', 'TypeScript', 'PostgreSQL'],
-      url: 'https://github.com/pw1131fd0-hub/openclaw-crm',
-      status: '✅ 生產就緒',
-      emoji: '📊'
-    },
-    {
-      id: 'ckad-exec',
-      name: 'CKAD Executor',
-      description: 'Kubernetes 認證自動化考試練習平台',
-      tech: ['TypeScript', 'Kubernetes', 'Docker'],
-      url: 'https://github.com/pw1131fd0-hub/CKAD-exec',
-      status: '✅ 生產就緒',
-      emoji: '📝'
-    },
-    {
-      id: 'openclaw-deployer',
-      name: 'OpenClaw Deployer',
-      description: 'CI/CD 一鍵部署工具 - 自動化測試、構建、部署流程',
-      tech: ['Node.js', 'GitHub Actions', 'Docker'],
-      url: 'https://github.com/pw1131fd0-hub/openclaw-deployer',
-      status: '✅ 生產就緒',
-      emoji: '🚀'
-    }
-  ];
+import { projects } from '@/data/projects';
 
+export default function Home() {
   return (
     <main className="min-h-screen bg-white dark:bg-black text-black dark:text-white font-sans">
       {/* Header Section - Inspired by iiNumbers */}
@@ -79,7 +33,7 @@ export default function Home() {
             <div key={project.id} className="group">
               <div className="flex flex-col md:flex-row md:items-baseline justify-between mb-2">
                 <a 
-                  href={project.url} 
+                  href={project.githubUrl} 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-xl font-bold hover:text-blue-600 dark:hover:text-blue-400 underline underline-offset-4 decoration-1 decoration-gray-300 dark:decoration-gray-700 hover:decoration-blue-600 transition-all"
@@ -94,7 +48,7 @@ export default function Home() {
                 {project.description}
               </p>
               <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm font-mono text-gray-500 dark:text-gray-500">
-                {project.tech.map((tech) => (
+                {project.techStack.map((tech) => (
                   <span key={tech}>#{tech.toLowerCase()}</span>
                 ))}
               </div>

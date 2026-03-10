@@ -12,7 +12,8 @@ describe('Projects Data', () => {
       expect(project.description).toBeDefined();
       expect(project.techStack).toBeDefined();
       expect(project.githubUrl).toBeDefined();
-      expect(project.imageUrl).toBeDefined();
+      expect(project.status).toBeDefined();
+      expect(project.emoji).toBeDefined();
     });
   });
 
