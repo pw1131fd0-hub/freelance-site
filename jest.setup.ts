@@ -64,3 +64,19 @@ if (typeof Headers === 'undefined') {
 const { TextEncoder, TextDecoder } = require('util');
 global.TextEncoder = TextEncoder;
 global.TextDecoder = TextDecoder;
+
+// React 19 act polyfill
+// @ts-ignore
+global.IS_REACT_ACT_ENVIRONMENT = true;
+
+// @ts-ignore
+if (typeof React.act === 'undefined') {
+  try {
+    // @ts-ignore
+    const { act } = require('react');
+    // @ts-ignore
+    if (act) React.act = act;
+  } catch (e) {
+    // ignore
+  }
+}

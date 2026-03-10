@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { projects } from '@/data/projects';
 
 export default function Home() {
@@ -64,12 +65,18 @@ export default function Home() {
           Interested in AI solutions or collaboration?
         </p>
         <div className="flex flex-wrap gap-8">
-          <a 
+          <Link 
             href="/contact" 
             className="text-lg font-bold border-b-2 border-black dark:border-white hover:text-blue-600 hover:border-blue-600 transition-all"
           >
             Send a Message
-          </a>
+          </Link>
+          <Link 
+            href="/blog" 
+            className="text-lg font-bold border-b-2 border-black dark:border-white hover:text-blue-600 hover:border-blue-600 transition-all"
+          >
+            Insights
+          </Link>
           <a 
             href="mailto:contact@iinumbers.com" 
             className="text-lg font-bold border-b-2 border-black dark:border-white hover:text-blue-600 hover:border-blue-600 transition-all"

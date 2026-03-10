@@ -17,6 +17,8 @@
 }
 ```
 
+*Note: The frontend also performs a simple math CAPTCHA verification before calling this API.*
+
 **Response Schema (Success - 200 OK)**:
 ```json
 {

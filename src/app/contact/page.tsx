@@ -7,7 +7,9 @@ export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    subject: '',
     message: '',
+    captcha: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState('');
@@ -22,21 +24,29 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Simple CAPTCHA validation
+    if (formData.captcha !== '2') {
+      setMessage('❌ Error: Incorrect answer to the math question.');
+      return;
+    }
+
     setIsSubmitting(true);
     setMessage('');
 
     try {
+      const { captcha: _, ...submitData } = formData;
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(submitData),
       });
 
       if (response.ok) {
         setMessage('✅ Message sent successfully! I\'ll get back to you soon.');
-        setFormData({ name: '', email: '', message: '' });
+        setFormData({ name: '', email: '', subject: '', message: '', captcha: '' });
       } else {
         const errorData = await response.json();
         setMessage(`❌ Error: ${errorData.error || 'Failed to send message.'}`);
@@ -98,6 +108,21 @@ export default function Contact() {
             </div>
 
             <div className="border-b border-gray-200 dark:border-gray-800 pb-2 focus-within:border-blue-600 transition-colors">
+              <label htmlFor="subject" className="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-2">
+                Subject
+              </label>
+              <input
+                type="text"
+                id="subject"
+                name="subject"
+                value={formData.subject}
+                onChange={handleChange}
+                className="w-full bg-transparent border-none focus:ring-0 p-0 text-lg placeholder-gray-300 dark:placeholder-gray-700"
+                placeholder="What's this about?"
+              />
+            </div>
+
+            <div className="border-b border-gray-200 dark:border-gray-800 pb-2 focus-within:border-blue-600 transition-colors">
               <label htmlFor="message" className="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-2">
                 Message
               </label>
@@ -110,6 +135,22 @@ export default function Contact() {
                 rows={4}
                 className="w-full bg-transparent border-none focus:ring-0 p-0 text-lg placeholder-gray-300 dark:placeholder-gray-700 resize-none"
                 placeholder="What's on your mind?"
+              />
+            </div>
+
+            <div className="border-b border-gray-200 dark:border-gray-800 pb-2 focus-within:border-blue-600 transition-colors">
+              <label htmlFor="captcha" className="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-2">
+                Verification: 1 + 1 = ?
+              </label>
+              <input
+                type="text"
+                id="captcha"
+                name="captcha"
+                value={formData.captcha}
+                onChange={handleChange}
+                required
+                className="w-full bg-transparent border-none focus:ring-0 p-0 text-lg placeholder-gray-300 dark:placeholder-gray-700"
+                placeholder="Prove you are human"
               />
             </div>
           </div>
