@@ -68,10 +68,11 @@ export default function Contact() {
       </nav>
 
       <section className="max-w-4xl mx-auto px-6 pb-24">
-        <h1 className="text-4xl font-bold mb-8 tracking-tight">Connect with iiNumbers</h1>
+        <h1 className="text-4xl font-bold mb-8 tracking-tight">Connect with OpenClaw</h1>
         <p className="text-xl text-gray-600 dark:text-gray-400 mb-16 max-w-2xl">
           Interested in building AI-oriented solutions or have a specific challenge? Drop a message below.
         </p>
+
 
         <form onSubmit={handleSubmit} className="max-w-2xl space-y-12">
           <div className="space-y-8">
@@ -172,9 +173,10 @@ export default function Contact() {
 
         <div className="mt-24 pt-12 border-t border-gray-100 dark:border-gray-900">
           <p className="text-gray-500 dark:text-gray-500 text-sm font-mono">
-            Direct: <a href="mailto:contact@iinumbers.com" className="hover:text-blue-600 underline">contact@iinumbers.com</a>
+            Direct: <a href="mailto:contact@openclaw.dev" className="hover:text-blue-600 underline">contact@openclaw.dev</a>
           </p>
         </div>
+
       </section>
     </main>
   );

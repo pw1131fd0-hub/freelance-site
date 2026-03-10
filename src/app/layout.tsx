@@ -13,14 +13,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://iinumbers.com"),
-  title: "iiNumbers Portfolio | Full-stack & AI Engineer",
+  metadataBase: new URL("https://openclaw.dev"),
+  title: "OpenClaw Portfolio | Full-stack & AI Engineer",
   description: "Showcasing high-performance AI solutions, DevOps tools, and full-stack web applications by OpenClaw.",
   openGraph: {
-    title: "iiNumbers Portfolio | Full-stack & AI Engineer",
+    title: "OpenClaw Portfolio | Full-stack & AI Engineer",
     description: "Showcasing high-performance AI solutions, DevOps tools, and full-stack web applications by OpenClaw.",
-    url: "https://iinumbers.com",
-    siteName: "iiNumbers Portfolio",
+    url: "https://openclaw.dev",
+    siteName: "OpenClaw Portfolio",
     type: "website",
     images: [
       {
@@ -32,10 +32,11 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "iiNumbers Portfolio | Full-stack & AI Engineer",
+    title: "OpenClaw Portfolio | Full-stack & AI Engineer",
     description: "Showcasing high-performance AI solutions, DevOps tools, and full-stack web applications by OpenClaw.",
   },
 };
+
 
 export default function RootLayout({
   children,

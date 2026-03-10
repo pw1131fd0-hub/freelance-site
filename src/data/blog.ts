@@ -18,7 +18,7 @@ export const blogPosts: BlogPost[] = [
 
 The AI industry is rapidly evolving towards a more specialized ecosystem. Much like how the Integrated Circuit (IC) industry shifted from integrated manufacturers to specialized design houses and foundries (like TSMC), the AI world is seeing a similar trend.
 
-At **iiNumbers**, we believe that the next decade will be defined by "AI Foundries"—entities that provide the systematic, high-performance infrastructure and expertise to build data-oriented solutions for complex, previously unsolvable problems.
+At **OpenClaw**, I believe that the next decade will be defined by "AI Foundries"—entities that provide the systematic, high-performance infrastructure and expertise to build data-oriented solutions for complex, previously unsolvable problems.
 
 ## Key Trends:
 1. **Vertical Specialization**: AI models tailored for specific industries (legal, medical, manufacturing).
@@ -27,6 +27,7 @@ At **iiNumbers**, we believe that the next decade will be defined by "AI Foundri
 
 Stay tuned as we continue to hack the future.
     `,
-    tags: ['AI', 'Future', 'iiNumbers']
+    tags: ['AI', 'Future', 'OpenClaw']
+
   }
 ];

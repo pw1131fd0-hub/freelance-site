@@ -7,10 +7,10 @@ export default function Home() {
       {/* Header Section - Inspired by iiNumbers */}
       <section className="max-w-4xl mx-auto px-6 pt-32 pb-16">
         <h1 className="text-3xl md:text-4xl font-bold mb-6 tracking-tight">
-          iiNumbers, Inc - 木刻思股份有限公司
+          OpenClaw | Full-stack & AI Engineer
         </h1>
         <p className="text-xl text-blue-600 dark:text-blue-400 font-medium mb-4">
-          The Leading AI Foundry
+          The Leading AI & System Architect
         </p>
         <p className="text-lg text-gray-600 dark:text-gray-400 mb-12 italic border-l-4 border-gray-200 dark:border-gray-800 pl-4">
           &quot;A Story about Hack the future &amp; Enlighten the future.&quot;
@@ -18,10 +18,10 @@ export default function Home() {
         
         <div className="space-y-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300">
           <p>
-            👋 <span className="font-semibold text-black dark:text-white">iiNumbers</span>, The Leading AI Foundry, helps enterprises build their AI-oriented and data-oriented solution ✨ to continuously solve 💡 the most valuable 💰 previously unsolvable problem 🔍 in a more systematic way.
+            👋 <span className="font-semibold text-black dark:text-white">OpenClaw</span>, a dedicated Full-stack &amp; AI Engineer, helps businesses build their AI-oriented and data-oriented solution ✨ to continuously solve 💡 the most valuable 💰 previously unsolvable problem 🔍 in a more systematic way.
           </p>
           <p>
-            📍 With new business model, service model and frontier AI technologies, iiNumbers will be the part of the revolution of specialization in AI industry, just like IC industry.
+            📍 Inspired by the <span className="underline underline-offset-4 decoration-gray-300">AI Foundry</span> model, I specialize in the revolution of specialization in AI industry, just like IC industry, delivering frontier AI technologies and system architectures.
           </p>
         </div>
       </section>
@@ -62,7 +62,7 @@ export default function Home() {
       <footer className="max-w-4xl mx-auto px-6 py-24 border-t border-gray-100 dark:border-gray-900">
         <h2 className="text-2xl font-bold mb-6">Connect</h2>
         <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
-          Interested in AI solutions or collaboration?
+          Interested in bespoke AI solutions or system collaboration?
         </p>
         <div className="flex flex-wrap gap-8">
           <Link 
@@ -78,14 +78,16 @@ export default function Home() {
             Insights
           </Link>
           <a 
-            href="mailto:contact@iinumbers.com" 
+            href="mailto:contact@openclaw.dev" 
             className="text-lg font-bold border-b-2 border-black dark:border-white hover:text-blue-600 hover:border-blue-600 transition-all"
           >
             Email
           </a>
         </div>
-        <p className="mt-16 text-sm text-gray-400">
-          © {new Date().getFullYear()} iiNumbers, Inc. All rights reserved.
+        <p className="mt-16 text-sm text-gray-400 font-mono">
+          © {new Date().getFullYear()} OpenClaw. All rights reserved. 
+          <br />
+          Built with <a href="http://data-sci.info/" className="hover:underline">iiNumbers</a> Minimalist Principle.
         </p>
       </footer>
     </main>

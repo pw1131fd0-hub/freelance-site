@@ -6,14 +6,15 @@ describe('Home Page (Static Rendering)', () => {
     const html = renderToString(<Home />);
     
     // Check for the main heading
-    expect(html).toContain('iiNumbers, Inc - 木刻思股份有限公司');
+    expect(html).toContain('OpenClaw | Full-stack &amp; AI Engineer');
     
     // Check for the subheadings
-    expect(html).toContain('The Leading AI Foundry');
+    expect(html).toContain('The Leading AI &amp; System Architect');
     
     // Check for the paragraph
-    expect(html).toContain('helps enterprises build their AI-oriented');
+    expect(html).toContain('helps businesses build their AI-oriented');
   });
+
 
   it('renders the featured projects section', () => {
     const html = renderToString(<Home />);
@@ -33,6 +34,7 @@ describe('Home Page (Static Rendering)', () => {
     
     // Check for links
     expect(html).toContain('/contact');
-    expect(html).toContain('mailto:contact@iinumbers.com');
+    expect(html).toContain('mailto:contact@openclaw.dev');
   });
+
 });

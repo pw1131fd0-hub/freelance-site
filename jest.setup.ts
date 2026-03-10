@@ -69,14 +69,16 @@ global.TextDecoder = TextDecoder;
 // @ts-ignore
 global.IS_REACT_ACT_ENVIRONMENT = true;
 
+const reactPkg = require('react');
+const { act } = reactPkg;
 // @ts-ignore
 if (typeof React.act === 'undefined') {
-  try {
-    // @ts-ignore
-    const { act } = require('react');
-    // @ts-ignore
-    if (act) React.act = act;
-  } catch (e) {
-    // ignore
-  }
+  // @ts-ignore
+  React.act = act;
 }
+// @ts-ignore
+global.act = act;
+
+
+
+
