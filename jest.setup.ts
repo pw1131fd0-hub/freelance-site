@@ -1,22 +1,6 @@
 import '@testing-library/jest-dom';
 import * as React from 'react';
 
-// Fix for React 19 act missing in Jest/JSDOM
-try {
-  const { act } = require('react-dom/test-utils');
-  Object.defineProperty(React, 'act', {
-    value: act,
-    writable: true,
-    configurable: true
-  });
-} catch (e) {
-  Object.defineProperty(React, 'act', {
-    value: (cb: any) => cb(),
-    writable: true,
-    configurable: true
-  });
-}
-
 // Polyfill Web APIs for JSDOM
 if (typeof Request === 'undefined') {
   global.Request = class Request {
@@ -31,7 +15,7 @@ if (typeof Request === 'undefined') {
       this.headers = new Headers(init?.headers);
     }
     async json() {
-      return JSON.parse(this.body);
+      return typeof this.body === 'string' ? JSON.parse(this.body) : this.body;
     }
   } as any;
 }
@@ -55,8 +39,12 @@ if (typeof Headers === 'undefined') {
     map = new Map();
     constructor(init?: any) {
       if (init) {
-        for (const [k, v] of Object.entries(init)) {
-          this.map.set(k, v);
+        if (init instanceof Headers) {
+          (init as any).map.forEach((v: string, k: string) => this.map.set(k, v));
+        } else {
+          for (const [k, v] of Object.entries(init)) {
+            this.map.set(k, v);
+          }
         }
       }
     }
@@ -65,6 +53,9 @@ if (typeof Headers === 'undefined') {
     }
     set(name: string, value: string) {
       this.map.set(name, value);
+    }
+    forEach(cb: any) {
+      this.map.forEach(cb);
     }
   } as any;
 }
