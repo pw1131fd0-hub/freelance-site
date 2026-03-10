@@ -15,12 +15,19 @@ const contactSchema = z.object({
 const rateLimitMap = new Map<string, { count: number; timestamp: number }>();
 const RATE_LIMIT = 3; // 3 requests per minute
 const RATE_LIMIT_WINDOW = 60 * 1000;
+const MAX_LIMIT_MAP_SIZE = 1000; // Limit map size to prevent memory leaks
 
 export async function POST(request: Request) {
   try {
     // Basic Rate Limiting based on IP
     const ip = request.headers.get('x-forwarded-for') || '127.0.0.1';
     const now = Date.now();
+    
+    // Cleanup if map gets too large
+    if (rateLimitMap.size > MAX_LIMIT_MAP_SIZE) {
+      rateLimitMap.clear();
+    }
+
     const rateLimitData = rateLimitMap.get(ip);
     
     if (rateLimitData) {

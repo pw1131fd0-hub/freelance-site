@@ -48,99 +48,85 @@ export default function Home() {
   ];
 
   return (
-    <main className="min-h-screen bg-white dark:bg-black">
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center px-4 py-20 overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0">
-          <div className="w-full h-full bg-gradient-to-br from-blue-500/10 to-purple-500/10"></div>
-        </div>
+    <main className="min-h-screen bg-white dark:bg-black text-black dark:text-white font-sans">
+      {/* Header Section - Inspired by iiNumbers */}
+      <section className="max-w-4xl mx-auto px-6 pt-32 pb-16">
+        <h1 className="text-3xl md:text-4xl font-bold mb-6 tracking-tight">
+          iiNumbers, Inc - 木刻思股份有限公司
+        </h1>
+        <p className="text-xl text-blue-600 dark:text-blue-400 font-medium mb-4">
+          The Leading AI Foundry
+        </p>
+        <p className="text-lg text-gray-600 dark:text-gray-400 mb-12 italic border-l-4 border-gray-200 dark:border-gray-800 pl-4">
+          &quot;A Story about Hack the future &amp; Enlighten the future.&quot;
+        </p>
         
-        <div className="max-w-4xl text-center relative z-10">
-          {/* Avatar */}
-          <div className="mb-8">
-            <div className="w-48 h-48 md:w-64 md:h-64 rounded-full mx-auto border-4 border-blue-600 shadow-lg bg-gradient-to-br from-blue-400 to-purple-400 flex items-center justify-center">
-              <span className="text-6xl">🤖</span>
+        <div className="space-y-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300">
+          <p>
+            👋 <span className="font-semibold text-black dark:text-white">iiNumbers</span>, The Leading AI Foundry, helps enterprises build their AI-oriented and data-oriented solution ✨ to continuously solve 💡 the most valuable 💰 previously unsolvable problem 🔍 in a more systematic way.
+          </p>
+          <p>
+            📍 With new business model, service model and frontier AI technologies, iiNumbers will be the part of the revolution of specialization in AI industry, just like IC industry.
+          </p>
+        </div>
+      </section>
+
+      {/* Projects List - Minimalist approach */}
+      <section className="max-w-4xl mx-auto px-6 py-16 border-t border-gray-100 dark:border-gray-900">
+        <h2 className="text-2xl font-bold mb-10">Featured Projects</h2>
+        <div className="space-y-12">
+          {projects.map((project) => (
+            <div key={project.id} className="group">
+              <div className="flex flex-col md:flex-row md:items-baseline justify-between mb-2">
+                <a 
+                  href={project.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-xl font-bold hover:text-blue-600 dark:hover:text-blue-400 underline underline-offset-4 decoration-1 decoration-gray-300 dark:decoration-gray-700 hover:decoration-blue-600 transition-all"
+                >
+                  {project.emoji} {project.name}
+                </a>
+                <span className="text-sm font-mono text-green-600 dark:text-green-400 mt-1 md:mt-0">
+                  {project.status}
+                </span>
+              </div>
+              <p className="text-gray-600 dark:text-gray-400 mb-3 max-w-2xl">
+                {project.description}
+              </p>
+              <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm font-mono text-gray-500 dark:text-gray-500">
+                {project.tech.map((tech) => (
+                  <span key={tech}>#{tech.toLowerCase()}</span>
+                ))}
+              </div>
             </div>
-          </div>
-          
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-black dark:text-white mb-6">
-            iiNumbers, Inc - 木刻思股份有限公司
-          </h1>
-          <p className="text-xl md:text-2xl text-blue-600 dark:text-blue-400 font-medium mb-4">
-            The Leading AI Foundry
-          </p>
-          <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 mb-8 italic">
-            &quot;A Story about Hack the future &amp; Enlighten the future.&quot;
-          </p>
-          <p className="text-lg text-gray-500 dark:text-gray-500 max-w-2xl mx-auto">
-            Passionate about cloud infrastructure, AI, and creating products that matter. 
-            Helping enterprises build AI-oriented and data-oriented solutions to solve the most valuable previously unsolvable problems.
-          </p>
+          ))}
         </div>
       </section>
 
-      {/* Projects Section */}
-      <section className="px-4 py-20 bg-gray-50 dark:bg-zinc-900">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold mb-16 text-black dark:text-white">Featured Projects</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map((project) => (
-              <a
-                key={project.id}
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group overflow-hidden border border-gray-200 dark:border-gray-700 rounded-lg hover:border-green-500 dark:hover:border-green-500 transition-all hover:shadow-lg dark:hover:shadow-green-500/20"
-              >
-                {/* Project Image */}
-                <div className="relative w-full h-48 overflow-hidden bg-gradient-to-br from-blue-400 to-purple-400 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <span className="text-7xl">{project.emoji}</span>
-                </div>
-                
-                {/* Project Info */}
-                <div className="p-6">
-                  <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-xl font-semibold text-black dark:text-white group-hover:text-green-600 dark:group-hover:text-green-400">
-                      {project.name}
-                    </h3>
-                    <span className="text-xs font-semibold text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/30 px-2 py-1 rounded">
-                      {project.status}
-                    </span>
-                  </div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">{project.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tech.map((tech) => (
-                      <span
-                        key={tech}
-                        className="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section className="px-4 py-20 bg-gray-50 dark:bg-zinc-900">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-8 text-black dark:text-white">Get In Touch</h2>
-          <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
-            Have a project in mind? Let&apos;s collaborate.
-          </p>
-          <a
-            href="/contact"
-            className="inline-block px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+      {/* Footer / Contact */}
+      <footer className="max-w-4xl mx-auto px-6 py-24 border-t border-gray-100 dark:border-gray-900">
+        <h2 className="text-2xl font-bold mb-6">Connect</h2>
+        <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
+          Interested in AI solutions or collaboration?
+        </p>
+        <div className="flex flex-wrap gap-8">
+          <a 
+            href="/contact" 
+            className="text-lg font-bold border-b-2 border-black dark:border-white hover:text-blue-600 hover:border-blue-600 transition-all"
           >
-            Get In Touch
+            Send a Message
+          </a>
+          <a 
+            href="mailto:contact@iinumbers.com" 
+            className="text-lg font-bold border-b-2 border-black dark:border-white hover:text-blue-600 hover:border-blue-600 transition-all"
+          >
+            Email
           </a>
         </div>
-      </section>
+        <p className="mt-16 text-sm text-gray-400">
+          © {new Date().getFullYear()} iiNumbers, Inc. All rights reserved.
+        </p>
+      </footer>
     </main>
   );
 }

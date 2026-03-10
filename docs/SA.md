@@ -33,7 +33,7 @@ graph TD
 
 ## 2. 元件職責 (Component Responsibilities)
 
-- **Frontend UI (React/Tailwind)**: 負責呈現使用者介面、響應式設計 (RWD) 以及透過 Framer Motion 實作的頁面動畫過場效果。
+- **Frontend UI (React/Tailwind)**: 負責呈現使用者介面、響應式設計 (RWD)。遵循極簡主義，以文字為核心，移除複雜動畫與裝飾。
 - **Static Site Generation (SSG)**: 在建置階段 (Build time) 將作品集資料與 MDX 部落格文章預先渲染為靜態 HTML，以提供最快的載入速度 (Lighthouse 雙 90+ 目標)。
 - **API Routes (Next.js API)**: 處理來自前端的動態請求，目前主要負責接收「聯絡表單」的資料，並轉發給第三方信件服務器，同時實作 Rate Limiting 防禦。
 - **Content Layer**: 作為輕量級的資料來源，包含靜態的作品集定義 (TypeScript/JSON 格式) 以及 Markdown/MDX 格式的部落格文章。
@@ -52,7 +52,7 @@ graph TD
 4. API Route 進行後端驗證與 Rate Limiting 檢查。
 5. 驗證通過後，API 呼叫第三方郵件服務 (如 Resend) 寄送通知信給網站擁有者。
 6. 第三方服務回傳成功，API Route 回傳 HTTP 200 給前端。
-7. 前端顯示成功送出的提示動畫 (Toast Notification)。
+7. 前端顯示成功送出的提示。
 
 ## 4. 部署架構 (Deployment Architecture)
 
@@ -67,8 +67,7 @@ graph TD
 | --- | --- | --- |
 | **核心框架** | Next.js 14+ (App Router), React, TypeScript | 網站基礎架構與靜態生成 |
 | **樣式與 UI** | Tailwind CSS, clsx, tailwind-merge | Utility-first CSS 框架與類別合併工具 |
-| **動畫效果** | Framer Motion | 頁面切換、滾動與元件互動動畫 |
 | **表單處理** | React Hook Form, Zod | 表單狀態管理與 Schema 驗證 |
 | **外部 API** | Resend 或 SendGrid | 寄發聯絡表單的通知信件 |
 | **內容處理** | next-mdx-remote 或 gray-matter | 解析與渲染 MDX 部落格文章 |
-| **圖示庫** | Lucide React | 提供一致風格的 SVG 圖示 |
+| **圖示庫** | Emojis (Native) | 系統內建 Emoji，提升效能並維持極簡風格 |

@@ -67,7 +67,7 @@ interface BlogPost {
 
 - **前端層 (Frontend)**:
   - 欄位驗證錯誤：使用 Zod 配合 React Hook Form 在 Client-side 即時提示錯誤訊息，避免無效請求送出。
-  - 網路或伺服器錯誤：捕捉 API 回傳的非 200 狀態碼，透過 UI Toast 元件顯示友善的錯誤提示（如「發送失敗，請稍後再試」）。
+  - 網路或伺服器錯誤：捕捉 API 回傳的非 200 狀態碼，顯示友善的錯誤提示（如「發送失敗，請稍後再試」）。
 - **後端層 (API Routes)**:
   - 統一使用 Try-Catch 包覆非同步邏輯。
   - 對 Request Body 再次進行 Zod 驗證（Server-side Validation），驗證失敗回傳 HTTP 400。
@@ -123,10 +123,9 @@ interface ContactFormProps {
   className?: string;
 }
 
-// 作品集卡片元件 Props
-interface ProjectCardProps {
+// 作品集卡片元件 Props (現改為極簡列表項)
+interface ProjectItemProps {
   project: Project;
-  index: number; // 用於 Framer Motion 延遲動畫計算
 }
 
 // 標籤元件 Props

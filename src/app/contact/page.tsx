@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -37,7 +38,8 @@ export default function Contact() {
         setMessage('✅ Message sent successfully! I\'ll get back to you soon.');
         setFormData({ name: '', email: '', message: '' });
       } else {
-        setMessage('❌ Failed to send message. Please try again.');
+        const errorData = await response.json();
+        setMessage(`❌ Error: ${errorData.error || 'Failed to send message.'}`);
       }
     } catch (error) {
       setMessage('❌ Error sending message. Please try again later.');
@@ -48,38 +50,24 @@ export default function Contact() {
   };
 
   return (
-    <main className="min-h-screen bg-white dark:bg-black">
-      {/* Header with Background */}
-      <section className="relative bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 px-4 py-24 overflow-hidden">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-black dark:text-white mb-4">
-            Get In Touch
-          </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400">
-            Have a project in mind? Let&apos;s collaborate and build something amazing together.
-          </p>
-        </div>
-      </section>
+    <main className="min-h-screen bg-white dark:bg-black text-black dark:text-white font-sans">
+      <nav className="max-w-4xl mx-auto px-6 py-12">
+        <Link href="/" className="text-sm font-bold hover:text-blue-600 dark:hover:text-blue-400">
+          ← Back to Home
+        </Link>
+      </nav>
 
-      {/* Contact Form */}
-      <section className="px-4 py-20">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-            {/* Image Side */}
-            <div className="hidden lg:flex items-center justify-center">
-              <div className="w-80 h-96 bg-gradient-to-br from-purple-400 to-pink-400 rounded-lg shadow-lg flex flex-col items-center justify-center space-y-6">
-                <span className="text-8xl">✉️</span>
-                <span className="text-6xl">💬</span>
-              </div>
-            </div>
-            
-            {/* Form Side */}
-            <div>
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Name */}
-            <div>
-              <label htmlFor="name" className="block text-sm font-semibold text-black dark:text-white mb-2">
-                Your Name
+      <section className="max-w-4xl mx-auto px-6 pb-24">
+        <h1 className="text-4xl font-bold mb-8 tracking-tight">Connect with iiNumbers</h1>
+        <p className="text-xl text-gray-600 dark:text-gray-400 mb-16 max-w-2xl">
+          Interested in building AI-oriented solutions or have a specific challenge? Drop a message below.
+        </p>
+
+        <form onSubmit={handleSubmit} className="max-w-2xl space-y-12">
+          <div className="space-y-8">
+            <div className="border-b border-gray-200 dark:border-gray-800 pb-2 focus-within:border-blue-600 transition-colors">
+              <label htmlFor="name" className="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-2">
+                Name
               </label>
               <input
                 type="text"
@@ -88,15 +76,14 @@ export default function Contact() {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-zinc-900 text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="John Doe"
+                className="w-full bg-transparent border-none focus:ring-0 p-0 text-lg placeholder-gray-300 dark:placeholder-gray-700"
+                placeholder="How should we call you?"
               />
             </div>
 
-            {/* Email */}
-            <div>
-              <label htmlFor="email" className="block text-sm font-semibold text-black dark:text-white mb-2">
-                Your Email
+            <div className="border-b border-gray-200 dark:border-gray-800 pb-2 focus-within:border-blue-600 transition-colors">
+              <label htmlFor="email" className="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-2">
+                Email
               </label>
               <input
                 type="email"
@@ -105,14 +92,13 @@ export default function Contact() {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-zinc-900 text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="john@example.com"
+                className="w-full bg-transparent border-none focus:ring-0 p-0 text-lg placeholder-gray-300 dark:placeholder-gray-700"
+                placeholder="your@email.com"
               />
             </div>
 
-            {/* Message */}
-            <div>
-              <label htmlFor="message" className="block text-sm font-semibold text-black dark:text-white mb-2">
+            <div className="border-b border-gray-200 dark:border-gray-800 pb-2 focus-within:border-blue-600 transition-colors">
+              <label htmlFor="message" className="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-2">
                 Message
               </label>
               <textarea
@@ -121,41 +107,32 @@ export default function Contact() {
                 value={formData.message}
                 onChange={handleChange}
                 required
-                rows={6}
-                className="w-full px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-zinc-900 text-black dark:text-white placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
-                placeholder="Tell me about your project, requirements, and timeline..."
+                rows={4}
+                className="w-full bg-transparent border-none focus:ring-0 p-0 text-lg placeholder-gray-300 dark:placeholder-gray-700 resize-none"
+                placeholder="What's on your mind?"
               />
             </div>
-
-            {/* Message */}
-            {message && (
-              <div className={`p-4 rounded-lg text-sm ${
-                message.startsWith('✅') 
-                  ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-400' 
-                  : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-400'
-              }`}>
-                {message}
-              </div>
-            )}
-
-            {/* Submit Button */}
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
-            >
-              {isSubmitting ? 'Sending...' : 'Send Message'}
-            </button>
-          </form>
-
-          {/* Additional Contact Info */}
-          <div className="mt-16 pt-12 border-t border-gray-200 dark:border-gray-700">
-            <p className="text-center text-gray-600 dark:text-gray-400 text-sm">
-              Or reach out directly: <a href="mailto:contact@example.com" className="text-blue-600 dark:text-blue-400 hover:underline">contact@example.com</a>
-            </p>
           </div>
+
+          {message && (
+            <div className={`text-sm font-medium ${message.startsWith('✅') ? 'text-green-600' : 'text-red-600'}`}>
+              {message}
             </div>
-          </div>
+          )}
+
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="px-12 py-4 bg-black dark:bg-white text-white dark:text-black font-bold text-lg hover:bg-blue-600 dark:hover:bg-blue-400 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+          >
+            {isSubmitting ? 'Sending...' : 'Send Message'}
+          </button>
+        </form>
+
+        <div className="mt-24 pt-12 border-t border-gray-100 dark:border-gray-900">
+          <p className="text-gray-500 dark:text-gray-500 text-sm font-mono">
+            Direct: <a href="mailto:contact@iinumbers.com" className="hover:text-blue-600 underline">contact@iinumbers.com</a>
+          </p>
         </div>
       </section>
     </main>

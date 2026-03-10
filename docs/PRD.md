@@ -61,18 +61,17 @@
 - **Phase 3**: 整合 Markdown 部落格系統與進階 SEO 優化。
 
 ## 8. UI/UX 設計規範 (UI/UX Design Guide)
+- **設計哲學 (Design Philosophy)**: 遵循 [iiNumbers](http://data-sci.info/) 的極簡主義 (Minimalism)。以文字為核心，去除不必要的裝飾、陰影與複雜背景，強調資訊密度與直接性。
 - **色彩計畫 (Color Palette)**:
-  - **主色 (Primary)**: `#2563EB` (專業藍，展現科技與可信賴感)
-  - **輔色 (Secondary)**: `#10B981` (綠色，用於成功提示或特別強調的 AI/DevOps 標籤)
-  - **背景色 (Background - 淺色)**: `#F8FAFC` (Slate 50) / **深色**: `#0F172A` (Slate 900)
-  - **文字色 (Text - 淺色)**: `#1E293B` (Slate 800) / **深色**: `#F1F5F9` (Slate 100)
+  - **背景色 (Background)**: 純白 (`#FFFFFF`) / 純黑 (`#000000`)
+  - **文字色 (Text)**: 深灰/黑 (`#111827`) / 淺灰/白 (`#F9FAFB`)
+  - **強調色 (Accent)**: 僅用於連結與重要關鍵字，使用專業藍 (`#2563EB`) 或 綠色 (`#10B981`)
 - **字型 (Typography)**:
-  - 標題字型: `Inter` 或 `Roboto` (乾淨、現代)
-  - 程式碼/技術棧: `Fira Code` 或 `JetBrains Mono`
+  - 標題與內文: `Inter` 或系統內建黑體 (Sans-serif)，強調易讀性。
+  - 裝飾性元素: 善用 Emoji (👋, ✨, 💡, 💰, 🔍, 📍) 來增加視覺層次而非圖片。
 - **元件風格**:
-  - 圓角: 8px (`rounded-lg`) 營造現代感而不失專業。
-  - 陰影: 柔和陰影 (`shadow-md` 到 `shadow-xl` 用於卡片 hover 效果)。
-  - 間距: 統一使用 4/8/16/24/32/48/64 像素級距。
+  - 去除卡片陰影與邊框，改以間距 (Spacing) 與水平線 (Rule) 區隔。
+  - 移除複雜動畫，僅保留基礎的連結 Hover 效果。
 - **RWD 斷點 (Breakpoints)**:
   - Mobile: < 640px
   - Tablet: 640px - 1024px
