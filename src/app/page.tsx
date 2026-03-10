@@ -1,5 +1,3 @@
-import Image from 'next/image';
-
 export default function Home() {
   const projects = [
     {
@@ -28,15 +26,6 @@ export default function Home() {
       url: 'https://github.com/pw1131fd0-hub/openclaw-crm',
       status: '✅ 生產就緒',
       emoji: '📊'
-    },
-    {
-      id: 'lobster-autoops',
-      name: 'Lobster AutoOps',
-      description: '自動化運維平台 - 任務排程、監控告警、日誌彙整',
-      tech: ['Node.js', 'Express', 'Redis', 'PostgreSQL'],
-      url: 'https://github.com/pw1131fd0-hub/lobster-autoops',
-      status: '✅ 生產就緒',
-      emoji: '🦞'
     },
     {
       id: 'ckad-exec',
@@ -71,19 +60,22 @@ export default function Home() {
           {/* Avatar */}
           <div className="mb-8">
             <div className="w-48 h-48 md:w-64 md:h-64 rounded-full mx-auto border-4 border-blue-600 shadow-lg bg-gradient-to-br from-blue-400 to-purple-400 flex items-center justify-center">
-              <span className="text-6xl">👨‍💻</span>
+              <span className="text-6xl">🤖</span>
             </div>
           </div>
           
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-black dark:text-white mb-6">
-            Hi, I'm a Full-Stack Developer
+            iiNumbers, Inc - 木刻思股份有限公司
           </h1>
-          <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 mb-8">
-            Building intelligent systems for modern challenges
+          <p className="text-xl md:text-2xl text-blue-600 dark:text-blue-400 font-medium mb-4">
+            The Leading AI Foundry
+          </p>
+          <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 mb-8 italic">
+            &quot;A Story about Hack the future &amp; Enlighten the future.&quot;
           </p>
           <p className="text-lg text-gray-500 dark:text-gray-500 max-w-2xl mx-auto">
             Passionate about cloud infrastructure, AI, and creating products that matter. 
-            Currently exploring Kubernetes, AI automation, and web3 technologies.
+            Helping enterprises build AI-oriented and data-oriented solutions to solve the most valuable previously unsolvable problems.
           </p>
         </div>
       </section>
@@ -139,7 +131,7 @@ export default function Home() {
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl font-bold mb-8 text-black dark:text-white">Get In Touch</h2>
           <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
-            Have a project in mind? Let's collaborate.
+            Have a project in mind? Let&apos;s collaborate.
           </p>
           <a
             href="/contact"

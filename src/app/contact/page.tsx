@@ -6,7 +6,7 @@ export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    projectDescription: '',
+    message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState('');
@@ -25,7 +25,6 @@ export default function Contact() {
     setMessage('');
 
     try {
-      // TODO: Replace with actual API endpoint
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
@@ -36,7 +35,7 @@ export default function Contact() {
 
       if (response.ok) {
         setMessage('✅ Message sent successfully! I\'ll get back to you soon.');
-        setFormData({ name: '', email: '', projectDescription: '' });
+        setFormData({ name: '', email: '', message: '' });
       } else {
         setMessage('❌ Failed to send message. Please try again.');
       }
@@ -57,7 +56,7 @@ export default function Contact() {
             Get In Touch
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-400">
-            Have a project in mind? Let's collaborate and build something amazing together.
+            Have a project in mind? Let&apos;s collaborate and build something amazing together.
           </p>
         </div>
       </section>
@@ -111,15 +110,15 @@ export default function Contact() {
               />
             </div>
 
-            {/* Project Description */}
+            {/* Message */}
             <div>
-              <label htmlFor="projectDescription" className="block text-sm font-semibold text-black dark:text-white mb-2">
-                Project Description
+              <label htmlFor="message" className="block text-sm font-semibold text-black dark:text-white mb-2">
+                Message
               </label>
               <textarea
-                id="projectDescription"
-                name="projectDescription"
-                value={formData.projectDescription}
+                id="message"
+                name="message"
+                value={formData.message}
                 onChange={handleChange}
                 required
                 rows={6}
