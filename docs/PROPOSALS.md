@@ -1,119 +1,187 @@
-# 接案網站 CRM 客戶管理系統開發 
+# 🌐 接案網站 + CRM 一體化系統開發 
 
-## 🎯 任務目標
-在現有的接案網站基礎上，新增客戶管理系統 (CRM) 功能。
+## 🎯 整合目標
+將現有的接案網站與 CRM 客戶管理系統整合為統一平台，提供完整的業務解決方案。
 
-## 📋 技術規格
-- **資料庫**: SQLite + Prisma ORM
-- **認證**: 簡單密碼登入
-- **框架**: 基於現有的 Next.js 14 架構
+## 🏗️ 系統架構
 
-## 🚀 Phase 1: 資料庫設計與初始化
+### 前台區域 (公開展示)
+- **首頁** - Hero Section + 技能展示
+- **關於我** - 個人簡介與專業經歷  
+- **作品集** - 專案展示與案例研究
+- **聯絡我** - 客戶詢問表單 (整合 CRM)
 
-### 1.1 安裝依賴
-```bash
-npm install prisma @prisma/client sqlite3
-npm install -D prisma
-```
+### 後台區域 (管理介面)
+- **Dashboard** - 總覽儀表板 (客戶統計、專案狀態)
+- **Clients** - 客戶列表與詳情管理
+- **Projects** - 專案狀態追蹤與更新
+- **Settings** - 系統設定與個人資料
 
-### 1.2 初始化 Prisma
-```bash
-npx prisma init --datasource-provider sqlite
-```
-
-### 1.3 資料庫 Schema 設計
-建立 `prisma/schema.prisma`:
+### 資料庫設計
 ```prisma
-generator client {
-  provider = "prisma-client-js"
-}
-
-datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
-}
-
 model Client {
   id        Int       @id @default(autoincrement())
   name      String
   email     String    @unique
   phone     String?
   company   String?
+  source    String?   // "contact_form", "referral", "direct"
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   projects  Project[]
+  notes     ClientNote[]
 }
 
 model Project {
-  id           Int      @id @default(autoincrement())
-  clientId     Int
-  title        String
-  description  String?
-  budgetRange  String?
-  status       String   @default("pending") // pending, quoted, in_progress, completed, rejected
-  priority     String   @default("medium")  // low, medium, high
+  id             Int      @id @default(autoincrement())
+  clientId       Int
+  title          String
+  description    String?
+  budgetRange    String?
+  status         String   @default("inquiry") // inquiry, quoted, approved, in_progress, completed, cancelled
+  priority       String   @default("medium")  // low, medium, high, urgent
   estimatedHours Int?
   quotedAmount   Float?
-  notes        String?
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  client       Client   @relation(fields: [clientId], references: [id])
+  actualHours    Float?
+  startDate      DateTime?
+  endDate        DateTime?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  client         Client   @relation(fields: [clientId], references: [id])
+  tasks          ProjectTask[]
+}
+
+model ClientNote {
+  id        Int      @id @default(autoincrement())
+  clientId  Int
+  content   String
+  type      String   @default("general") // general, meeting, phone, email
+  createdAt DateTime @default(now())
+  client    Client   @relation(fields: [clientId], references: [id])
+}
+
+model ProjectTask {
+  id          Int     @id @default(autoincrement())
+  projectId   Int
+  title       String
+  description String?
+  completed   Boolean @default(false)
+  createdAt   DateTime @default(now())
+  project     Project @relation(fields: [projectId], references: [id])
 }
 ```
 
-### 1.4 執行 Migration
+## 🚀 開發階段
+
+### Phase 1: CRM 基礎架構整合 (2小時)
+**目標**: 在現有網站基礎上整合資料庫與 API
+
+#### 1.1 Prisma 設定
 ```bash
-npx prisma migrate dev --name init
-npx prisma generate
+cd /home/crawd_user/project/freelance-site
+npm install prisma @prisma/client
+npx prisma init --datasource-provider sqlite
 ```
 
-## 🎨 Phase 2: 後台管理介面
+#### 1.2 資料庫 Migration
+- 建立 `prisma/schema.prisma` (上述設計)
+- 執行 `npx prisma migrate dev --name init`
+- 生成 Prisma Client: `npx prisma generate`
 
-### 2.1 建立後台路由結構
-- `src/app/admin/page.tsx` - 管理介面主頁
+#### 1.3 API 路由建立
+- `src/app/api/admin/clients/route.ts` - 客戶 CRUD
+- `src/app/api/admin/projects/route.ts` - 專案 CRUD
+- `src/app/api/admin/auth/route.ts` - 簡單認證
+- 修改現有 `src/app/api/contact/route.ts` 整合客戶建立
+
+### Phase 2: 後台管理介面 (2.5小時)  
+**目標**: 建立完整的管理介面
+
+#### 2.1 認證中介軟體
+- `src/middleware.ts` - 保護 `/admin` 路由
+- 簡單的密碼認證 (環境變數 `ADMIN_PASSWORD`)
+
+#### 2.2 後台頁面開發
 - `src/app/admin/login/page.tsx` - 登入頁面
+- `src/app/admin/dashboard/page.tsx` - 總覽儀表板
 - `src/app/admin/clients/page.tsx` - 客戶列表
+- `src/app/admin/clients/[id]/page.tsx` - 客戶詳情
 - `src/app/admin/projects/page.tsx` - 專案列表
 - `src/app/admin/projects/[id]/page.tsx` - 專案詳情
 
-### 2.2 簡單認證系統
-使用環境變數 `ADMIN_PASSWORD` 進行基本認證。
+#### 2.3 UI 組件建立
+- `ClientTable` - 客戶表格組件
+- `ProjectStatusBadge` - 專案狀態標籤
+- `StatsCard` - 統計卡片組件
+- `AdminLayout` - 後台佈局組件
 
-### 2.3 客戶與專案管理介面
-- 客戶列表 (可搜尋、分頁)
-- 專案狀態更新
-- 快速統計：總客戶數、進行中專案、本月詢問數
+### Phase 3: 前後台整合與優化 (1.5小時)
+**目標**: 無縫整合與使用者體驗優化
 
-## 📧 Phase 3: 表單整合與自動化
+#### 3.1 聯絡表單升級
+- 表單提交自動建立客戶記錄
+- Email 通知機制 (客戶確認信 + 管理員通知)
+- 表單驗證與錯誤處理強化
 
-### 3.1 修改聯絡表單 API
-更新 `src/app/api/contact/route.ts`:
-- 收到表單提交後自動建立客戶記錄
-- 建立專案詢問記錄
-- 發送確認信給客戶
+#### 3.2 UI/UX 統一
+- 後台介面採用與前台一致的設計語言
+- 響應式設計確保移動端體驗
+- 載入狀態與互動反饋
 
-### 3.2 Email 範本
-建立歡迎信與確認信範本。
+#### 3.3 效能優化
+- 資料庫查詢優化
+- 分頁與搜尋功能
+- 快取策略
 
-## 🔧 Phase 4: 部署準備
+## 🔧 技術規格
 
-### 4.1 環境變數設定
+### 核心技術棧
+- **框架**: Next.js 14 (App Router)
+- **資料庫**: SQLite + Prisma ORM  
+- **樣式**: Tailwind CSS
+- **UI組件**: Headless UI + Heroicons
+- **認證**: 簡單密碼認證
+- **部署**: 現有環境 (localhost:3001)
+
+### 環境變數
 ```env
-ADMIN_PASSWORD=your_secure_password
+# 資料庫
 DATABASE_URL="file:./dev.db"
+
+# 管理員認證  
+ADMIN_PASSWORD="your_secure_password"
+
+# Email (選配)
+RESEND_API_KEY="re_xxxxx" # 如需 email 功能
+FROM_EMAIL="contact@yourdomain.com"
 ```
 
-### 4.2 生產部署調整
-確保 SQLite 檔案在重新部署時不會遺失。
-
 ## ✅ 完成檢查清單
-- [ ] Prisma 設定與 migration 完成
-- [ ] 客戶與專案模型建立
-- [ ] 後台管理介面實作
-- [ ] 簡單認證系統
-- [ ] 聯絡表單整合
-- [ ] 基本測試通過
-- [ ] 本地環境測試完畢
+
+### Phase 1 - CRM 基礎
+- [ ] Prisma 安裝與設定完成
+- [ ] 資料庫 schema 建立
+- [ ] Migration 執行成功
+- [ ] 基本 API 路由實作
+- [ ] 聯絡表單 API 整合
+
+### Phase 2 - 後台介面  
+- [ ] 認證系統實作
+- [ ] 管理員登入頁面
+- [ ] Dashboard 總覽頁面
+- [ ] 客戶列表與詳情頁面
+- [ ] 專案管理介面
+- [ ] 基本 CRUD 操作完成
+
+### Phase 3 - 整合優化
+- [ ] 前後台 UI 風格統一
+- [ ] Email 通知功能 (選配)
+- [ ] 響應式設計完善
+- [ ] 效能優化實施
+- [ ] 完整測試通過
 
 ## 🎯 下一步行動
-OpenCode 請開始執行 Phase 1，完成 Prisma 設定和資料庫初始化。
+OpenCode 開始執行整合開發，從 Phase 1 的 Prisma 設定開始。
+
+**預計總開發時間**: 6 小時  
+**當前狀態**: 準備開始 Phase 1
