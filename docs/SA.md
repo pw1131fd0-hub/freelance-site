@@ -1,73 +1,46 @@
-# System Architecture (SA) - Freelance Portfolio
+# System Architecture (SA) - 🌐 接案網站 CRM 客戶管理系統
 
-## 1. 系統架構圖 (System Architecture Diagram)
+## 1. 高層架構圖 (System Overview)
 
 ```mermaid
 graph TD
-    Client[Web Browser / Mobile Device] -->|HTTPS| VercelEdge[Vercel Edge Network]
-    VercelEdge --> NextApp[Next.js Application]
+    User((外部客戶)) -->|提交表單| Frontend[Next.js App Router]
+    Admin((接案者/管理員)) -->|查看/管理| Frontend
     
-    subgraph Next.js Application
-        UI[Frontend UI - React/Tailwind]
-        SSG[Static Site Generation]
-        API[API Routes]
+    subgraph "Next.js Application (Server-side)"
+        Frontend -->|Server Actions| BusinessLogic[業務邏輯層]
+        BusinessLogic -->|Prisma Client| DB[(SQLite Database)]
     end
     
-    UI --> SSG
-    UI -->|POST /api/contact| API
-    
-    subgraph Content Layer
-        MDX[(MDX Files - Blog)]
-        JSON[(JSON/TS Data - Projects)]
+    subgraph "Security & Auth"
+        NextAuth[NextAuth.js] --- BusinessLogic
     end
-    
-    SSG --> Content Layer
-    
-    subgraph External Services
-        Resend[Resend / SendGrid API]
-        GitHub[GitHub API - Optional Data Fetch]
-    end
-    
-    API -->|Send Email| Resend
 ```
 
 ## 2. 元件職責 (Component Responsibilities)
 
-- **Frontend UI (React/Tailwind)**: 負責呈現使用者介面、響應式設計 (RWD)。遵循極簡主義，以文字為核心，移除複雜動畫與裝飾。
-- **Static Site Generation (SSG)**: 在建置階段 (Build time) 將作品集資料與 MDX 部落格文章預先渲染為靜態 HTML，以提供最快的載入速度 (Lighthouse 雙 90+ 目標)。
-- **API Routes (Next.js API)**: 處理來自前端的動態請求，目前主要負責接收「聯絡表單」的資料，並轉發給第三方信件服務器，同時實作 Rate Limiting 防禦。
-- **Content Layer**: 作為輕量級的資料來源，包含靜態的作品集定義 (TypeScript/JSON 格式) 以及 Markdown/MDX 格式的部落格文章。
+- **Next.js 14 (App Router)**:
+  - **Client Components**: 處理 UI 互動（如：表單輸入、狀態切換按鈕）。
+  - **Server Components**: 負責伺服器端渲染、資料抓取 (Fetch) 與權限驗證。
+  - **Server Actions**: 作為 API 的替代方案，處理資料寫入與更新。
+- **Prisma ORM**: 負責與 SQLite 通訊，提供型別安全 (Type-safe) 的資料庫操作介面。
+- **SQLite**: 持久化儲存客戶資訊、詢問單與管理員帳號。
+- **NextAuth.js**: 處理管理員登入驗證，保護後台路由 `/admin/*`。
 
 ## 3. 資料流 (Data Flow)
 
-### 3.1 靜態內容存取流 (首頁、作品集、部落格)
-1. 使用者發出網頁請求。
-2. Vercel CDN (Edge Network) 直接回傳已在 Build time 生成的靜態 HTML/CSS/JS 檔案。
-3. 瀏覽器渲染畫面，達成分秒級的首屏載入 (FCP < 1.5s)。
+1. **詢問流程**: 客戶填寫表單 -> Server Action 驗證資料 -> Prisma 寫入 `Inquiry` 與 `Customer` 表 -> 回傳成功訊息。
+2. **管理流程**: 管理員登入 -> Server Component 抓取 `Inquiry` 列表 -> 渲染管理介面 -> 管理員更新狀態 -> Server Action 更新資料庫 -> 觸發 `revalidatePath` 更新 UI。
 
-### 3.2 聯絡表單提交流
-1. 使用者在前端填寫聯絡表單 (Name, Email, Subject, Message)。
-2. 前端進行初步資料驗證 (如 Email 格式、必填欄位)。
-3. 前端呼叫 `POST /api/contact` 將資料送至 Next.js API Route。
-4. API Route 進行後端驗證與 Rate Limiting 檢查。
-5. 驗證通過後，API 呼叫第三方郵件服務 (如 Resend) 寄送通知信給網站擁有者。
-6. 第三方服務回傳成功，API Route 回傳 HTTP 200 給前端。
-7. 前端顯示成功送出的提示。
+## 4. 部署架構 (Deployment)
 
-## 4. 部署架構 (Deployment Architecture)
-
-- **版本控制**: GitHub (`pw1131fd0-hub`)
-- **CI/CD 管線**: 整合 Vercel for GitHub，任何推送到 `main` 分支的 Commit 皆會自動觸發 Vercel 的建置與部署。
-- **主機與 CDN**: Vercel (Serverless Functions 用於 API Routes，Edge Network 用於靜態檔案快取)。
-- **網域管理**: 綁定自訂網域，並由 Vercel 自動核發與更新 SSL 憑證 (強制 HTTPS)。
+- **環境**: Node.js 18+
+- **部署平台**: 可部署於 Vercel (需配合外部 DB 如 PlanetScale/Neon) 或 VPS (直接使用本地 SQLite)。
+- **持久化**: 若使用 SQLite，需確保部署環境支援持久化卷 (Persistent Volume)。
 
 ## 5. 第三方依賴 (Third-party Dependencies)
 
-| 分類 | 套件 / 服務 | 用途說明 |
-| --- | --- | --- |
-| **核心框架** | Next.js 14+ (App Router), React, TypeScript | 網站基礎架構與靜態生成 |
-| **樣式與 UI** | Tailwind CSS, clsx, tailwind-merge | Utility-first CSS 框架與類別合併工具 |
-| **表單處理** | React Hook Form, Zod | 表單狀態管理與 Schema 驗證 |
-| **外部 API** | Resend 或 SendGrid | 寄發聯絡表單的通知信件 |
-| **內容處理** | next-mdx-remote 或 gray-matter | 解析與渲染 MDX 部落格文章 |
-| **圖示庫** | Emojis (Native) | 系統內建 Emoji，提升效能並維持極簡風格 |
+- `lucide-react`: 圖示庫。
+- `zod`: Schema 驗證（表單驗證與 API 驗證）。
+- `shadcn/ui`: UI 元件庫（基於 Radix UI）。
+- `date-fns`: 日期格式化。

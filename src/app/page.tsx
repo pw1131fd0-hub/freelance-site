@@ -69,7 +69,7 @@ export default function Home() {
             href="/contact" 
             className="text-lg font-bold border-b-2 border-black dark:border-white hover:text-blue-600 hover:border-blue-600 transition-all"
           >
-            Send a Message
+            Send a Message (CRM Integration)
           </Link>
           <Link 
             href="/blog" 

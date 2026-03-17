@@ -1,93 +1,68 @@
-# Product Requirements Document (PRD) - Freelance Portfolio
+# PRD: 🌐 接案網站 CRM 客戶管理系統
 
-## 1. 產品願景與核心痛點 (Product Vision & Core Pain Points)
-- **願景 (Vision)**: 打造一個高度專業、載入快速且具備現代感的個人接案網站，充分展現全端 (Full-stack)、DevOps 與 AI 的綜合技術能力，讓潛在客戶能快速了解專業背景並主動建立聯繫。
-- **痛點 (Pain Points)**:
-  - 潛在客戶無法透過單一管道快速且全面地了解工程師的技術廣度與深度。
-  - 缺乏一個專業展示平台來突顯如遊戲開發 (Three.js)、AI 應用、DevOps 工具及系統架構等多元作品集。
-  - 現有開源作品散落於 GitHub，缺乏視覺化的介面與商業價值的詮釋。
+## 1. 產品願景與核心痛點 (Why)
+**願景**: 為自由職業者打造一個輕量、高效且集成的客戶管理系統，將「詢問 - 報價 - 案源追蹤」流程數位化，提升轉換率並優化客戶管理體驗。
 
-## 2. 目標用戶畫像與使用場景 (Target Personas & User Stories)
-- **Persona A: 企業技術主管 (CTO/VP of Engineering)**
-  - 需求：尋找能獨立完成從基礎設施到前端應用的全端工程師或技術顧問。
-  - **User Story 1**: 身為企業技術主管，我想要看到候選人過去的架構設計與 DevOps 經驗，以便評估其是否能勝任我們公司的核心基礎設施重建專案。
-- **Persona B: 專案發包方/創辦人 (Founders/Clients)**
-  - 需求：尋求具備 AI 與系統整合能力的開發者來實現商業 MVP。
-  - **User Story 2**: 身為新創創辦人，我想要快速瀏覽開發者的實作案例與聯絡方式，以便我能立即發送專案合作詢問。
-- **Persona C: HR 或技術招募人員 (Tech Recruiters)**
-  - 需求：篩選具備特定技術棧 (如 Go, Kubernetes, TypeScript, Three.js) 的人才。
-  - **User Story 3**: 身為技術招募人員，我想要在網站上看到清晰的技術棧清單與開源專案連結，以便快速確認候選人是否符合我們的職缺要求。
+**核心痛點**:
+- **詢問分散**: 來自 Email、Line、社交媒體的詢問難以彙整，容易遺漏。
+- **追蹤困難**: 難以快速確認哪些客戶已報價、哪些正在進行中，或者哪些需要後續跟進。
+- **資訊斷層**: 缺乏集中的客戶資料庫，每次合作都需要重新詢問基礎資訊。
 
-## 3. 功能需求清單 (Feature Requirements)
-| 功能模組 | 功能描述 | 優先級 | 驗收標準 (Acceptance Criteria) |
-| --- | --- | --- | --- |
-| **首頁與技術棧介紹** | 提供專業的個人簡介、技術專長 (Full-stack, DevOps, AI) 標籤。 | P0 | 頁面載入後立即顯示姓名、核心標語及技術棧圖示；支援 RWD。 |
-| **作品集展示 (核心)** | 展示五大指定核心專案，包含名稱、技術棧、連結、描述與截圖。 | P0 | 必須從 `pw1131fd0-hub` 擷取/展示以下 5 個專案：<br>1. openclaw-fps<br>2. k8s-copilot<br>3. Openclaw-crm<br>4. CKAD-exec<br>5. openclaw-deployer<br>皆包含 GitHub 連結與展示圖。 |
-| **聯絡表單** | 讓訪客可以直接發送訊息至指定信箱。 | P1 | 表單包含姓名、Email、主旨、訊息內容；提交後有成功提示並防止垃圾訊息 (如 reCAPTCHA 或簡易驗證)。 |
-| **部落格整合** | 展示技術文章或過往心得，提升 SEO 與專業度。 | P2 | 提供 Markdown 渲染或串接外部文章平台 API (如 Medium/Dev.to)；支援分頁或無限滾動。 |
-| **SEO 與效能優化** | 確保網站能被搜尋引擎良好索引。 | P1 | Lighthouse 分數雙 90+；具備正確的 meta tags、Open Graph 標籤。 |
+## 2. 目標用戶畫像與使用場景 (User Stories)
+1. **User Story A (客戶角色)**: 作為一名潛在客戶，我希望能透過網站上的表單直接提交我的需求與預算，這樣我不必手動寫 Email，也能確保提供所有必要的開發資訊。
+2. **User Story B (接案者角色)**: 作為一名接案工程師，我希望能在一站式的後台看到所有新進的詢問清單，並能一鍵標記其處理狀態（如：已聯絡、報價中、已簽約），以便我管理我的時間。
+3. **User Story C (接案者角色)**: 作為一名接案工程師，我希望能記錄每位客戶的詳細聯絡資訊與過往合作記錄，這樣我在進行二次開發或售後服務時能快速進入狀況。
 
-## 4. 非功能需求 (Non-functional Requirements)
-- **效能 (Performance)**:
-  - 首屏載入時間 (FCP) < 1.5 秒。
-  - 核心網頁指標 (Core Web Vitals): LCP < 2.5s, FID < 100ms, CLS < 0.1。
-- **安全 (Security)**:
-  - 全站強制使用 HTTPS。
-  - 聯絡表單需具備防 XSS 與 CSRF 機制，並限制 Rate Limiting (每分鐘最多 3 次發送)。
-- **可用性 (Usability)**:
-  - 支援主流現代瀏覽器 (Chrome, Firefox, Safari, Edge 最新兩版)。
-  - 無障礙設計 (a11y) 符合 WCAG 2.1 AA 標準。
-- **擴展性 (Scalability)**:
-  - 作品集與部落格內容應易於透過 CMS 或 JSON/Markdown 檔案擴充，無需修改核心程式碼。
+## 3. 功能需求清單 (Features)
+| 分級 | 功能名稱 | 驗收標準 (AC) |
+| :--- | :--- | :--- |
+| **P0** | **客戶詢問表單 (Public)** | 用戶填寫姓名、Email、需求描述、預算範圍後，資料能存入資料庫。 |
+| **P0** | **詢問管理列表 (Admin)** | 管理員可查看所有詢問清單，包含提交時間、狀態。 |
+| **P0** | **案件狀態轉換** | 支援「待處理」、「聯繫中」、「報價中」、「已簽約」、「已結案」、「已取消」狀態。 |
+| **P1** | **客戶聯絡簿** | 從詢問單自動提取客戶資料，建立持久化的客戶紀錄。 |
+| **P1** | **後台 Dashboard** | 顯示當月詢問數、各狀態案件比例、預計總收益。 |
+| **P2** | **Email 通知** | 客戶提交表單後，管理員收到 Email 提醒。 |
+| **P2** | **搜尋與篩選** | 支援依關鍵字、日期、狀態篩選詢問單。 |
 
-## 5. 技術限制與選型建議 (Tech Stack Selection)
-- **前端框架**: Next.js (React) 搭配 TypeScript，利用 SSG/ISR 提升載入速度與 SEO。
-- **樣式與 UI**: Tailwind CSS 搭配 Framer Motion (提供專業流暢的動畫體驗)，確保專業簡潔質感。
-- **部署方式**: Vercel，結合 GitHub Actions 實現 CI/CD 自動化部署。
-- **資料儲存 (聯絡表單/部落格)**: 聯絡表單可整合 Resend 或 SendGrid API；部落格使用本地 MDX 檔案。
+## 4. 非功能需求
+- **效能**: 頁面加載速度 (LCP) < 2 秒；後台列表查詢應在 500ms 內響應。
+- **安全**: 後台必須有身份驗證機制 (Auth)；防止 SQL Injection 與 XSS 攻擊。
+- **可用性**: 提供響應式設計 (RWD)，支援手機端查看詢問單。
+- **擴展性**: 資料庫 schema 應預留未來對接 Stripe 支付或 Jira API 的欄位。
 
-## 6. 競品分析與替代方案 (Competitor Analysis)
-- **傳統履歷 (PDF/CakeResume)**: 缺乏互動性，無法動態展示 Three.js 等複雜專案。自建網站能突破此限制。
-- **通用作品集平台 (Behance)**: 偏向設計師，無法突顯 DevOps/架構設計/API 整合等後端技術能力。
-- **純靜態 GitHub Pages**: 若僅用 Jekyll 模板，風格容易受限且缺乏現代前端框架的高效互動體驗。因此選用 Next.js 加上自訂設計能最大化展現前端實力。
+## 5. 技術限制與選型
+- **框架**: Next.js 14 (App Router)
+- **資料庫**: SQLite (輕量、單檔案，適合初期)
+- **ORM**: Prisma
+- **樣式**: Tailwind CSS + Shadcn UI (Radix UI)
+- **驗證**: NextAuth.js (選擇性) 或簡單 Session
 
-## 7. MVP 範圍與迭代路線圖 (MVP Scope & Roadmap)
-- **Phase 1 (MVP - 目前階段)**:
-  - 靜態首頁、專業簡介、技術棧呈現。
-  - 實作「老闆回饋」指定的 5 大作品集區塊 (openclaw-fps, k8s-copilot, Openclaw-crm, CKAD-exec, openclaw-deployer)。
-  - 基礎 RWD 響應式佈局與靜態聯絡方式 (Email/LinkedIn 連結)。
-  - 部署上線。
-- **Phase 2**: 實作動態聯絡表單 (串接寄信 API) 與進階動畫效果。
-- **Phase 3**: 整合 Markdown 部落格系統與進階 SEO 優化。
+## 6. 競品分析與替代方案
+- **Trello/Notion**: 可做 Kanban，但缺乏專業的 Web Form 集成與客戶資料結構化。
+- **HubSpot CRM**: 功能太強大太複雜，不適合單兵作戰的自由職業者。
+- **自研優勢**: 深度集成於現有接案網站，SEO 更好，數據掌握在自己手中。
 
-## 8. UI/UX 設計規範 (UI/UX Design Guide)
-- **設計哲學 (Design Philosophy)**: 遵循 [iiNumbers](http://data-sci.info/) 的極簡主義 (Minimalism)。以文字為核心，去除不必要的裝飾、陰影與複雜背景，強調資訊密度與直接性。
-- **色彩計畫 (Color Palette)**:
-  - **背景色 (Background)**: 純白 (`#FFFFFF`) / 純黑 (`#000000`)
-  - **文字色 (Text)**: 深灰/黑 (`#111827`) / 淺灰/白 (`#F9FAFB`)
-  - **強調色 (Accent)**: 僅用於連結與重要關鍵字，使用專業藍 (`#2563EB`) 或 綠色 (`#10B981`)
-- **字型 (Typography)**:
-  - 標題與內文: `Inter` 或系統內建黑體 (Sans-serif)，強調易讀性。
-  - 裝飾性元素: 善用 Emoji (👋, ✨, 💡, 💰, 🔍, 📍) 來增加視覺層次而非圖片。
+## 7. MVP 範圍與路線圖
+- **V1 (MVP)**: 詢問表單 + Prisma Schema + 管理後台列表。
+- **V2**: Dashboard 統計 + 搜尋功能。
+- **V3**: 附件上傳 (如：需求說明文件) + 多國語系。
+
+## 8. UI/UX 設計規範
+- **色彩計畫**:
+  - 主色 (Primary): `#2563eb` (Royal Blue)
+  - 輔色 (Secondary): `#64748b` (Slate Grey)
+  - 背景 (Background): `#f8fafc` (Off-white)
+  - 文字 (Text): `#0f172a` (Deep Navy)
+  - 錯誤 (Error): `#ef4444` (Rose Red)
+- **字型**: `Inter`, `system-ui`, `sans-serif`
 - **元件風格**:
-  - 去除卡片陰影與邊框，改以間距 (Spacing) 與水平線 (Rule) 區隔。
-  - 移除複雜動畫，僅保留基礎的連結 Hover 效果。
-- **RWD 斷點 (Breakpoints)**:
-  - Mobile: < 640px
-  - Tablet: 640px - 1024px
-  - Desktop: > 1024px
-- **主題切換**: 支援系統級深色/淺色模式 (Dark/Light mode) 切換。
+  - 圓角 (Rounded): `0.5rem` (lg)
+  - 陰影 (Shadow): `shadow-sm`
+  - 間距 (Spacing): `8px (base-1)`
+- **RWD 斷點**: `sm: 640px`, `md: 768px`, `lg: 1024px`
+- **模式**: 支援深色 (Dark Mode) 與淺色 (Light Mode)。
 
-## 9. 成功指標 (Success Metrics/KPIs)
-- **曝光度**: Google Search Console 索引成功且自然搜尋點擊率 (CTR) > 2%。
-- **效能表現**: Lighthouse 綜合評分 (Performance, Accessibility, Best Practices, SEO) 四項均 > 90。
-- **轉換率**: 訪客停留時間 > 1 分鐘，且每 100 位訪客至少產生 1 次點擊 GitHub 連結或填寫聯絡表單的行為 (1% 轉換率)。
-
----
-**[注意] 老闆回饋 — 最高優先 (MVP 核心需求)**
-作品集區塊需明確列出以下 GitHub (`pw1131fd0-hub`) 專案，展現全端 + DevOps + AI 的能力組合：
-1. **openclaw-fps**: TypeScript 瀏覽器 FPS 遊戲 (Three.js + Cannon.js)
-2. **k8s-copilot**: Python K8s 智慧助手
-3. **Openclaw-crm**: TypeScript CRM 系統
-4. **CKAD-exec**: Go CKAD 練習工具
-5. **openclaw-deployer**: Shell 自動化部署工具
+## 9. 成功指標 (KPI)
+- **轉化率**: 從訪問「聯絡我」頁面到成功提交表單的轉化率提高 15%。
+- **效率**: 接案者回覆詢問的平均時間減少 30%。
+- **數據完整性**: 100% 的案源都有清楚的狀態記錄。
