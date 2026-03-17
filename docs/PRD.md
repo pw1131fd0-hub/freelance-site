@@ -1,134 +1,121 @@
-# Product Requirement Document (PRD) - Freelance + CRM Unified Platform
+# Product Requirement Document (PRD) - Solopreneur One
 
-**Version:** 1.0 (Initial Draft)  
+**Version:** 2.0 (Redesigned)  
 **Status:** [DRAFT]  
-**Author:** Senior PM
+**Author:** Senior PM / Lead Engineer  
+**Last Updated:** 2026-03-17
 
 ---
 
-## 1. Product Vision & Core Pain Points (Why)
+## 1. Product Vision & Core Pain Points (The "Why")
 
 ### 1.1 Vision
-To empower freelancers by providing a seamless, integrated platform that combines an elegant portfolio for showcasing work with a robust CRM for client management and project tracking. One tool to rule the entire freelance lifecycle from lead to invoice.
+**Solopreneur One** is the definitive "Command Center" for the modern independent professional. It dissolves the boundary between a portfolio and a CRM, creating a high-conversion lead funnel that flows directly into a streamlined project management system. Our mission is to eliminate "Administrative Overhead" for solo-operators so they can focus 100% on their craft.
 
 ### 1.2 Core Pain Points
-- **Fragmented Workflow:** Freelancers currently juggle between multiple tools (Portfolio sites, CRM, Email, Project Management) causing data silos and inefficiency.
-- **Poor Lead Conversion:** Static portfolios often fail to capture visitor interest or provide clear call-to-actions (CTAs) that lead into a CRM.
-- **Client Management Overhead:** Tracking project progress, client communications, and files in disparate places is time-consuming and prone to error.
-- **High Cost/Complexity:** Existing CRM solutions are often over-engineered and expensive for solo freelancers.
+- **The "Tool Fatigue" Tax:** Switching between Webflow (Portfolio), Hubspot (CRM), and Trello (PM) wastes 15-20% of a freelancer's week.
+- **Static Portfolio Friction:** Traditional portfolios are passive. Visitors often leave because there is no clear path from "Interest" to "Inquiry".
+- **Opaque Client Experience:** Clients are often left in the dark during the project lifecycle, leading to excessive "Status Check" emails.
+- **Data Fragmentation:** Financial data, project files, and client history are scattered across different platforms, making year-end reporting and client retention difficult.
 
 ---
 
-## 2. Target User Personas & User Stories
+## 2. Target User Personas & Detailed User Stories
 
 ### 2.1 Personas
-- **"The Creative Pro" (Designer/Photographer):** Needs a visually stunning way to show work and handle high-volume inquiries.
-- **"The Solopreneur" (Developer/Consultant):** Focused on project milestones, client communication, and professional lead management.
-- **"The Part-timer":** Needs a simple, set-and-forget system to manage side-hustle clients without complex setup.
+- **"Alex the Artisan" (High-end Brand Designer):**Alex needs a gallery that feels like a premium art book. He values high-conversion inquiries with budget-filtering to avoid low-ballers.
+- **"Jordan the Architect" (Full-stack Developer):**Jordan needs a portfolio that demonstrates technical depth. He values milestone tracking and integrated technical specs for projects.
+- **"Casey the Consultant" (Marketing Strategist):**Casey needs to build trust through case studies. She values a CRM that captures "how they found me" and project ROI data.
 
 ### 2.2 User Stories
-- **Story 1 (Lead Generation):** As a visitor to the freelancer's site, I want to easily view their past work and submit a structured contact form so I can get a quote without a long email chain.
-- **Story 2 (Project Management):** As a freelancer, I want to convert a contact inquiry into a "Client" and create a "Project" with milestones so I can keep track of my commitments and progress.
-- **Story 3 (Client Insight):** As a freelancer, I want to see a history of all communications and project statuses for a specific client in one dashboard so I can provide better service and manage expectations.
+- **Story 1 (Lead Funnel):** As a high-intent visitor, I want a "Build Your Quote" interactive form instead of a generic text box, so I can provide my budget and timeline immediately, knowing if I'm a good fit for the freelancer.
+- **Story 2 (Instant Workflow):** As a freelancer, I want a "Convert to Project" button on every inquiry that automatically creates a project dashboard, pulls in the client's brief, and suggests a milestone template based on the "Project Type".
+- **Story 3 (The Unified History):** As a freelancer, I want a 360-degree "Timeline View" for every client, showing every inquiry, every project, every milestone completed, and every file shared, so I never lose context.
 
 ---
 
 ## 3. Functional Requirements (P0/P1/P2)
 
-### P0: Essential for MVP
-- **Portfolio Frontend:**
-  - Landing page with bio and featured projects.
-  - Project detail pages (Gallery, Description, Tech/Tools used).
-  - Integrated contact form (captures name, email, project type, budget, message).
-- **CRM Backend (Admin Only):**
-  - **Inquiry Management:** View, status update (New, Contacted, Rejected, Converted).
-  - **Client Management:** Basic CRUD for clients.
-  - **Project Tracking:** Create projects linked to clients, set basic status (Ongoing, Completed, On Hold).
-- **Authentication:** Simple admin login for the CRM area.
+### P0: Core Engine (Essential for MVP)
+1.  **High-Conversion Portfolio:**
+    *   **Feature:** Dynamic Landing Page with filtered project gallery (Category/Tech).
+    *   **Acceptance Criteria:** Page loads in < 1s; Gallery items open to deep-dive pages; Interactive Lead Gen Form.
+2.  **Intelligent CRM (Back-office):**
+    *   **Feature:** Inquiry Inbox with "Lead Scoring" (based on budget/urgency).
+    *   **Acceptance Criteria:** Admin can view, mark as "Qualified/Unqualified", and respond via mailto link.
+3.  **Project Command Center:**
+    *   **Feature:** Kanban or Timeline view of all active projects.
+    *   **Acceptance Criteria:** Projects linked to Clients; Status tracking (Discovery, In-Progress, Review, Completed).
+4.  **Secure Admin Gateway:**
+    *   **Feature:** Multi-Factor Auth (or simple secure hash-based login) for the backend.
+    *   **Acceptance Criteria:** Zero access to `/admin/*` routes without a valid session.
 
-### P1: Important for Quality
-- **Milestone Management:** Add/edit/delete milestones within projects.
-- **File Attachments:** Upload/link assets (images/docs) to projects.
-- **Rich Project Showcase:** Video support and interactive elements in the portfolio.
-- **Dashboard Overview:** Analytics on lead volume and project revenue (estimated).
+### P1: Professional Workflow (Quality & Efficiency)
+1.  **Milestone Automation:** Templates for "Web Dev", "Branding", "Consulting" that auto-populate milestones.
+2.  **Asset Vault:** Centralized file storage per project with public/private toggle for client sharing.
+3.  **Advanced Analytics:** "Conversion Rate" of landing page and "Revenue Pipeline" (Total $ in discovery vs. active).
+4.  **Rich Case Studies:** Support for video embeds (YouTube/Vimeo/Loom) and interactive scroll-triggered galleries.
 
-### P2: Nice to Have
-- **Invoicing Integration:** Basic invoice generation and tracking.
-- **Client Portal:** Let clients log in to see their project progress.
-- **Email Notifications:** Notify admin of new inquiries and notify clients of milestone updates.
+### P2: Ecosystem Integration (Scale & Polish)
+1.  **Client "View-Only" Link:** Secure, tokenized URL for clients to track project status without account creation.
+2.  **Quick-Invoice Generator:** Auto-fill client/project data into a professional PDF invoice.
+3.  **Custom Domain Mapping:** Support for deploying the same engine for multiple "Personas" on different domains (Multi-tenant ready).
 
 ---
 
-## 4. Non-Functional Requirements
+## 4. Non-Functional Requirements & Performance Targets
 
 | Metric | Target |
 |---|---|
-| **Performance (LCP)** | < 1.5s for the portfolio landing page |
-| **Security** | OWASP Top 10 compliance; CSRF/XSS protection; secure password hashing (Argon2/bcrypt) |
-| **Availability** | 99.9% (Single-tenant deployment focus) |
-| **Scalability** | Support up to 10,000 leads and 500 active projects without performance degradation |
-| **Data Integrity** | Prisma-managed relational integrity with SQLite |
+| **Speed (LCP)** | < 0.8s (Static-first rendering) |
+| **SEO Score** | 100/100 on Google Lighthouse (Metadata, Semantic HTML) |
+| **Security** | Rate-limiting on contact forms; Prisma-based input sanitization; SSL-only. |
+| **Data Resilience** | Hourly SQLite snapshots backed up to cloud storage (e.g., S3/R2). |
+| **UX Accessibility** | WCAG 2.1 AA Compliance (Contrast, Keyboard Nav). |
 
 ---
 
-## 5. Technical Constraints & Selection
+## 5. Technical Stack & Architecture Rationale
 
-- **Frontend/Backend Framework:** Next.js 14 (App Router) - For SSR, SEO, and integrated API routes.
-- **Database:** SQLite - Optimized for solo use, zero-configuration, and easy backups.
-- **ORM:** Prisma - For type-safe database access and migrations.
-- **Styling:** Tailwind CSS - For rapid, modern, and responsive UI development.
-- **Icons:** Lucide-React.
-- **Form Handling:** React Hook Form + Zod validation.
-
----
-
-## 6. Competitor Analysis & Alternatives
-
-- **Wix/Squarespace:** Good for portfolios, but poor CRM integration and high recurring costs.
-- **HoneyBook/Donsado:** Great CRM, but expensive and the portfolio/landing page features are often rigid.
-- **Notion:** Versatile, but requires extensive manual setup and lacks a professional "dedicated site" look for the portfolio.
-- **Our Edge:** Zero-overhead setup, highly tailored "Lead-to-Project" flow, and complete ownership of data via SQLite.
+- **Framework:** **Next.js 14 (App Router)** - SSR for SEO-critical portfolio; Client-side interactivity for the CRM.
+- **Database:** **SQLite (via Prisma)** - Zero-latency for solo use; "Database-as-a-file" makes migration and backup trivial.
+- **Styling:** **Tailwind CSS + Shadcn UI** - For a clean, "Enterprise-grade" look with minimal custom CSS.
+- **Type Safety:** **TypeScript + Zod** - End-to-end validation from the form input to the DB.
+- **Icons:** **Lucide-React** - Lightweight and modern.
 
 ---
 
-## 7. MVP Scope & Roadmap
+## 6. UI/UX Design System: "Obsidian & Chrome"
 
-- **Phase 1 (MVP):** Landing page, Project showcase, Contact form, Admin dashboard for Inquiries/Clients/Projects.
-- **Phase 2:** Milestone tracking, File management, Improved Analytics.
-- **Phase 3:** Client portal, Invoicing, Email automation.
+### 6.1 Color Palette
+- **Background (Primary):** `#09090B` (Zinc-950) - Deep, focused black.
+- **Surface (Secondary):** `#18181B` (Zinc-900) - Subtle depth for cards.
+- **Action (Primary):** `#FFFFFF` (White) - High-contrast call to actions.
+- **Accent (Muted):** `#A1A1AA` (Zinc-400) - For secondary text and metadata.
+- **Status (Success):** `#22C55E` (Emerald-500) - For "Completed" milestones.
 
----
+### 6.2 Typography
+- **Headings:** `Geist Sans` (Bold/Tight Tracking) - For a modern, tech-forward feel.
+- **Body:** `Inter` (Regular/Optimized for legibility).
+- **Code/Metadata:** `Geist Mono` - For a "System" aesthetic.
 
-## 8. UI/UX Design Specifications
-
-### 8.1 Color Palette (Modern/Professional)
-- **Primary (Action):** `#2563EB` (Blue-600)
-- **Secondary (Success):** `#059669` (Emerald-600)
-- **Background (Light):** `#FFFFFF` / `#F8FAFC`
-- **Background (Dark):** `#0F172A` / `#1E293B`
-- **Text (Light):** `#1E293B` (Gray-800)
-- **Text (Dark):** `#F1F5F9` (Gray-100)
-- **Accent:** `#F59E0B` (Amber-500) for warnings/status.
-
-### 8.2 Typography
-- **Primary Font:** `Inter` or `Geist` (Sans-serif)
-- **Heading Font:** `Inter` (Bold/Semi-bold)
-
-### 8.3 Component Style
-- **Corners:** Rounded (8px / 0.5rem)
-- **Shadows:** Subtle (Small/Medium depth)
-- **Interactions:** Hover states for all buttons/links; smooth page transitions (Next.js Link).
-
-### 8.4 RWD Breakpoints
-- **Mobile:** < 640px
-- **Tablet:** 640px - 1024px
-- **Desktop:** > 1024px
+### 6.3 Interactions
+- **Micro-animations:** Framer Motion for subtle entry transitions.
+- **Responsive:** Mobile-first design; "Desktop-optimized" CRM with sidebar navigation.
 
 ---
 
-## 9. Success Metrics (KPIs)
+## 7. Success Metrics (KPIs)
 
-- **Conversion Rate:** % of visitors submitting the contact form.
-- **Lead Response Time:** Average time to mark an inquiry as "Contacted".
-- **Project Throughput:** Number of projects completed per month.
-- **Site Speed Index:** Google PageSpeed score > 90.
+1.  **Lead-to-Project Conversion Rate:** Goal > 15%.
+2.  **Admin Efficiency:** Time spent in CRM < 30 mins/day.
+3.  **Client Transparency:** Reduction in status-check emails by > 50%.
+4.  **Lighthouse Performance:** 95+ across all categories.
+
+---
+
+## 8. Roadmap & Phasing
+
+- **Phase 1 (Core):** Landing, Project Detail, Admin Inquiry Inbox, Client/Project CRUD.
+- **Phase 2 (Workflow):** Milestone tracking, File management, Lead Scoring.
+- **Phase 3 (Expansion):** Analytics Dashboard, Client Access Links, Invoice templates.
