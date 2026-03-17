@@ -1,12 +1,31 @@
 # System Design (SD) - Solopreneur One
 
-**Version:** 1.0  
-**Status:** [DRAFT]  
+**Version:** 1.1  
+**Status:** [FINAL]  
 **Author:** System Designer  
 
 ---
 
-## 1. Database Schema (Prisma)
+## 1. Module Interface Definitions
+
+### 1.1 Portfolio Layer
+- `GalleryItem`: Props `{ title, description, slug, image, tags }`.
+- `LeadForm`: Form hook handling `InquirySchema` with `Zod`.
+- `Navigation`: Responsive menu with `lucide` icons.
+
+### 1.2 CRM Layer
+- `InquiryList`: Filterable grid for incoming leads.
+- `LeadCard`: Details view with status badge and "Convert" button.
+- `ScoringEngine`: Utility function `(inquiry) => number`.
+
+### 1.3 Project Engine
+- `KanbanBoard`: Component for tracking project status columns.
+- `MilestoneEditor`: Inline editing for project steps.
+- `AssetUploader`: Multi-file handler with progress indicators.
+
+---
+
+## 2. Database Schema (Prisma)
 
 The database is built on **SQLite**, focusing on simplicity and performance for single-tenant use.
 

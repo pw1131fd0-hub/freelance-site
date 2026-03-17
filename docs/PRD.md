@@ -1,7 +1,7 @@
 # Product Requirement Document (PRD) - Solopreneur One
 
-**Version:** 2.0 (Redesigned)  
-**Status:** [DRAFT]  
+**Version:** 2.1 (Refined)  
+**Status:** [FINAL]  
 **Author:** Senior PM / Lead Engineer  
 **Last Updated:** 2026-03-17
 
@@ -20,7 +20,18 @@
 
 ---
 
-## 2. Target User Personas & Detailed User Stories
+## 2. Competitive Analysis
+
+| Competitor | Pros | Cons | Solopreneur One Advantage |
+|---|---|---|---|
+| **Webflow / Squarespace** | Great design flexibility, easy templates. | No CRM, no project tracking, high monthly fees. | Integrated lead-to-project workflow. |
+| **HoneyBook / Dubsado** | Strong CRM and invoicing for creatives. | High learning curve, expensive, closed ecosystem. | Lightweight, performance-first, ownership of data (SQLite). |
+| **Notion (Custom OS)** | Highly flexible, one place for everything. | Fragile for client-facing side, slow for SEO, data sprawl. | SEO-optimized portfolio first, structured data backend. |
+| **Generic Portfolio** | Free/Low cost. | Passive, no automation, no business logic. | Active conversion and workflow automation. |
+
+---
+
+## 3. Target User Personas & Detailed User Stories
 
 ### 2.1 Personas
 - **"Alex the Artisan" (High-end Brand Designer):**Alex needs a gallery that feels like a premium art book. He values high-conversion inquiries with budget-filtering to avoid low-ballers.
@@ -99,9 +110,16 @@
 - **Body:** `Inter` (Regular/Optimized for legibility).
 - **Code/Metadata:** `Geist Mono` - For a "System" aesthetic.
 
-### 6.3 Interactions
-- **Micro-animations:** Framer Motion for subtle entry transitions.
-- **Responsive:** Mobile-first design; "Desktop-optimized" CRM with sidebar navigation.
+### 6.3 Interactions & Component Style
+- **Micro-animations:** Framer Motion for subtle entry transitions (0.3s ease-in-out).
+- **Border Radius:** `8px` (Standard) / `16px` (Cards/Large containers).
+- **Shadows:** `None` (Obsidian focus) - Use borders/stroke for depth (`Zinc-800`).
+- **Spacing:** Base-8 system (8, 16, 24, 32, 48, 64).
+- **Responsive (RWD):** 
+    *   Mobile: < 640px (Full-width, stacked layouts).
+    *   Tablet: 640px - 1024px (Grid-based cards).
+    *   Desktop: > 1024px (CRM Sidebar active, split-pane views).
+- **Modes:** Dark-only (The Obsidian & Chrome theme).
 
 ---
 
