@@ -2,8 +2,10 @@
 
 import prisma from '@/lib/prisma'
 import { revalidatePath } from 'next/cache'
+import { checkAuth } from '@/lib/auth-utils'
 
 export async function qualifyLead(id: string, status: string) {
+  if (!(await checkAuth())) return { success: false, error: 'Unauthorized' }
   try {
     await prisma.inquiry.update({
       where: { id },
@@ -18,6 +20,7 @@ export async function qualifyLead(id: string, status: string) {
 }
 
 export async function convertLead(id: string) {
+  if (!(await checkAuth())) return { success: false, error: 'Unauthorized' }
   try {
     const inquiry = await prisma.inquiry.findUnique({ where: { id } })
     if (!inquiry) return { success: false, error: 'Inquiry not found' }
@@ -69,6 +72,7 @@ export async function convertLead(id: string) {
 }
 
 export async function deleteInquiry(id: string) {
+  if (!(await checkAuth())) return { success: false, error: 'Unauthorized' }
   try {
     await prisma.inquiry.delete({ where: { id } })
     revalidatePath('/admin/crm')
@@ -80,6 +84,7 @@ export async function deleteInquiry(id: string) {
 }
 
 export async function updateMilestone(id: string, status: string) {
+  if (!(await checkAuth())) return { success: false, error: 'Unauthorized' }
   try {
     const milestone = await prisma.milestone.update({
       where: { id },
@@ -94,6 +99,7 @@ export async function updateMilestone(id: string, status: string) {
 }
 
 export async function updateProjectStatus(id: string, status: string) {
+  if (!(await checkAuth())) return { success: false, error: 'Unauthorized' }
   try {
     await prisma.project.update({
       where: { id },
@@ -109,6 +115,7 @@ export async function updateProjectStatus(id: string, status: string) {
 }
 
 export async function deleteProject(id: string) {
+  if (!(await checkAuth())) return { success: false, error: 'Unauthorized' }
   try {
     await prisma.project.delete({ where: { id } })
     revalidatePath('/admin/projects')
@@ -120,6 +127,7 @@ export async function deleteProject(id: string) {
 }
 
 export async function deleteClient(id: string) {
+  if (!(await checkAuth())) return { success: false, error: 'Unauthorized' }
   try {
     await prisma.client.delete({ where: { id } })
     revalidatePath('/admin/clients')
@@ -131,6 +139,7 @@ export async function deleteClient(id: string) {
 }
 
 export async function createAsset(data: { name: string, url: string, type: string, projectId: string }) {
+  if (!(await checkAuth())) return { success: false, error: 'Unauthorized' }
   try {
     const asset = await prisma.asset.create({ data })
     revalidatePath('/admin/assets')
@@ -143,6 +152,7 @@ export async function createAsset(data: { name: string, url: string, type: strin
 }
 
 export async function deleteAsset(id: string) {
+  if (!(await checkAuth())) return { success: false, error: 'Unauthorized' }
   try {
     const asset = await prisma.asset.delete({ where: { id } })
     revalidatePath('/admin/assets')

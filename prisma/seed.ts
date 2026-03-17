@@ -7,7 +7,9 @@ const adapter = new PrismaBetterSqlite3({ url: dbPath })
 const prisma = new PrismaClient({ adapter })
 
 function hashPassword(password: string) {
-  return crypto.createHash('sha256').update(password).digest('hex')
+  const salt = crypto.randomBytes(16).toString('hex')
+  const hash = crypto.scryptSync(password, salt, 64).toString('hex')
+  return `${salt}:${hash}`
 }
 
 async function main() {

@@ -7,6 +7,7 @@ export const InquirySchema = z.object({
   timeline: z.string().optional(),
   message: z.string().min(10, 'Message must be at least 10 characters'),
   projectType: z.string().min(2, 'Project type is required'),
+  honeypot: z.string().optional(),
 })
 
 export type InquiryInput = z.infer<typeof InquirySchema>

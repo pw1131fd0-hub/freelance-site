@@ -182,6 +182,11 @@ export function LeadForm() {
           {/* STEP 2: Contact Info & Brief */}
           {currentStep === 2 && (
             <div className="space-y-8 animate-in slide-in-from-right-4 duration-500">
+              {/* Honeypot field - HIDDEN */}
+              <div className="hidden" aria-hidden="true">
+                <input type="text" {...form.register('honeypot')} tabIndex={-1} autoComplete="off" />
+              </div>
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="space-y-3">
                   <Label htmlFor="name" className="text-[10px] uppercase tracking-widest text-zinc-500 font-mono">Full Name</Label>

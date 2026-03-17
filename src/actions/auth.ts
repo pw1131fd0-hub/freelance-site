@@ -4,12 +4,9 @@ import prisma from '@/lib/prisma'
 import { LoginSchema, type LoginInput } from '@/lib/schemas'
 import { cookies } from 'next/headers'
 import * as crypto from 'crypto'
+import { verifyPassword } from '@/lib/auth-utils'
 
 const SESSION_SECRET = process.env.SESSION_SECRET || 'solopreneur-one-secret-2026'
-
-function hashPassword(password: string) {
-  return crypto.createHash('sha256').update(password).digest('hex')
-}
 
 export async function login(data: LoginInput) {
   try {
@@ -19,7 +16,7 @@ export async function login(data: LoginInput) {
       where: { email: validatedData.email }
     })
     
-    if (!user || user.passwordHash !== hashPassword(validatedData.password)) {
+    if (!user || !verifyPassword(validatedData.password, user.passwordHash)) {
       return { success: false, error: 'Invalid email or password' }
     }
     

@@ -44,6 +44,19 @@ vi.mock('next/cache', () => ({
   revalidatePath: vi.fn(),
 }))
 
+vi.mock('next/headers', () => ({
+  cookies: vi.fn(() => ({
+    get: vi.fn(() => ({ value: 'valid-session' })),
+  })),
+  headers: vi.fn(() => ({
+    get: vi.fn(() => '127.0.0.1'),
+  })),
+}))
+
+vi.mock('@/lib/auth-utils', () => ({
+  checkAuth: vi.fn(async () => 'user-1'),
+}))
+
 describe('Admin Actions', () => {
   beforeEach(() => {
     vi.clearAllMocks()

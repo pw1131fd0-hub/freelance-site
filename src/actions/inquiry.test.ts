@@ -1,6 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { submitInquiry } from './inquiry'
 import prisma from '@/lib/prisma'
+import { headers } from 'next/headers'
 
 vi.mock('@/lib/prisma', () => ({
   default: {
@@ -10,9 +11,19 @@ vi.mock('@/lib/prisma', () => ({
   },
 }))
 
+vi.mock('next/headers', () => ({
+  headers: vi.fn(() => ({
+    get: vi.fn(),
+  })),
+}))
+
 describe('Inquiry Actions', () => {
   beforeEach(() => {
     vi.clearAllMocks()
+    // Reset IP for each test to bypass rate limiting
+    ;(headers as any).mockReturnValue({
+      get: vi.fn((key) => key === 'x-forwarded-for' ? `127.0.0.${Math.floor(Math.random() * 255)}` : null)
+    })
   })
 
   describe('submitInquiry', () => {

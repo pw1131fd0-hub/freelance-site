@@ -1,26 +1,37 @@
 import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
+import type { NextRequest } from 'next/request'
 
-// Simple session verification for middleware (edge compatible)
-// Since we can't use node:crypto easily here, we'll just check if the cookie exists 
-// and let the server components do the deeper verification if needed, 
-// OR we can use the Web Crypto API if we want.
-// For MVP, checking existence and a simple format is a start.
+// Note: In some Edge runtimes, we'd need to use Web Crypto.
+// But for this project's deployment target, we assume Node.js support or we'll provide a compatible check.
+// Since we are running in a environment with better-sqlite3, we are in Node.js.
 
 export async function middleware(request: NextRequest) {
-  const session = request.cookies.get('session')?.value
+  const sessionToken = request.cookies.get('session')?.value
   const { pathname } = request.nextUrl
 
   // Protect /admin routes except /admin/login
   if (pathname.startsWith('/admin') && pathname !== '/admin/login') {
-    if (!session) {
+    if (!sessionToken) {
       return NextResponse.redirect(new URL('/admin/login', request.url))
+    }
+    
+    // Deeper verification could be done here if we had a Web Crypto version of verifySession
+    // For now, we rely on server actions/components to do the final verification 
+    // but we can at least check if it looks like a signed token (payload.signature)
+    const parts = sessionToken.split('.')
+    if (parts.length !== 2) {
+      const response = NextResponse.redirect(new URL('/admin/login', request.url))
+      response.cookies.delete('session')
+      return response
     }
   }
 
   // Redirect /admin/login to /admin/dashboard if already logged in
-  if (pathname === '/admin/login' && session) {
-    return NextResponse.redirect(new URL('/admin/dashboard', request.url))
+  if (pathname === '/admin/login' && sessionToken) {
+    const parts = sessionToken.split('.')
+    if (parts.length === 2) {
+      return NextResponse.redirect(new URL('/admin/dashboard', request.url))
+    }
   }
 
   return NextResponse.next()
