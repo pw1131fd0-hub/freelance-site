@@ -92,3 +92,66 @@ export async function updateMilestone(id: string, status: string) {
     return { success: false, error: 'Internal server error' }
   }
 }
+
+export async function updateProjectStatus(id: string, status: string) {
+  try {
+    await prisma.project.update({
+      where: { id },
+      data: { status }
+    })
+    revalidatePath('/admin/projects')
+    revalidatePath(`/admin/projects/${id}`)
+    return { success: true }
+  } catch (error) {
+    console.error('Failed to update project status:', error)
+    return { success: false, error: 'Internal server error' }
+  }
+}
+
+export async function deleteProject(id: string) {
+  try {
+    await prisma.project.delete({ where: { id } })
+    revalidatePath('/admin/projects')
+    return { success: true }
+  } catch (error) {
+    console.error('Failed to delete project:', error)
+    return { success: false, error: 'Internal server error' }
+  }
+}
+
+export async function deleteClient(id: string) {
+  try {
+    await prisma.client.delete({ where: { id } })
+    revalidatePath('/admin/clients')
+    return { success: true }
+  } catch (error) {
+    console.error('Failed to delete client:', error)
+    return { success: false, error: 'Internal server error' }
+  }
+}
+
+export async function createAsset(data: { name: string, url: string, type: string, projectId: string }) {
+  try {
+    const asset = await prisma.asset.create({ data })
+    revalidatePath('/admin/assets')
+    revalidatePath(`/admin/projects/${data.projectId}`)
+    return { success: true, asset }
+  } catch (error) {
+    console.error('Failed to create asset:', error)
+    return { success: false, error: 'Internal server error' }
+  }
+}
+
+export async function deleteAsset(id: string) {
+  try {
+    const asset = await prisma.asset.delete({ where: { id } })
+    revalidatePath('/admin/assets')
+    revalidatePath(`/admin/projects/${asset.projectId}`)
+    return { success: true }
+  } catch (error) {
+    console.error('Failed to delete asset:', error)
+    return { success: false, error: 'Internal server error' }
+  }
+}
+
+

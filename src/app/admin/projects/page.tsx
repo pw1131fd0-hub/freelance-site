@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Plus, Briefcase, Calendar, CheckCircle, Clock } from "lucide-react"
+import Link from "next/link"
 
 export default async function ProjectsPage() {
   const projects = await prisma.project.findMany({
@@ -42,31 +43,33 @@ export default async function ProjectsPage() {
             
             <div className="flex flex-col gap-3 min-h-[400px]">
                {projects.filter(p => p.status === s.label).map((p) => (
-                 <Card key={p.id} className="bg-zinc-900 border-zinc-800 rounded-none cursor-pointer hover:border-zinc-700 transition-all group">
-                   <CardHeader className="p-4 border-b border-zinc-800 group-hover:bg-zinc-950/50">
-                     <CardTitle className="text-sm font-heading font-bold uppercase tracking-tight">{p.title}</CardTitle>
-                     <p className="text-[10px] text-zinc-500 font-mono uppercase tracking-widest">{p.client.name}</p>
-                   </CardHeader>
-                   <CardContent className="p-4 space-y-3">
-                      <div className="flex flex-col gap-1">
-                        <div className="flex justify-between text-[10px] font-mono uppercase text-zinc-600 tracking-widest">
-                           <span>Milestones</span>
-                           <span>{p.milestones.filter(m => m.status === 'COMPLETED').length} / {p.milestones.length}</span>
+                 <Link key={p.id} href={`/admin/projects/${p.id}`}>
+                   <Card className="bg-zinc-900 border-zinc-800 rounded-none cursor-pointer hover:border-zinc-700 transition-all group">
+                     <CardHeader className="p-4 border-b border-zinc-800 group-hover:bg-zinc-950/50">
+                       <CardTitle className="text-sm font-heading font-bold uppercase tracking-tight">{p.title}</CardTitle>
+                       <p className="text-[10px] text-zinc-500 font-mono uppercase tracking-widest">{p.client.name}</p>
+                     </CardHeader>
+                     <CardContent className="p-4 space-y-3">
+                        <div className="flex flex-col gap-1">
+                          <div className="flex justify-between text-[10px] font-mono uppercase text-zinc-600 tracking-widest">
+                             <span>Milestones</span>
+                             <span>{p.milestones.filter(m => m.status === 'COMPLETED').length} / {p.milestones.length}</span>
+                          </div>
+                          <div className="w-full h-1 bg-zinc-950 border border-zinc-900 overflow-hidden">
+                             <div 
+                               className="h-full bg-white transition-all duration-1000" 
+                               style={{ width: p.milestones.length ? `${(p.milestones.filter(m => m.status === 'COMPLETED').length / p.milestones.length) * 100}%` : '0%' }}
+                             />
+                          </div>
                         </div>
-                        <div className="w-full h-1 bg-zinc-950 border border-zinc-900 overflow-hidden">
-                           <div 
-                             className="h-full bg-white transition-all duration-1000" 
-                             style={{ width: p.milestones.length ? `${(p.milestones.filter(m => m.status === 'COMPLETED').length / p.milestones.length) * 100}%` : '0%' }}
-                           />
+                        <div className="flex justify-between items-center pt-2">
+                          <Badge variant="outline" className="text-[9px] font-mono border-zinc-800 text-zinc-600 bg-zinc-950">
+                             {p.budget ? `$${p.budget.toLocaleString()}` : 'N/A'}
+                          </Badge>
                         </div>
-                      </div>
-                      <div className="flex justify-between items-center pt-2">
-                        <Badge variant="outline" className="text-[9px] font-mono border-zinc-800 text-zinc-600 bg-zinc-950">
-                           {p.budget ? `$${p.budget.toLocaleString()}` : 'N/A'}
-                        </Badge>
-                      </div>
-                   </CardContent>
-                 </Card>
+                     </CardContent>
+                   </Card>
+                 </Link>
                ))}
                
                {projects.filter(p => p.status === s.label).length === 0 && (
