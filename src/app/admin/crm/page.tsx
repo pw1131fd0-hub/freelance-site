@@ -2,8 +2,7 @@ import prisma from "@/lib/prisma"
 import { Card, CardContent } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Mail, Trash2, CheckCircle } from "lucide-react"
+import { LeadActions } from "@/components/shared/LeadActions"
 
 export default async function CRMPage() {
   const inquiries = await prisma.inquiry.findMany({
@@ -56,43 +55,31 @@ export default async function CRMPage() {
                       </div>
                     </TableCell>
                     <TableCell>
-                      <Badge variant="outline" className="text-[10px] border-zinc-800 bg-zinc-950 font-mono">
+                      <Badge variant="outline" className="text-[10px] border-zinc-800 bg-zinc-950 font-mono uppercase">
                         {inquiry.projectType}
                       </Badge>
                     </TableCell>
-                    <TableCell className="font-mono text-xs">
+                    <TableCell className="font-mono text-xs text-zinc-400">
                       {inquiry.budget ? `$${inquiry.budget.toLocaleString()}` : "N/A"}
                     </TableCell>
                     <TableCell>
                       <div className="flex items-center gap-2">
-                        <div className="w-12 h-1 bg-zinc-800 rounded-full overflow-hidden">
+                        <div className="w-12 h-1 bg-zinc-800 rounded-full overflow-hidden border border-zinc-900">
                            <div 
                              className="h-full bg-emerald-500" 
                              style={{ width: `${Math.min(inquiry.score, 100)}%` }}
                            />
                         </div>
-                        <span className="text-[10px] font-mono text-zinc-500">{inquiry.score}</span>
+                        <span className="text-[10px] font-mono text-zinc-600">{inquiry.score}</span>
                       </div>
                     </TableCell>
                     <TableCell>
-                      <Badge className="bg-emerald-500/10 text-emerald-500 border-emerald-500/20 text-[10px] uppercase font-mono">
+                      <Badge className={cn("text-[10px] uppercase font-mono border-zinc-800", inquiry.status === 'NEW' ? "bg-zinc-800 text-zinc-400" : "bg-emerald-500/10 text-emerald-500")}>
                         {inquiry.status}
                       </Badge>
                     </TableCell>
                     <TableCell className="text-right">
-                       <div className="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                         <a href={`mailto:${inquiry.email}?subject=Re: Your ${inquiry.projectType} inquiry`}>
-                            <Button size="icon" variant="ghost" className="h-8 w-8 text-zinc-500 hover:text-white hover:bg-zinc-800">
-                              <Mail className="h-4 w-4" />
-                            </Button>
-                         </a>
-                         <Button size="icon" variant="ghost" className="h-8 w-8 text-zinc-500 hover:text-emerald-500 hover:bg-emerald-500/10">
-                            <CheckCircle className="h-4 w-4" />
-                         </Button>
-                         <Button size="icon" variant="ghost" className="h-8 w-8 text-zinc-500 hover:text-destructive hover:bg-destructive/10">
-                            <Trash2 className="h-4 w-4" />
-                         </Button>
-                       </div>
+                       <LeadActions id={inquiry.id} email={inquiry.email} projectType={inquiry.projectType} />
                     </TableCell>
                   </TableRow>
                 ))
@@ -103,4 +90,8 @@ export default async function CRMPage() {
       </Card>
     </div>
   )
+}
+
+function cn(...inputs: (string | undefined | null | boolean)[]) {
+  return inputs.filter(Boolean).join(" ");
 }

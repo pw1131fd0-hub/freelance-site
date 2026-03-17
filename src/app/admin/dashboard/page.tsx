@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
 import { Users, FileText, Briefcase, Zap } from "lucide-react"
+import { cn } from "@/lib/utils"
 
 export default async function DashboardPage() {
   const inquiries = await prisma.inquiry.findMany({
@@ -17,11 +18,13 @@ export default async function DashboardPage() {
     { label: "Clients", value: await prisma.client.count(), icon: FileText },
   ]
 
+  const today = new Date().toISOString().split('T')[0]
+
   return (
     <div className="p-8 space-y-8 bg-black min-h-screen text-white">
       <div className="space-y-2">
         <h1 className="text-4xl font-heading font-bold uppercase tracking-tighter">Command Center</h1>
-        <p className="text-zinc-500 font-mono text-sm uppercase">Overview / 2026-03-17</p>
+        <p className="text-zinc-500 font-mono text-sm uppercase">Overview / {today}</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -29,7 +32,7 @@ export default async function DashboardPage() {
           <Card key={stat.label} className="bg-zinc-900 border-zinc-800 rounded-none">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-xs font-mono uppercase text-zinc-500 tracking-widest">{stat.label}</CardTitle>
-              <stat.icon className="w-4 h-4 text-zinc-500" />
+              <stat.icon className="w-4 h-4 text-zinc-700" />
             </CardHeader>
             <CardContent>
               <div className="text-4xl font-heading font-bold">{stat.value}</div>
@@ -42,7 +45,7 @@ export default async function DashboardPage() {
         <Card className="bg-zinc-900 border-zinc-800 rounded-none">
           <CardHeader className="border-b border-zinc-800 bg-zinc-950/50">
             <CardTitle className="text-xl font-heading font-bold uppercase tracking-tight">Recent Inquiries</CardTitle>
-            <CardDescription className="text-zinc-500 text-xs font-mono">LATEST LEADS FROM LANDING PAGE</CardDescription>
+            <CardDescription className="text-zinc-500 text-xs font-mono uppercase">Latest leads from landing page</CardDescription>
           </CardHeader>
           <CardContent className="p-0">
             <Table>
@@ -57,20 +60,22 @@ export default async function DashboardPage() {
               <TableBody>
                 {inquiries.length === 0 ? (
                   <TableRow>
-                    <TableCell colSpan={4} className="text-center py-12 text-zinc-600 font-mono italic">
+                    <TableCell colSpan={4} className="text-center py-12 text-zinc-600 font-mono italic text-xs uppercase">
                       NO INQUIRIES YET
                     </TableCell>
                   </TableRow>
                 ) : (
                   inquiries.map((inquiry) => (
                     <TableRow key={inquiry.id} className="border-zinc-800 hover:bg-zinc-950 transition-colors">
-                      <TableCell className="font-medium">{inquiry.name}</TableCell>
-                      <TableCell className="text-zinc-500 text-xs">{inquiry.projectType}</TableCell>
+                      <TableCell className="font-bold uppercase tracking-tight text-sm">{inquiry.name}</TableCell>
+                      <TableCell className="text-zinc-500 text-[10px] font-mono uppercase">{inquiry.projectType}</TableCell>
                       <TableCell>
-                        <Badge variant="outline" className="font-mono text-[10px] border-zinc-700">{inquiry.score}</Badge>
+                        <Badge variant="outline" className="font-mono text-[9px] border-zinc-700 bg-zinc-950 text-zinc-500">{inquiry.score}</Badge>
                       </TableCell>
                       <TableCell>
-                        <Badge className="bg-emerald-500/10 text-emerald-500 border-emerald-500/20 text-[10px]">{inquiry.status}</Badge>
+                        <Badge className={cn("text-[9px] uppercase font-mono border-zinc-800", inquiry.status === 'NEW' ? "bg-zinc-800 text-zinc-400" : "bg-emerald-500/10 text-emerald-500")}>
+                          {inquiry.status}
+                        </Badge>
                       </TableCell>
                     </TableRow>
                   ))

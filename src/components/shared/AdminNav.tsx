@@ -1,15 +1,26 @@
+'use client'
+
 import Link from "next/link";
-import { Users, FileText, Briefcase, Zap, Home, LayoutDashboard } from "lucide-react";
+import { Users, FileText, Briefcase, Zap, Home, LayoutDashboard, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { logout } from "@/actions/auth";
+import { useRouter } from "next/navigation";
 
 export default function AdminNav() {
+  const router = useRouter()
   const items = [
-    { label: "DASHBOARD", icon: LayoutDashboard, href: "/dashboard" },
-    { label: "CRM / LEADS", icon: Users, href: "/crm" },
-    { label: "PROJECTS", icon: Briefcase, href: "/projects" },
-    { label: "CLIENTS", icon: FileText, href: "/clients" },
-    { label: "ASSET VAULT", icon: Zap, href: "/assets" },
+    { label: "DASHBOARD", icon: LayoutDashboard, href: "/admin/dashboard" },
+    { label: "CRM / LEADS", icon: Users, href: "/admin/crm" },
+    { label: "PROJECTS", icon: Briefcase, href: "/admin/projects" },
+    { label: "CLIENTS", icon: FileText, href: "/admin/clients" },
+    { label: "ASSET VAULT", icon: Zap, href: "/admin/assets" },
   ]
+
+  const handleLogout = async () => {
+    await logout()
+    router.push('/admin/login')
+    router.refresh()
+  }
 
   return (
     <nav className="w-64 border-r border-zinc-900 flex flex-col gap-8 p-8 bg-zinc-950/50 backdrop-blur-md sticky top-0 h-screen overflow-y-auto">
@@ -29,13 +40,21 @@ export default function AdminNav() {
         ))}
       </div>
 
-      <div className="pt-8 border-t border-zinc-900">
+      <div className="pt-8 border-t border-zinc-900 flex flex-col gap-2">
         <Link href="/">
-          <Button variant="ghost" className="w-full justify-start gap-3 text-zinc-600 hover:text-white hover:bg-zinc-900 rounded-none font-mono text-xs font-medium tracking-widest">
+          <Button variant="ghost" className="w-full justify-start gap-3 text-zinc-600 hover:text-white hover:bg-zinc-900 rounded-none font-mono text-[10px] uppercase tracking-widest">
             <Home className="w-4 h-4" />
             BACK TO PORTFOLIO
           </Button>
         </Link>
+        <Button 
+          variant="ghost" 
+          onClick={handleLogout}
+          className="w-full justify-start gap-3 text-destructive/60 hover:text-destructive hover:bg-destructive/10 rounded-none font-mono text-[10px] uppercase tracking-widest"
+        >
+          <LogOut className="w-4 h-4" />
+          TERMINATE SESSION
+        </Button>
       </div>
     </nav>
   )

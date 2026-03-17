@@ -1,9 +1,14 @@
 import { PrismaClient } from '@prisma/client'
 import { PrismaBetterSqlite3 } from '@prisma/adapter-better-sqlite3'
+import * as crypto from 'crypto'
 
 const dbPath = 'prisma/dev.db'
 const adapter = new PrismaBetterSqlite3({ url: dbPath })
 const prisma = new PrismaClient({ adapter })
+
+function hashPassword(password: string) {
+  return crypto.createHash('sha256').update(password).digest('hex')
+}
 
 async function main() {
   // Clean DB
@@ -13,6 +18,15 @@ async function main() {
   await prisma.client.deleteMany({})
   await prisma.inquiry.deleteMany({})
   await prisma.user.deleteMany({})
+
+  // Admin User
+  await prisma.user.create({
+    data: {
+      email: 'admin@solopreneur.one',
+      passwordHash: hashPassword('admin123'),
+      name: 'Senior Freelancer',
+    }
+  })
 
   const client1 = await prisma.client.create({
     data: {

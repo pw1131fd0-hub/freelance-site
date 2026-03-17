@@ -4,8 +4,31 @@ import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 import { ArrowRight, Code, Palette, Zap } from "lucide-react";
 import { LeadForm } from "@/components/shared/LeadForm";
+import prisma from "@/lib/prisma";
 
-export default function LandingPage() {
+export default async function LandingPage() {
+  const projects = await prisma.project.findMany({
+    where: { status: 'COMPLETED' },
+    take: 4,
+    orderBy: { createdAt: 'desc' }
+  })
+
+  // Fallback if no completed projects
+  const displayProjects = projects.length > 0 ? projects : [
+    {
+      title: "Obsidian Dashboard",
+      description: "Web App",
+      slug: "obsidian-dashboard",
+      image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      title: "Chrome Extension",
+      description: "Tools",
+      slug: "chrome-extension",
+      image: "https://images.unsplash.com/photo-1614850523296-e811cf9ee177?auto=format&fit=crop&w=800&q=80"
+    }
+  ]
+
   return (
     <div className="flex flex-col gap-24 pb-24 bg-zinc-950">
       {/* Hero Section */}
@@ -45,26 +68,13 @@ export default function LandingPage() {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {[
-            {
-              title: "Obsidian Dashboard",
-              category: "Web App",
-              tech: ["Next.js", "Prisma", "Tailwind"],
-              image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80"
-            },
-            {
-              title: "Chrome Extension for Artisans",
-              category: "Tools",
-              tech: ["React", "Typescript"],
-              image: "https://images.unsplash.com/photo-1614850523296-e811cf9ee177?auto=format&fit=crop&w=800&q=80"
-            }
-          ].map((project, i) => (
-            <Link key={i} href={`/portfolio/${project.title.toLowerCase().replace(/\s+/g, '-')}`}>
+          {displayProjects.map((project, i) => (
+            <Link key={i} href={`/portfolio/${'slug' in project ? project.slug : project.title.toLowerCase().replace(/\s+/g, '-')}`}>
               <Card className="bg-zinc-900/50 border-zinc-900 overflow-hidden group cursor-pointer hover:border-zinc-800 transition-all rounded-none">
                 <div className="aspect-video relative overflow-hidden bg-zinc-950">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={project.image}
+                    src={'image' in project ? project.image : "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80"}
                     alt={project.title}
                     className="object-cover w-full h-full opacity-40 group-hover:opacity-80 group-hover:scale-105 transition-all duration-700 ease-in-out"
                   />
@@ -73,7 +83,7 @@ export default function LandingPage() {
                   <div className="flex justify-between items-start">
                     <div className="space-y-1">
                       <CardTitle className="text-2xl font-heading font-bold uppercase tracking-tight">{project.title}</CardTitle>
-                      <p className="text-xs text-zinc-600 font-mono uppercase tracking-widest">{project.category}</p>
+                      <p className="text-xs text-zinc-600 font-mono uppercase tracking-widest">{project.description || 'Project'}</p>
                     </div>
                   </div>
                 </CardHeader>
