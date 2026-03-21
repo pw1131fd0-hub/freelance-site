@@ -3,10 +3,10 @@
 import Link from "next/link";
 import { projects } from "@/data/projects";
 import { blogPosts } from "@/data/blog";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { ArrowRight, ExternalLink, Github, Mail } from "lucide-react";
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
@@ -17,13 +17,9 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.45, ease: "easeOut" },
-  },
+  show: { opacity: 1, y: 0 },
 };
 
 const services = [
