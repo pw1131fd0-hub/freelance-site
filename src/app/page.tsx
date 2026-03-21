@@ -160,19 +160,27 @@ export default function Home() {
                 </span>
               ))}
             </div>
-            <Link
-              href={projects[0].githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm font-bold text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors group/link"
-            >
-              <Github size={15} />
-              View on GitHub
-              <ArrowRight
-                size={13}
-                className="group-hover/link:translate-x-0.5 transition-transform"
-              />
-            </Link>
+            <div className="flex items-center gap-5">
+              <Link
+                href={`/projects/${projects[0].id}`}
+                className="inline-flex items-center gap-2 text-sm font-bold text-blue-600 dark:text-blue-400 hover:underline underline-offset-4 transition-colors group/link"
+              >
+                Case Study
+                <ArrowRight
+                  size={13}
+                  className="group-hover/link:translate-x-0.5 transition-transform"
+                />
+              </Link>
+              <Link
+                href={projects[0].githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm font-bold text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              >
+                <Github size={14} />
+                GitHub
+              </Link>
+            </div>
           </div>
         </motion.section>
 
@@ -224,16 +232,24 @@ export default function Home() {
                 </span>
               ))}
             </div>
-            <Link
-              href={project.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-            >
-              <Github size={12} />
-              GitHub
-              <ExternalLink size={10} />
-            </Link>
+            <div className="flex items-center gap-3">
+              <Link
+                href={`/projects/${project.id}`}
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline underline-offset-4 transition-colors"
+              >
+                Case Study <ArrowRight size={10} />
+              </Link>
+              <Link
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              >
+                <Github size={12} />
+                GitHub
+                <ExternalLink size={10} />
+              </Link>
+            </div>
           </motion.section>
         ))}
 

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { projects } from "@/data/projects";
 import { motion, type Variants } from "framer-motion";
-import { ArrowLeft, ExternalLink, Github } from "lucide-react";
+import { ArrowLeft, ArrowRight, ExternalLink, Github } from "lucide-react";
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -20,6 +20,7 @@ const itemVariants: Variants = {
 
 const statusColors: Record<string, string> = {
   "✅ 生產就緒": "bg-emerald-100 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400",
+  "✅ Production Ready": "bg-emerald-100 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400",
 };
 
 export default function Projects() {
@@ -89,19 +90,28 @@ export default function Projects() {
                   </span>
                 ))}
               </div>
-              <Link
-                href={featured.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm font-bold text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors group/link"
-              >
-                <Github size={15} />
-                View on GitHub
-                <ExternalLink
-                  size={12}
-                  className="group-hover/link:translate-x-0.5 transition-transform"
-                />
-              </Link>
+              <div className="flex items-center gap-5">
+                <Link
+                  href={`/projects/${featured.id}`}
+                  className="inline-flex items-center gap-2 text-sm font-bold text-blue-600 dark:text-blue-400 hover:underline underline-offset-4 transition-colors group/link"
+                >
+                  View Case Study
+                  <ArrowRight
+                    size={13}
+                    className="group-hover/link:translate-x-0.5 transition-transform"
+                  />
+                </Link>
+                <Link
+                  href={featured.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-sm font-bold text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                >
+                  <Github size={14} />
+                  GitHub
+                  <ExternalLink size={11} />
+                </Link>
+              </div>
             </div>
           </motion.div>
 
@@ -178,16 +188,24 @@ export default function Projects() {
                   </span>
                 )}
               </div>
-              <Link
-                href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-              >
-                <Github size={12} />
-                GitHub
-                <ExternalLink size={10} />
-              </Link>
+              <div className="flex items-center gap-4">
+                <Link
+                  href={`/projects/${project.id}`}
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline underline-offset-4 transition-colors"
+                >
+                  Case Study <ArrowRight size={10} />
+                </Link>
+                <Link
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                >
+                  <Github size={12} />
+                  GitHub
+                  <ExternalLink size={10} />
+                </Link>
+              </div>
             </motion.div>
           ))}
         </div>
