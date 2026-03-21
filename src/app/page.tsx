@@ -99,7 +99,7 @@ export default function Home() {
 
           <div className="flex flex-wrap gap-3">
             <Link
-              href="#work"
+              href="/projects"
               className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white rounded-xl font-semibold text-sm hover:bg-blue-700 active:scale-[0.98] transition-all"
             >
               View My Work <ArrowRight size={15} />
@@ -137,7 +137,6 @@ export default function Home() {
         {/* ── 3. FEATURED PROJECT ──────────────────────────────── */}
         <motion.section
           variants={itemVariants}
-          id="work"
           className="col-span-1 md:col-span-2 lg:col-span-7 bg-white dark:bg-[#111111] rounded-[28px] p-8 border border-slate-100 dark:border-white/[0.05] group relative overflow-hidden flex flex-col"
         >
           <div className="absolute inset-0 bg-gradient-to-br from-blue-50/80 via-transparent to-transparent dark:from-blue-950/20 dark:via-transparent dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
@@ -341,6 +340,12 @@ export default function Home() {
       <footer className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 mt-12 pb-10 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-400 text-xs font-mono border-t border-slate-100 dark:border-white/[0.05] pt-8">
         <span>© {new Date().getFullYear()} OpenClaw · All rights reserved</span>
         <div className="flex items-center gap-5">
+          <Link
+            href="/projects"
+            className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+          >
+            Projects
+          </Link>
           <Link
             href="/blog"
             className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
