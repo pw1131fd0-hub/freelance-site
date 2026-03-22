@@ -1,18 +1,43 @@
-"use client";
-
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { projects } from "@/data/projects";
-import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, CheckCircle, ExternalLink, Github } from "lucide-react";
-import { use } from "react";
 
-export default function ProjectDetail({
+export function generateStaticParams() {
+  return projects.map((p) => ({ id: p.id }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  const project = projects.find((p) => p.id === id);
+  if (!project) return { title: "Project Not Found | OpenClaw" };
+  return {
+    title: `${project.emoji} ${project.name} | OpenClaw`,
+    description: project.description,
+    openGraph: {
+      title: `${project.name} | OpenClaw`,
+      description: project.description,
+      type: "website",
+    },
+    twitter: {
+      card: "summary",
+      title: `${project.name} | OpenClaw`,
+      description: project.description,
+    },
+  };
+}
+
+export default async function ProjectDetail({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const { id } = use(params);
+  const { id } = await params;
   const project = projects.find((p) => p.id === id);
 
   if (!project) notFound();
@@ -23,12 +48,7 @@ export default function ProjectDetail({
 
   return (
     <main className="min-h-screen bg-[#F8FAFC] dark:bg-[#080808] text-[#0F172A] dark:text-[#F1F5F9] font-sans">
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
-        className="max-w-4xl mx-auto px-4 md:px-6 lg:px-8 py-12"
-      >
+      <div className="max-w-4xl mx-auto px-4 md:px-6 lg:px-8 py-12">
         {/* Back */}
         <Link
           href="/projects"
@@ -174,7 +194,7 @@ export default function ProjectDetail({
             <div className="flex-1" />
           )}
         </div>
-      </motion.div>
+      </div>
     </main>
   );
 }
