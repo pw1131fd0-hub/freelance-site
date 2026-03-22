@@ -79,3 +79,18 @@ Phase 1 Bento-Elite redesign implemented: full navigation with theme toggle, com
 - Core Stack dark 
 
 ---
+
+## [2026-03-22 02:39:04] [redesign] 88%
+
+Phase 2 complete: /projects page (bento grid + individual case study pages per project with longDescription/highlights/prev-next nav), 4 blog posts (up from 1), blog list redesigned to match bento aesthetic with featured post card, blog post renderer improved with proper markdown parsing, Navigation upgraded with mobile hamburger drawer and Projects link, projects data enriched with longDescription/highlights/liveUrl, footer updated with Projects link. All 16 routes compile successfully.
+
+> Phase 2 complete. Here's what was done:
+
+**Changes delivered:**
+- `/projects` — new bento-grid page listing all 5 projects with status badges
+- `/projects/[id]` — individual case study pages with `longDescription`, `highlights`, tech stack card, and prev/next navigation
+- **Blog list** — redesigned to match bento aesthetic (featured post hero card + grid of remaining posts)
+- **Blog post page** — proper markdown renderer (headings, lists, bold, inline code) in a bento card container
+- **Navigati
+
+---
