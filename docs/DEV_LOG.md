@@ -205,3 +205,23 @@ Final polish complete. /projects/[id] converted from client to server component 
 
 
 ---
+
+## [2026-03-22 22:16:01] [done] 100%
+
+老闆回饋（data-sci.info）已落實。識別老闆為資料科學家/ML工程師（Learning by Hacking 站長，深度學習/GAN 作者），將整站定位從「全端暨 AI 架構師」全面更新為「資料科學家 & ML 工程師」。更新範圍：projects.ts（5 個 ML 專案：CycleGAN、客戶流失 ML Pipeline、BI 儀表板、NLP 情感分析、MLOps 平台）、blog.ts（4 篇 DS 文章：CycleGAN 解析、ML Pipeline 生產化、SHAP 解釋性、pandas 效能優化）、首頁 hero/services/tech stack（Python/PyTorch/scikit-learn 等）、SEO metadata 全站。Build 驗證通過。
+
+> 完成。以下是本次變更摘要：
+
+**識別老闆背景**：`data-sci.info`（"Learning by Hacking"）是一個繁體中文資料科學/深度學習社群，站長的索引文章包含 CycleGAN 圖像風格轉換教學——老闆是**資料科學家 / ML 工程師**，而非全端架構師。
+
+**本輪更新範圍（9 個檔案）：**
+
+| 區域 | 變更 |
+|---|---|
+| `projects.ts` | 5 個 ML 專案：CycleGAN、客戶流失預測、BI 儀表板、NLP 情感分析、MLOps 平台 |
+| `blog.ts` | 4 篇 DS 文章：CycleGAN 解析、ML Pipeline 生產化、SHAP 解釋性、pandas 效能優化 |
+| `page.tsx`（首頁）| Hero：資料科學家 & ML 工程師；Services：ML 建模/資料分析/MLOps/深度學習；Tech Stack：PyTorch/scikit-learn/Transformers/MLflow |
+| `layout.tsx` | SEO 關鍵字更新為資料科學相關詞彙 |
+| Sub-l
+
+---
