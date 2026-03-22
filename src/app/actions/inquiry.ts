@@ -39,6 +39,8 @@ export async function submitInquiry(data: InquiryData) {
       data: {
         description: validated.description,
         budget: validated.budget,
+        projectType: validated.projectType,
+        priority: validated.priority || "P2",
         customerId: customer.id,
         status: "PENDING",
       },

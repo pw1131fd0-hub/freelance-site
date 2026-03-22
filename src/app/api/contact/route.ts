@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { Resend } from 'resend';
+import { prisma } from '@/lib/prisma';
 
 const resend = new Resend(process.env.RESEND_API_KEY || 're_dummy_key');
 
@@ -8,7 +9,11 @@ const contactSchema = z.object({
   name: z.string().min(1, 'Name is required').max(50),
   email: z.string().email('Invalid email address'),
   subject: z.string().max(100).optional(),
-  message: z.string().min(1, 'Message is required').max(1000),
+  message: z.string().min(1, 'Message is required').max(5000),
+  projectType: z.string().optional(),
+  budget: z.string().optional(),
+  priority: z.string().optional(),
+  phone: z.string().optional(),
 });
 
 // Basic in-memory rate limiting (for MVP, resets on server restart)
@@ -56,7 +61,48 @@ export async function POST(request: Request) {
       );
     }
 
-    const { name, email, subject, message } = validatedData.data;
+    const { name, email, subject, message, projectType, budget, priority, phone } = validatedData.data;
+
+    // Save to database (Inquiry flow)
+    try {
+      // Find or create customer
+      let customer = await prisma.customer.findUnique({
+        where: { email },
+      });
+
+      if (!customer) {
+        customer = await prisma.customer.create({
+          data: {
+            name,
+            email,
+            phone: phone || null,
+          },
+        });
+      } else {
+        // Update phone if provided
+        if (phone) {
+          await prisma.customer.update({
+            where: { id: customer.id },
+            data: { phone },
+          });
+        }
+      }
+
+      // Create inquiry
+      await prisma.inquiry.create({
+        data: {
+          description: message,
+          budget: budget || null,
+          projectType: projectType || null,
+          priority: priority || 'P2',
+          customerId: customer.id,
+          status: 'PENDING',
+        },
+      });
+    } catch (dbError) {
+      console.error('Failed to save inquiry to database:', dbError);
+      // Continue even if DB save fails - still try to send email
+    }
 
     // Send email using Resend
     if (process.env.RESEND_API_KEY) {
