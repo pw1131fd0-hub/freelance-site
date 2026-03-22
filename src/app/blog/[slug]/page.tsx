@@ -1,12 +1,42 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { blogPosts } from "@/data/blog";
 import { notFound } from "next/navigation";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Clock } from "lucide-react";
 
 export function generateStaticParams() {
   return blogPosts.map((post) => ({
     slug: post.slug,
   }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const post = blogPosts.find((p) => p.slug === slug);
+  if (!post) return { title: "Post Not Found | OpenClaw" };
+  return {
+    title: `${post.title} | OpenClaw`,
+    description: post.excerpt,
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      type: "article",
+    },
+    twitter: {
+      card: "summary",
+      title: post.title,
+      description: post.excerpt,
+    },
+  };
+}
+
+function getReadingTime(content: string): number {
+  const words = content.trim().split(/\s+/).length;
+  return Math.max(1, Math.ceil(words / 200));
 }
 
 function renderContent(content: string) {
@@ -103,7 +133,12 @@ function renderContent(content: string) {
 }
 
 function boldify(text: string): string {
-  return text.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>").replace(/`(.+?)`/g, '<code class="px-1.5 py-0.5 bg-slate-100 dark:bg-white/10 rounded text-sm font-mono text-slate-700 dark:text-slate-300">$1</code>');
+  return text
+    .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+    .replace(
+      /`(.+?)`/g,
+      '<code class="px-1.5 py-0.5 bg-slate-100 dark:bg-white/10 rounded text-sm font-mono text-slate-700 dark:text-slate-300">$1</code>'
+    );
 }
 
 export default async function BlogPostPage({
@@ -117,6 +152,8 @@ export default async function BlogPostPage({
   if (!post) {
     notFound();
   }
+
+  const readingTime = getReadingTime(post.content);
 
   return (
     <main className="min-h-screen bg-[#F8FAFC] dark:bg-[#080808] text-[#0F172A] dark:text-[#F1F5F9] font-sans">
@@ -144,7 +181,13 @@ export default async function BlogPostPage({
             <h1 className="text-3xl md:text-4xl font-bold tracking-tight leading-snug mb-4">
               {post.title}
             </h1>
-            <time className="text-xs font-mono text-slate-400">{post.date}</time>
+            <div className="flex items-center gap-4 text-xs font-mono text-slate-400">
+              <time>{post.date}</time>
+              <span className="inline-flex items-center gap-1">
+                <Clock size={11} />
+                {readingTime} min read
+              </span>
+            </div>
           </header>
 
           <div className="prose-custom">{renderContent(post.content)}</div>

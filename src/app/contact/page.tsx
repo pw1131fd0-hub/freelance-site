@@ -2,6 +2,21 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { motion, type Variants } from 'framer-motion';
+import { ArrowLeft, ArrowRight, Mail, MessageSquare, Clock } from 'lucide-react';
+
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.07, delayChildren: 0.05 },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0 },
+};
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -12,172 +27,296 @@ export default function Contact() {
     captcha: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [message, setMessage] = useState('');
+  const [statusMsg, setStatusMsg] = useState('');
+  const [isSuccess, setIsSuccess] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value,
-    }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Simple CAPTCHA validation
+
     if (formData.captcha !== '2') {
-      setMessage('❌ Error: Incorrect answer to the math question.');
+      setIsSuccess(false);
+      setStatusMsg('Incorrect answer to the verification question.');
       return;
     }
 
     setIsSubmitting(true);
-    setMessage('');
+    setStatusMsg('');
 
     try {
       const { captcha: _, ...submitData } = formData;
       const response = await fetch('/api/contact', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(submitData),
       });
 
       if (response.ok) {
-        setMessage('✅ Message sent successfully! I\'ll get back to you soon.');
+        setIsSuccess(true);
+        setStatusMsg("Message sent! I'll get back to you within 24–48 hours.");
         setFormData({ name: '', email: '', subject: '', message: '', captcha: '' });
       } else {
         const errorData = await response.json();
-        setMessage(`❌ Error: ${errorData.error || 'Failed to send message.'}`);
+        setIsSuccess(false);
+        setStatusMsg(errorData.error || 'Failed to send message.');
       }
-    } catch (error) {
-      setMessage('❌ Error sending message. Please try again later.');
-      console.error('Form submission error:', error);
+    } catch {
+      setIsSuccess(false);
+      setStatusMsg('Error sending message. Please try again later.');
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <main className="min-h-screen bg-white dark:bg-black text-black dark:text-white font-sans">
-      <nav className="max-w-4xl mx-auto px-6 py-12">
-        <Link href="/" className="text-sm font-bold hover:text-blue-600 dark:hover:text-blue-400">
-          ← Back to Home
-        </Link>
-      </nav>
-
-      <section className="max-w-4xl mx-auto px-6 pb-24">
-        <h1 className="text-4xl font-bold mb-8 tracking-tight">Connect with OpenClaw</h1>
-        <p className="text-xl text-gray-600 dark:text-gray-400 mb-16 max-w-2xl">
-          Interested in building AI-oriented solutions or have a specific challenge? Drop a message below.
-        </p>
-
-
-        <form onSubmit={handleSubmit} className="max-w-2xl space-y-12">
-          <div className="space-y-8">
-            <div className="border-b border-gray-200 dark:border-gray-800 pb-2 focus-within:border-blue-600 transition-colors">
-              <label htmlFor="name" className="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-2">
-                Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                className="w-full bg-transparent border-none focus:ring-0 p-0 text-lg placeholder-gray-300 dark:placeholder-gray-700"
-                placeholder="How should we call you?"
-              />
-            </div>
-
-            <div className="border-b border-gray-200 dark:border-gray-800 pb-2 focus-within:border-blue-600 transition-colors">
-              <label htmlFor="email" className="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-2">
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                className="w-full bg-transparent border-none focus:ring-0 p-0 text-lg placeholder-gray-300 dark:placeholder-gray-700"
-                placeholder="your@email.com"
-              />
-            </div>
-
-            <div className="border-b border-gray-200 dark:border-gray-800 pb-2 focus-within:border-blue-600 transition-colors">
-              <label htmlFor="subject" className="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-2">
-                Subject
-              </label>
-              <input
-                type="text"
-                id="subject"
-                name="subject"
-                value={formData.subject}
-                onChange={handleChange}
-                className="w-full bg-transparent border-none focus:ring-0 p-0 text-lg placeholder-gray-300 dark:placeholder-gray-700"
-                placeholder="What's this about?"
-              />
-            </div>
-
-            <div className="border-b border-gray-200 dark:border-gray-800 pb-2 focus-within:border-blue-600 transition-colors">
-              <label htmlFor="message" className="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-2">
-                Message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                required
-                rows={4}
-                className="w-full bg-transparent border-none focus:ring-0 p-0 text-lg placeholder-gray-300 dark:placeholder-gray-700 resize-none"
-                placeholder="What's on your mind?"
-              />
-            </div>
-
-            <div className="border-b border-gray-200 dark:border-gray-800 pb-2 focus-within:border-blue-600 transition-colors">
-              <label htmlFor="captcha" className="block text-xs font-bold uppercase tracking-widest text-gray-500 mb-2">
-                Verification: 1 + 1 = ?
-              </label>
-              <input
-                type="text"
-                id="captcha"
-                name="captcha"
-                value={formData.captcha}
-                onChange={handleChange}
-                required
-                className="w-full bg-transparent border-none focus:ring-0 p-0 text-lg placeholder-gray-300 dark:placeholder-gray-700"
-                placeholder="Prove you are human"
-              />
-            </div>
-          </div>
-
-          {message && (
-            <div className={`text-sm font-medium ${message.startsWith('✅') ? 'text-green-600' : 'text-red-600'}`}>
-              {message}
-            </div>
-          )}
-
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="px-12 py-4 bg-black dark:bg-white text-white dark:text-black font-bold text-lg hover:bg-blue-600 dark:hover:bg-blue-400 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+    <main className="min-h-screen bg-[#F8FAFC] dark:bg-[#080808] text-[#0F172A] dark:text-[#F1F5F9] font-sans">
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="show"
+        className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-8"
+      >
+        {/* Header */}
+        <motion.div variants={itemVariants} className="mb-8">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors mb-6 font-medium"
           >
-            {isSubmitting ? 'Sending...' : 'Send Message'}
-          </button>
-        </form>
-
-        <div className="mt-24 pt-12 border-t border-gray-100 dark:border-gray-900">
-          <p className="text-gray-500 dark:text-gray-500 text-sm font-mono">
-            Direct: <a href="mailto:contact@openclaw.dev" className="hover:text-blue-600 underline">contact@openclaw.dev</a>
+            <ArrowLeft size={14} />
+            Back to Home
+          </Link>
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
+            Get in Touch
+          </h1>
+          <p className="mt-3 text-slate-500 dark:text-slate-400 max-w-xl text-base leading-relaxed">
+            Interested in building AI-oriented solutions or have a specific
+            challenge? Let&apos;s talk.
           </p>
+        </motion.div>
+
+        {/* Bento grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-5">
+          {/* Contact form card */}
+          <motion.div
+            variants={itemVariants}
+            className="lg:col-span-8 bg-white dark:bg-[#111111] rounded-[28px] p-8 md:p-10 border border-slate-100 dark:border-white/[0.05]"
+          >
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div>
+                  <label
+                    htmlFor="name"
+                    className="block text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-2"
+                  >
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    className="w-full bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.08] rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-400 dark:focus:border-blue-500 transition-colors"
+                    placeholder="Your name"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="block text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-2"
+                  >
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    className="w-full bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.08] rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-400 dark:focus:border-blue-500 transition-colors"
+                    placeholder="your@email.com"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label
+                  htmlFor="subject"
+                  className="block text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-2"
+                >
+                  Subject
+                </label>
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  className="w-full bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.08] rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-400 dark:focus:border-blue-500 transition-colors"
+                  placeholder="What's this about?"
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="message"
+                  className="block text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-2"
+                >
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  rows={5}
+                  className="w-full bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.08] rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-400 dark:focus:border-blue-500 transition-colors resize-none"
+                  placeholder="Tell me about your project or idea..."
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="captcha"
+                  className="block text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-2"
+                >
+                  Verification: 1 + 1 = ?
+                </label>
+                <input
+                  type="text"
+                  id="captcha"
+                  name="captcha"
+                  value={formData.captcha}
+                  onChange={handleChange}
+                  required
+                  className="w-36 bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.08] rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-400 dark:focus:border-blue-500 transition-colors"
+                  placeholder="Answer"
+                />
+              </div>
+
+              {statusMsg && (
+                <div
+                  className={`text-sm font-medium px-4 py-3 rounded-xl ${
+                    isSuccess
+                      ? 'bg-emerald-50 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-400'
+                      : 'bg-red-50 dark:bg-red-950/30 text-red-600 dark:text-red-400'
+                  }`}
+                >
+                  {statusMsg}
+                </div>
+              )}
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="inline-flex items-center gap-2 px-8 py-3.5 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-300 dark:disabled:bg-white/10 text-white font-bold text-sm rounded-xl transition-colors disabled:cursor-not-allowed"
+              >
+                {isSubmitting ? (
+                  'Sending...'
+                ) : (
+                  <>
+                    Send Message <ArrowRight size={14} />
+                  </>
+                )}
+              </button>
+            </form>
+          </motion.div>
+
+          {/* Sidebar */}
+          <div className="lg:col-span-4 flex flex-col gap-4 lg:gap-5">
+            {/* Availability card */}
+            <motion.div
+              variants={itemVariants}
+              className="bg-blue-600 rounded-[28px] p-8 text-white flex flex-col justify-between"
+            >
+              <div className="text-xs font-mono uppercase tracking-[0.15em] text-blue-200 mb-6">
+                Availability
+              </div>
+              <div className="space-y-5 flex-1">
+                <div className="flex items-center gap-2.5">
+                  <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse flex-shrink-0" />
+                  <span className="text-sm font-bold">Open to new projects</span>
+                </div>
+                <div>
+                  <div className="text-4xl font-bold leading-none">Q2 2026</div>
+                  <div className="text-sm text-blue-200 mt-1">
+                    Next availability
+                  </div>
+                </div>
+              </div>
+              <div className="mt-8 pt-6 border-t border-white/20 text-xs font-mono text-blue-300 uppercase tracking-widest">
+                Typical reply: 24–48h
+              </div>
+            </motion.div>
+
+            {/* Direct contact card */}
+            <motion.div
+              variants={itemVariants}
+              className="bg-white dark:bg-[#111111] rounded-[28px] p-7 border border-slate-100 dark:border-white/[0.05] flex flex-col gap-5"
+            >
+              <div className="text-xs font-mono uppercase tracking-[0.15em] text-slate-400 dark:text-slate-500">
+                Direct Contact
+              </div>
+              <a
+                href="mailto:contact@openclaw.dev"
+                className="group flex items-center gap-3 text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              >
+                <div className="w-9 h-9 rounded-xl bg-slate-100 dark:bg-white/[0.05] flex items-center justify-center group-hover:bg-blue-50 dark:group-hover:bg-blue-950/30 transition-colors flex-shrink-0">
+                  <Mail
+                    size={15}
+                    className="text-slate-500 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors"
+                  />
+                </div>
+                <div>
+                  <div className="text-xs text-slate-400 mb-0.5">Email</div>
+                  <div className="text-sm font-bold">contact@openclaw.dev</div>
+                </div>
+              </a>
+              <div className="flex items-start gap-3 text-slate-700 dark:text-slate-300">
+                <div className="w-9 h-9 rounded-xl bg-slate-100 dark:bg-white/[0.05] flex items-center justify-center flex-shrink-0">
+                  <MessageSquare size={15} className="text-slate-500" />
+                </div>
+                <div>
+                  <div className="text-xs text-slate-400 mb-0.5">Preferred</div>
+                  <div className="text-sm font-bold">Via contact form</div>
+                </div>
+              </div>
+              <div className="flex items-start gap-3 text-slate-700 dark:text-slate-300">
+                <div className="w-9 h-9 rounded-xl bg-slate-100 dark:bg-white/[0.05] flex items-center justify-center flex-shrink-0">
+                  <Clock size={15} className="text-slate-500" />
+                </div>
+                <div>
+                  <div className="text-xs text-slate-400 mb-0.5">Timezone</div>
+                  <div className="text-sm font-bold">GMT+8 (Taipei)</div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
 
-      </section>
+        {/* Footer */}
+        <motion.footer
+          variants={itemVariants}
+          className="mt-12 pb-10 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-400 text-xs font-mono border-t border-slate-100 dark:border-white/[0.05] pt-8"
+        >
+          <span>© {new Date().getFullYear()} OpenClaw</span>
+          <Link
+            href="/projects"
+            className="text-blue-600 dark:text-blue-400 hover:underline underline-offset-4"
+          >
+            View my work →
+          </Link>
+        </motion.footer>
+      </motion.div>
     </main>
   );
 }

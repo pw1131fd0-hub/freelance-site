@@ -3,7 +3,12 @@
 import Link from "next/link";
 import { blogPosts } from "@/data/blog";
 import { motion, type Variants } from "framer-motion";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, Clock } from "lucide-react";
+
+function getReadingTime(content: string): number {
+  const words = content.trim().split(/\s+/).length;
+  return Math.max(1, Math.ceil(words / 200));
+}
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -78,9 +83,13 @@ export default function Blog() {
                     ))}
                   </div>
                   <div className="flex items-center justify-between">
-                    <time className="text-xs font-mono text-slate-400">
-                      {featured.date}
-                    </time>
+                    <div className="flex items-center gap-3 text-xs font-mono text-slate-400">
+                      <time>{featured.date}</time>
+                      <span className="inline-flex items-center gap-1">
+                        <Clock size={11} />
+                        {getReadingTime(featured.content)} min read
+                      </span>
+                    </div>
                     <span className="inline-flex items-center gap-1.5 text-sm font-bold text-slate-700 dark:text-slate-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                       Read Article
                       <ArrowRight
@@ -130,9 +139,13 @@ export default function Blog() {
                 href={`/blog/${post.slug}`}
                 className="block h-full bg-white dark:bg-[#111111] rounded-[28px] p-7 border border-slate-100 dark:border-white/[0.05] group hover:border-blue-200 dark:hover:border-blue-800/50 transition-colors duration-200 flex flex-col"
               >
-                <time className="text-xs font-mono text-slate-400 mb-3 block">
-                  {post.date}
-                </time>
+                <div className="flex items-center gap-3 text-xs font-mono text-slate-400 mb-3">
+                  <time>{post.date}</time>
+                  <span className="inline-flex items-center gap-1">
+                    <Clock size={10} />
+                    {getReadingTime(post.content)} min
+                  </span>
+                </div>
                 <h3 className="text-base font-bold mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-snug flex-1">
                   {post.title}
                 </h3>
