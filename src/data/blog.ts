@@ -10,138 +10,138 @@ export interface BlogPost {
 export const blogPosts: BlogPost[] = [
   {
     slug: 'future-of-ai-foundries',
-    title: 'The Future of AI Foundries',
+    title: 'AI 代工廠的未來',
     date: '2026-03-01',
-    excerpt: 'Exploring how AI specialization will revolutionize the tech industry, mirroring the IC industry evolution.',
+    excerpt: '探索 AI 專業化如何革新科技產業——就像 IC 產業從整合製造商演進為專業設計廠與代工廠的歷程。',
     content: `
-# The Future of AI Foundries
+# AI 代工廠的未來
 
-The AI industry is rapidly evolving towards a more specialized ecosystem. Much like how the Integrated Circuit (IC) industry shifted from integrated manufacturers to specialized design houses and foundries (like TSMC), the AI world is seeing a similar trend.
+AI 產業正快速朝向更專業化的生態系演進。就如同半導體產業從整合型製造商轉型為專業設計廠與代工廠（如台積電）的過程，AI 領域也正在上演類似的趨勢。
 
-At **OpenClaw**, I believe that the next decade will be defined by "AI Foundries"—entities that provide the systematic, high-performance infrastructure and expertise to build data-oriented solutions for complex, previously unsolvable problems.
+在 **OpenClaw**，我相信未來十年將由「AI 代工廠」所定義——這些實體提供系統化、高效能的基礎設施與專業知識，為複雜、以往無法解決的問題打造以數據為核心的解決方案。
 
-## Key Trends:
-1. **Vertical Specialization**: AI models tailored for specific industries (legal, medical, manufacturing).
-2. **Data-Centric Infrastructure**: Moving away from model-centric to data-centric development.
-3. **The "Enlighten the Future" Mission**: Using AI not just for automation, but for genuine enlightenment of human potential.
+## 關鍵趨勢：
+1. **垂直專業化**：針對特定產業（法律、醫療、製造）定制的 AI 模型。
+2. **以數據為中心的基礎架構**：從以模型為中心轉向以數據為中心的開發模式。
+3. **「照亮未來」使命**：使用 AI 不僅僅是為了自動化，更是為了真正啟發人類潛能。
 
-Stay tuned as we continue to hack the future.
+持續關注我們，一起駭進未來。
     `,
-    tags: ['AI', 'Future', 'OpenClaw']
+    tags: ['AI', '趨勢', 'OpenClaw']
   },
   {
     slug: 'kubernetes-production-lessons',
-    title: 'Kubernetes in Production: 5 Hard Lessons',
+    title: 'Kubernetes 生產環境的 5 個血淚教訓',
     date: '2026-02-18',
-    excerpt: 'After running Kubernetes clusters in production for two years, here are the five lessons that cost me the most time — and how to avoid them.',
+    excerpt: '在生產環境運行 Kubernetes 叢集兩年後，這是讓我付出最多時間代價的五個教訓——以及如何避免重蹈覆轍。',
     content: `
-# Kubernetes in Production: 5 Hard Lessons
+# Kubernetes 生產環境的 5 個血淚教訓
 
-Running Kubernetes at scale teaches you things no tutorial ever will. After managing clusters for multiple production workloads, here are the five lessons that hit hardest.
+大規模運行 Kubernetes 會讓你學到教科書裡永遠不會寫的事情。在管理多個生產工作負載的叢集之後，以下是打擊最大的五個教訓。
 
-## 1. Resource Requests Are Not Optional
+## 1. Resource Requests 不是可選的
 
-Skipping resource requests and limits feels fine until a single runaway pod starves your entire node. Set them — always. Use VPA in recommendation mode to calibrate real usage first.
+跳過 resource requests 和 limits 在一開始感覺沒什麼問題，直到某個失控的 Pod 把整個節點的資源榨乾。永遠要設定它們。先用 VPA 的建議模式校準實際用量。
 
-## 2. Liveness Probes Can Cause Cascading Failures
+## 2. Liveness Probe 可能引發連鎖失敗
 
-A liveness probe that's too aggressive will restart perfectly healthy pods under load, turning a traffic spike into an outage. Prefer readiness probes for traffic gating; use liveness only for true deadlock scenarios.
+設定過於激進的 liveness probe 會在負載高峰時重啟完全健康的 Pod，把流量激增變成服務中斷。偏好使用 readiness probe 控制流量路由；liveness 僅用於真正的死鎖情境。
 
-## 3. etcd Is Your Most Critical Dependency
+## 3. etcd 是你最關鍵的依賴
 
-Most engineers treat etcd as "just the database." It isn't — it's the brain of your cluster. Back it up hourly. Monitor its disk latency obsessively. At > 10ms write latency, strange things start happening to your control plane.
+大多數工程師把 etcd 視為「只是個資料庫」。它不是——它是你叢集的大腦。每小時備份。痴迷地監控它的磁碟延遲。寫入延遲 > 10ms 時，你的控制平面就會開始出現奇怪的行為。
 
-## 4. Namespace Isolation Is Not Security
+## 4. Namespace 隔離不等於安全
 
-RBAC and network policies are not optional extras. By default, pods in different namespaces can talk to each other freely. Implement NetworkPolicy deny-all defaults from day one.
+RBAC 和網路策略不是可有可無的附加項。預設情況下，不同命名空間的 Pod 可以自由通訊。從第一天就實施 NetworkPolicy 的全拒絕預設策略。
 
-## 5. GitOps or You'll Regret It
+## 5. GitOps，否則你會後悔
 
-Manual kubectl applies don't scale. The moment you have more than one engineer touching the cluster, drift becomes inevitable. ArgoCD or Flux, set it up before you need it.
+手動 kubectl apply 無法擴展。一旦有超過一名工程師操作叢集，配置漂移就不可避免。ArgoCD 或 Flux，在你需要之前就把它架起來。
 
-These lessons were expensive. Hopefully reading them isn't.
+這些教訓代價高昂。希望閱讀它們的代價不會那麼高。
     `,
-    tags: ['Kubernetes', 'DevOps', 'Production']
+    tags: ['Kubernetes', 'DevOps', '生產環境']
   },
   {
     slug: 'building-rag-pipelines-2026',
-    title: 'Building Production RAG Pipelines in 2026',
+    title: '打造 2026 年的生產級 RAG 流水線',
     date: '2026-02-05',
-    excerpt: 'Retrieval-Augmented Generation has matured. Here\'s what a production-grade RAG pipeline actually looks like today — beyond the demo.',
+    excerpt: '檢索增強生成（RAG）已趨於成熟。以下是今日生產級 RAG 流水線的真實樣貌——超越展示 Demo 的層次。',
     content: `
-# Building Production RAG Pipelines in 2026
+# 打造 2026 年的生產級 RAG 流水線
 
-RAG demos are easy. Production RAG is not. After shipping several LLM-powered features to real users, here's what separates a demo from something that actually works.
+RAG Demo 很容易做。生產級 RAG 卻不然。在將多個 LLM 驅動功能交付給真實用戶之後，以下是區分 Demo 與真正可用系統的關鍵差異。
 
-## The Anatomy of a Good RAG System
+## 優秀 RAG 系統的解剖
 
-A production RAG pipeline has five distinct concerns: ingestion, chunking, retrieval, augmentation, and evaluation. Most tutorials nail the middle three and ignore the outer two.
+生產級 RAG 流水線有五個核心環節：資料注入、分塊、檢索、增強與評估。大多數教程把中間三個做得很好，卻忽略了頭尾兩個。
 
-## Ingestion: Garbage In, Garbage Out
+## 注入：垃圾進，垃圾出
 
-Your retrieval quality ceiling is set at ingestion time. Invest in:
-- Document structure preservation (headers, tables, code blocks)
-- Metadata enrichment (source, timestamp, author, version)
-- Incremental updates with deduplication
+你的檢索品質上限在注入階段就已決定。投資在：
+- 文件結構保留（標題、表格、程式碼區塊）
+- 元數據豐富化（來源、時間戳、作者、版本）
+- 去重複的增量更新
 
-## Chunking Strategy Matters More Than Model Choice
+## 分塊策略比模型選擇更重要
 
-Semantic chunking consistently outperforms naive fixed-size splits. Use a sliding window with overlap for dense technical content, and sentence-boundary splits for prose.
+語義分塊的效果持續優於單純的固定大小切割。對密集技術內容使用帶重疊的滑動視窗，對敘述性文章使用句子邊界切割。
 
-## Hybrid Search Is the Current Best Practice
+## 混合搜尋是當前最佳實踐
 
-Pure vector search has recall problems for exact-match queries. Combine dense retrieval with BM25 sparse retrieval and use reciprocal rank fusion to merge results. Most teams see 15-25% relevance improvement over vector-only.
+純向量搜尋對精確匹配查詢有召回問題。將稠密檢索與 BM25 稀疏檢索結合，使用互倒排名融合合併結果。大多數團隊相較純向量方案可見 15-25% 的相關性提升。
 
-## Evaluation Is Not Optional
+## 評估不是可選的
 
-Without an eval harness, you're flying blind. Build:
-1. A golden dataset of 50-100 Q&A pairs from your domain
-2. Automated scoring with an LLM-as-judge
-3. Regression tests in CI to catch retrieval degradation
+沒有評估框架，你就是在盲飛。建立：
+1. 來自你領域的 50-100 個問答對黃金數據集
+2. 以 LLM 作為評判的自動評分
+3. CI 中的回歸測試，捕捉檢索品質退化
 
-Ship eval before you ship features. It's the only way to know if you're improving.
+在交付功能之前先交付評估框架。這是唯一能確認你在進步的方式。
     `,
-    tags: ['AI', 'LLM', 'RAG', 'Engineering']
+    tags: ['AI', 'LLM', 'RAG', '工程']
   },
   {
     slug: 'nextjs-server-actions-patterns',
-    title: 'Server Actions: The Pattern That Changed How I Build',
+    title: 'Server Actions：改變我開發方式的模式',
     date: '2026-01-22',
-    excerpt: 'Next.js Server Actions removed an entire layer of boilerplate from my workflow. Here are the patterns I\'ve settled on after building with them for a year.',
+    excerpt: 'Next.js Server Actions 從我的工作流程中消除了整整一層樣板程式碼。以下是我使用一年後沉澱下來的開發模式。',
     content: `
-# Server Actions: The Pattern That Changed How I Build
+# Server Actions：改變我開發方式的模式
 
-When Server Actions landed in Next.js 14, I was skeptical. Another abstraction over fetch? A year and several production apps later, I've changed my mind completely.
+當 Server Actions 在 Next.js 14 中推出時，我持懷疑態度。又一個 fetch 的抽象層？在一年和幾個生產應用之後，我完全改變了想法。
 
-## Why They Work
+## 為什麼它們有效
 
-Server Actions collapse the client-server boundary in a way that feels natural for data mutation workflows. You write a function on the server, call it from a client component, and Next.js handles the serialization, revalidation, and error boundary integration.
+Server Actions 以一種對數據修改工作流程感覺自然的方式折疊了客戶端-服務器邊界。你在服務器上寫一個函數，從客戶端組件調用它，Next.js 處理序列化、重新驗證和錯誤邊界整合。
 
-## The Patterns I Use
+## 我使用的模式
 
-### Pattern 1: Zod Validation at the Gate
+### 模式 1：在入口處進行 Zod 驗證
 
-Every Server Action starts with Zod validation. Not after — at the gate. If validation fails, return early with a typed error. Never trust client-supplied data.
+每個 Server Action 從 Zod 驗證開始。不是之後——而是在入口處。如果驗證失敗，提前返回並帶有類型化錯誤。永遠不要信任客戶端提供的數據。
 
-### Pattern 2: Return Typed Results
+### 模式 2：返回類型化結果
 
-Instead of throwing errors, return a discriminated union:
+不拋出錯誤，而是返回可辨識聯合型別：
 
-- \`{ success: true, data: T }\` on success
-- \`{ success: false, error: string }\` on failure
+- \`{ success: true, data: T }\` 成功時
+- \`{ success: false, error: string }\` 失敗時
 
-This pattern makes client-side handling predictable and avoids try/catch in components.
+這個模式使客戶端處理可預測，並避免在組件中使用 try/catch。
 
-### Pattern 3: Revalidate Precisely
+### 模式 3：精確重新驗證
 
-Avoid revalidatePath('/') — it's a nuclear option. Revalidate only the specific paths or tags affected by the mutation. Your users will notice the difference in perceived performance.
+避免 revalidatePath('/')——這是核選項。只重新驗證受修改影響的特定路徑或標籤。你的用戶會注意到感知性能的差異。
 
-### Pattern 4: Optimistic Updates with useOptimistic
+### 模式 4：使用 useOptimistic 進行樂觀更新
 
-For list operations, pair Server Actions with useOptimistic to give instant feedback while the server round-trip completes. The UX improvement is dramatic for frequent mutations.
+對於列表操作，將 Server Actions 與 useOptimistic 配對，在服務器往返完成時給出即時反饋。對於頻繁修改，UX 改善是顯著的。
 
-These patterns have halved the boilerplate in my apps without sacrificing type safety or control.
+這些模式在不犧牲類型安全或控制的情況下，將我應用中的樣板程式碼減少了一半。
     `,
-    tags: ['Next.js', 'TypeScript', 'Architecture']
+    tags: ['Next.js', 'TypeScript', '架構']
   }
 ];

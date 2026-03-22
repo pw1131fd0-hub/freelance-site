@@ -42,7 +42,7 @@ export default function Contact() {
 
     if (formData.captcha !== '2') {
       setIsSuccess(false);
-      setStatusMsg('Incorrect answer to the verification question.');
+      setStatusMsg('驗證問題答案不正確。');
       return;
     }
 
@@ -59,16 +59,16 @@ export default function Contact() {
 
       if (response.ok) {
         setIsSuccess(true);
-        setStatusMsg("Message sent! I'll get back to you within 24–48 hours.");
+        setStatusMsg('訊息已送出！我將在 24–48 小時內回覆您。');
         setFormData({ name: '', email: '', subject: '', message: '', captcha: '' });
       } else {
         const errorData = await response.json();
         setIsSuccess(false);
-        setStatusMsg(errorData.error || 'Failed to send message.');
+        setStatusMsg(errorData.error || '訊息傳送失敗。');
       }
     } catch {
       setIsSuccess(false);
-      setStatusMsg('Error sending message. Please try again later.');
+      setStatusMsg('傳送訊息時發生錯誤，請稍後再試。');
     } finally {
       setIsSubmitting(false);
     }
@@ -89,14 +89,13 @@ export default function Contact() {
             className="inline-flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors mb-6 font-medium"
           >
             <ArrowLeft size={14} />
-            Back to Home
+            返回首頁
           </Link>
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
-            Get in Touch
+            聯絡我
           </h1>
           <p className="mt-3 text-slate-500 dark:text-slate-400 max-w-xl text-base leading-relaxed">
-            Interested in building AI-oriented solutions or have a specific
-            challenge? Let&apos;s talk.
+            想建立 AI 解決方案，或有具體挑戰想討論嗎？讓我們來聊聊。
           </p>
         </motion.div>
 
@@ -114,7 +113,7 @@ export default function Contact() {
                     htmlFor="name"
                     className="block text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-2"
                   >
-                    Name
+                    姓名
                   </label>
                   <input
                     type="text"
@@ -124,7 +123,7 @@ export default function Contact() {
                     onChange={handleChange}
                     required
                     className="w-full bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.08] rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-400 dark:focus:border-blue-500 transition-colors"
-                    placeholder="Your name"
+                    placeholder="您的姓名"
                   />
                 </div>
                 <div>
@@ -132,7 +131,7 @@ export default function Contact() {
                     htmlFor="email"
                     className="block text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-2"
                   >
-                    Email
+                    電子郵件
                   </label>
                   <input
                     type="email"
@@ -152,7 +151,7 @@ export default function Contact() {
                   htmlFor="subject"
                   className="block text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-2"
                 >
-                  Subject
+                  主旨
                 </label>
                 <input
                   type="text"
@@ -161,7 +160,7 @@ export default function Contact() {
                   value={formData.subject}
                   onChange={handleChange}
                   className="w-full bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.08] rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-400 dark:focus:border-blue-500 transition-colors"
-                  placeholder="What's this about?"
+                  placeholder="這是關於什麼的？"
                 />
               </div>
 
@@ -170,7 +169,7 @@ export default function Contact() {
                   htmlFor="message"
                   className="block text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-2"
                 >
-                  Message
+                  訊息
                 </label>
                 <textarea
                   id="message"
@@ -180,7 +179,7 @@ export default function Contact() {
                   required
                   rows={5}
                   className="w-full bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.08] rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-400 dark:focus:border-blue-500 transition-colors resize-none"
-                  placeholder="Tell me about your project or idea..."
+                  placeholder="告訴我您的專案或想法……"
                 />
               </div>
 
@@ -189,7 +188,7 @@ export default function Contact() {
                   htmlFor="captcha"
                   className="block text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-2"
                 >
-                  Verification: 1 + 1 = ?
+                  驗證：1 + 1 = ？
                 </label>
                 <input
                   type="text"
@@ -199,7 +198,7 @@ export default function Contact() {
                   onChange={handleChange}
                   required
                   className="w-36 bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.08] rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-400 dark:focus:border-blue-500 transition-colors"
-                  placeholder="Answer"
+                  placeholder="答案"
                 />
               </div>
 
@@ -221,10 +220,10 @@ export default function Contact() {
                 className="inline-flex items-center gap-2 px-8 py-3.5 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-300 dark:disabled:bg-white/10 text-white font-bold text-sm rounded-xl transition-colors disabled:cursor-not-allowed"
               >
                 {isSubmitting ? (
-                  'Sending...'
+                  '寄送中……'
                 ) : (
                   <>
-                    Send Message <ArrowRight size={14} />
+                    傳送訊息 <ArrowRight size={14} />
                   </>
                 )}
               </button>
@@ -239,22 +238,22 @@ export default function Contact() {
               className="bg-blue-600 rounded-[28px] p-8 text-white flex flex-col justify-between"
             >
               <div className="text-xs font-mono uppercase tracking-[0.15em] text-blue-200 mb-6">
-                Availability
+                承接狀況
               </div>
               <div className="space-y-5 flex-1">
                 <div className="flex items-center gap-2.5">
                   <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse flex-shrink-0" />
-                  <span className="text-sm font-bold">Open to new projects</span>
+                  <span className="text-sm font-bold">目前接受新專案</span>
                 </div>
                 <div>
                   <div className="text-4xl font-bold leading-none">Q2 2026</div>
                   <div className="text-sm text-blue-200 mt-1">
-                    Next availability
+                    最早可配合時間
                   </div>
                 </div>
               </div>
               <div className="mt-8 pt-6 border-t border-white/20 text-xs font-mono text-blue-300 uppercase tracking-widest">
-                Typical reply: 24–48h
+                通常回覆時間：24–48h
               </div>
             </motion.div>
 
@@ -264,7 +263,7 @@ export default function Contact() {
               className="bg-white dark:bg-[#111111] rounded-[28px] p-7 border border-slate-100 dark:border-white/[0.05] flex flex-col gap-5"
             >
               <div className="text-xs font-mono uppercase tracking-[0.15em] text-slate-400 dark:text-slate-500">
-                Direct Contact
+                直接聯絡
               </div>
               <a
                 href="mailto:contact@openclaw.dev"
@@ -277,7 +276,7 @@ export default function Contact() {
                   />
                 </div>
                 <div>
-                  <div className="text-xs text-slate-400 mb-0.5">Email</div>
+                  <div className="text-xs text-slate-400 mb-0.5">電子郵件</div>
                   <div className="text-sm font-bold">contact@openclaw.dev</div>
                 </div>
               </a>
@@ -286,8 +285,8 @@ export default function Contact() {
                   <MessageSquare size={15} className="text-slate-500" />
                 </div>
                 <div>
-                  <div className="text-xs text-slate-400 mb-0.5">Preferred</div>
-                  <div className="text-sm font-bold">Via contact form</div>
+                  <div className="text-xs text-slate-400 mb-0.5">偏好方式</div>
+                  <div className="text-sm font-bold">透過聯絡表單</div>
                 </div>
               </div>
               <div className="flex items-start gap-3 text-slate-700 dark:text-slate-300">
@@ -295,7 +294,7 @@ export default function Contact() {
                   <Clock size={15} className="text-slate-500" />
                 </div>
                 <div>
-                  <div className="text-xs text-slate-400 mb-0.5">Timezone</div>
+                  <div className="text-xs text-slate-400 mb-0.5">時區</div>
                   <div className="text-sm font-bold">GMT+8 (Taipei)</div>
                 </div>
               </div>
@@ -313,7 +312,7 @@ export default function Contact() {
             href="/projects"
             className="text-blue-600 dark:text-blue-400 hover:underline underline-offset-4"
           >
-            View my work →
+            查看我的作品 →
           </Link>
         </motion.footer>
       </motion.div>

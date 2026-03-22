@@ -41,14 +41,13 @@ export default function Blog() {
             className="inline-flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors mb-6 font-medium"
           >
             <ArrowLeft size={14} />
-            Back to Home
+            返回首頁
           </Link>
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
-            Thoughts &amp; Insights
+            思想與見解
           </h1>
           <p className="mt-3 text-slate-500 dark:text-slate-400 max-w-xl text-base leading-relaxed">
-            Writing about AI, engineering practices, Kubernetes, and building
-            things that matter.
+            撰寫關於 AI、工程實踐、Kubernetes 及各種值得探討的主題。
           </p>
         </motion.div>
 
@@ -64,7 +63,7 @@ export default function Blog() {
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-50/80 via-transparent to-transparent dark:from-blue-950/20 dark:via-transparent dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                 <div className="relative z-10">
                   <span className="text-xs font-mono uppercase tracking-widest text-blue-600 dark:text-blue-400 mb-4 block">
-                    Latest Post
+                    最新文章
                   </span>
                   <h2 className="text-2xl md:text-3xl font-bold mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-snug">
                     {featured.title}
@@ -87,11 +86,11 @@ export default function Blog() {
                       <time>{featured.date}</time>
                       <span className="inline-flex items-center gap-1">
                         <Clock size={11} />
-                        {getReadingTime(featured.content)} min read
+                        {getReadingTime(featured.content)} 分鐘閱讀
                       </span>
                     </div>
                     <span className="inline-flex items-center gap-1.5 text-sm font-bold text-slate-700 dark:text-slate-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                      Read Article
+                      閱讀文章
                       <ArrowRight
                         size={13}
                         className="group-hover:translate-x-0.5 transition-transform"
@@ -109,22 +108,22 @@ export default function Blog() {
             className="lg:col-span-4 bg-blue-600 rounded-[28px] p-8 text-white flex flex-col justify-between"
           >
             <div className="text-xs font-mono uppercase tracking-[0.15em] text-blue-200 mb-6">
-              Writing
+              寫作
             </div>
             <div className="space-y-5 flex-1">
               <div>
                 <div className="text-4xl font-bold leading-none">
                   {blogPosts.length}
                 </div>
-                <div className="text-sm text-blue-200 mt-1">Articles</div>
+                <div className="text-sm text-blue-200 mt-1">篇文章</div>
               </div>
               <div>
                 <div className="text-4xl font-bold leading-none">2026</div>
-                <div className="text-sm text-blue-200 mt-1">Active Year</div>
+                <div className="text-sm text-blue-200 mt-1">活躍年份</div>
               </div>
             </div>
             <div className="mt-8 pt-6 border-t border-white/20 text-xs font-mono text-blue-300 uppercase tracking-widest">
-              AI · DevOps · Architecture
+              AI · DevOps · 架構
             </div>
           </motion.div>
 
@@ -143,7 +142,7 @@ export default function Blog() {
                   <time>{post.date}</time>
                   <span className="inline-flex items-center gap-1">
                     <Clock size={10} />
-                    {getReadingTime(post.content)} min
+                    {getReadingTime(post.content)} 分
                   </span>
                 </div>
                 <h3 className="text-base font-bold mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-snug flex-1">
@@ -177,7 +176,7 @@ export default function Blog() {
             href="/contact"
             className="text-blue-600 dark:text-blue-400 hover:underline underline-offset-4"
           >
-            Work with me →
+            與我合作 →
           </Link>
         </motion.footer>
       </motion.div>

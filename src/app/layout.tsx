@@ -16,30 +16,32 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "OpenClaw | Full-Stack & AI Architect",
+  title: "OpenClaw | 全端暨 AI 架構師",
   description:
-    "Building AI-oriented solutions to solve the most valuable, previously unsolvable problems. Full-stack developer, Kubernetes expert, and LLM integrations specialist available for freelance projects.",
+    "打造以 AI 為核心的解決方案，解決以往無法突破的高價值問題。全端工程師、Kubernetes 專家，以及 LLM 整合專家，目前承接自由接案專案。",
   keywords: [
-    "full-stack developer",
-    "AI architect",
+    "全端工程師",
+    "AI 架構師",
     "Kubernetes",
     "Next.js",
     "TypeScript",
-    "freelance engineer",
-    "LLM integration",
+    "自由接案工程師",
+    "LLM 整合",
+    "full-stack developer",
+    "AI architect",
   ],
   openGraph: {
-    title: "OpenClaw | Full-Stack & AI Architect",
+    title: "OpenClaw | 全端暨 AI 架構師",
     description:
-      "Building AI-oriented solutions to solve the most valuable, previously unsolvable problems.",
+      "打造以 AI 為核心的解決方案，解決以往無法突破的高價值問題。",
     type: "website",
-    locale: "en_US",
+    locale: "zh_TW",
   },
   twitter: {
     card: "summary_large_image",
-    title: "OpenClaw | Full-Stack & AI Architect",
+    title: "OpenClaw | 全端暨 AI 架構師",
     description:
-      "Building AI-oriented solutions to solve the most valuable, previously unsolvable problems.",
+      "打造以 AI 為核心的解決方案，解決以往無法突破的高價值問題。",
   },
 };
 
@@ -49,7 +51,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="zh-TW" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

@@ -1,13 +1,13 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Projects | OpenClaw',
+  title: '作品集 | OpenClaw',
   description:
-    'A selection of AI-powered platforms, Kubernetes tooling, and full-stack applications built by OpenClaw — all production-ready.',
+    '精選 AI 驅動平台、Kubernetes 工具與全端應用——由 OpenClaw 打造，全數達到生產就緒標準。',
   openGraph: {
-    title: 'Projects | OpenClaw',
+    title: '作品集 | OpenClaw',
     description:
-      'A selection of AI-powered platforms, Kubernetes tooling, and full-stack applications built by OpenClaw.',
+      '精選 AI 驅動平台、Kubernetes 工具與全端應用——由 OpenClaw 打造。',
     type: 'website',
   },
 };

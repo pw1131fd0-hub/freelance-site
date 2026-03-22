@@ -17,7 +17,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const post = blogPosts.find((p) => p.slug === slug);
-  if (!post) return { title: "Post Not Found | OpenClaw" };
+  if (!post) return { title: "找不到文章 | OpenClaw" };
   return {
     title: `${post.title} | OpenClaw`,
     description: post.excerpt,
@@ -163,7 +163,7 @@ export default async function BlogPostPage({
           className="inline-flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors mb-8 font-medium"
         >
           <ArrowLeft size={14} />
-          Back to Insights
+          返回部落格
         </Link>
 
         <article className="bg-white dark:bg-[#111111] rounded-[28px] p-8 md:p-12 border border-slate-100 dark:border-white/[0.05]">
@@ -185,7 +185,7 @@ export default async function BlogPostPage({
               <time>{post.date}</time>
               <span className="inline-flex items-center gap-1">
                 <Clock size={11} />
-                {readingTime} min read
+                {readingTime} 分鐘閱讀
               </span>
             </div>
           </header>
@@ -198,13 +198,13 @@ export default async function BlogPostPage({
             href="/blog"
             className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
           >
-            ← All posts
+            ← 所有文章
           </Link>
           <Link
             href="/contact"
             className="text-blue-600 dark:text-blue-400 hover:underline underline-offset-4"
           >
-            Work with me →
+            與我合作 →
           </Link>
         </footer>
       </div>

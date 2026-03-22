@@ -7,9 +7,9 @@ import { Menu, Moon, Sun, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const navLinks = [
-  { href: "/projects", label: "Work" },
-  { href: "/blog", label: "Blog" },
-  { href: "/contact", label: "Contact" },
+  { href: "/projects", label: "作品集" },
+  { href: "/blog", label: "部落格" },
+  { href: "/contact", label: "聯絡" },
 ];
 
 export function Navigation() {
@@ -58,7 +58,7 @@ export function Navigation() {
               <button
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
                 className="p-2 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors"
-                aria-label="Toggle theme"
+                aria-label="切換主題"
               >
                 {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
               </button>
@@ -68,14 +68,14 @@ export function Navigation() {
               href="/contact"
               className="hidden sm:inline-flex ml-2 px-4 py-2 text-sm font-semibold bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
             >
-              Hire Me
+              雇用我
             </Link>
 
             {/* Mobile hamburger */}
             <button
               onClick={() => setMobileOpen((v) => !v)}
               className="sm:hidden p-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors"
-              aria-label="Toggle menu"
+              aria-label="展開選單"
             >
               {mobileOpen ? <X size={18} /> : <Menu size={18} />}
             </button>

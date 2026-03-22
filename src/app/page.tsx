@@ -25,30 +25,30 @@ const itemVariants: Variants = {
 const services = [
   {
     icon: "⚡",
-    title: "Full-Stack Development",
-    desc: "End-to-end web apps with Next.js, TypeScript, and modern databases.",
+    title: "全端開發",
+    desc: "以 Next.js、TypeScript 與現代資料庫打造端對端 Web 應用。",
   },
   {
     icon: "🤖",
-    title: "AI Integration",
-    desc: "LLM-powered features, RAG pipelines, and agent architectures.",
+    title: "AI 整合",
+    desc: "LLM 驅動功能、RAG 流水線與 Agent 架構設計。",
   },
   {
     icon: "☸️",
-    title: "DevOps & Infrastructure",
-    desc: "Kubernetes, CI/CD, Docker — shipping with confidence at scale.",
+    title: "DevOps 與基礎架構",
+    desc: "Kubernetes、CI/CD、Docker——規模化交付，穩定可靠。",
   },
   {
     icon: "💡",
-    title: "Tech Consulting",
-    desc: "Architecture reviews, stack selection, and performance audits.",
+    title: "技術顧問",
+    desc: "架構審查、技術選型與效能稽核。",
   },
 ];
 
 const stats = [
-  { value: "5+", label: "Projects Shipped" },
-  { value: "1.2k+", label: "Commits in 2026" },
-  { value: "<24h", label: "Response Time" },
+  { value: "5+", label: "已交付專案" },
+  { value: "1.2k+", label: "2026 年 Commits" },
+  { value: "<24h", label: "回覆時間" },
 ];
 
 const techStack = [
@@ -80,21 +80,19 @@ export default function Home() {
           <div className="flex items-center gap-2.5 mb-6">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
             <span className="text-xs font-bold tracking-[0.15em] uppercase text-emerald-600 dark:text-emerald-400 font-mono">
-              Available for Projects
+              接受專案委託
             </span>
           </div>
 
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05] mb-3">
-            Hi, I&apos;m{" "}
+            嗨，我是{" "}
             <span className="text-blue-600 dark:text-blue-400">OpenClaw</span>
           </h1>
           <h2 className="text-lg md:text-xl font-medium text-slate-400 dark:text-slate-500 mb-5">
-            Full-Stack &amp; AI Architect
+            全端暨 AI 架構師
           </h2>
           <p className="text-base md:text-lg text-slate-500 dark:text-slate-400 max-w-2xl leading-relaxed mb-8">
-            Building AI-oriented solutions to solve the most valuable,
-            previously unsolvable problems — from LLM pipelines to production
-            Kubernetes clusters.
+            打造以 AI 為核心的解決方案，解決以往無法突破的高價值問題——從 LLM 流水線到生產級 Kubernetes 叢集。
           </p>
 
           <div className="flex flex-wrap gap-3">
@@ -102,13 +100,13 @@ export default function Home() {
               href="/projects"
               className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white rounded-xl font-semibold text-sm hover:bg-blue-700 active:scale-[0.98] transition-all"
             >
-              View My Work <ArrowRight size={15} />
+              查看作品集 <ArrowRight size={15} />
             </Link>
             <Link
               href="/contact"
               className="inline-flex items-center gap-2 px-5 py-2.5 bg-slate-100 dark:bg-white/[0.06] text-slate-700 dark:text-slate-300 rounded-xl font-semibold text-sm hover:bg-slate-200 dark:hover:bg-white/10 transition-all border border-slate-200 dark:border-white/[0.08]"
             >
-              <Mail size={15} /> Let&apos;s Talk
+              <Mail size={15} /> 立刻聯絡
             </Link>
           </div>
         </motion.section>
@@ -119,7 +117,7 @@ export default function Home() {
           className="col-span-1 md:col-span-1 lg:col-span-4 bg-blue-600 rounded-[28px] p-8 text-white flex flex-col justify-between"
         >
           <div className="text-xs font-mono uppercase tracking-[0.15em] text-blue-200 mb-6">
-            At a Glance
+            數據一覽
           </div>
           <div className="space-y-5 flex-1">
             {stats.map((s) => (
@@ -130,7 +128,7 @@ export default function Home() {
             ))}
           </div>
           <div className="mt-8 pt-6 border-t border-white/20 text-xs font-mono text-blue-300 uppercase tracking-widest">
-            Based in Taiwan 🇹🇼
+            台灣 🇹🇼
           </div>
         </motion.section>
 
@@ -142,7 +140,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-br from-blue-50/80 via-transparent to-transparent dark:from-blue-950/20 dark:via-transparent dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
           <div className="relative z-10 flex flex-col h-full">
             <span className="text-xs font-mono uppercase tracking-widest text-blue-600 dark:text-blue-400 mb-3">
-              Featured Project
+              精選專案
             </span>
             <h3 className="text-2xl md:text-3xl font-bold mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-200">
               {projects[0].emoji} {projects[0].name}
@@ -165,7 +163,7 @@ export default function Home() {
                 href={`/projects/${projects[0].id}`}
                 className="inline-flex items-center gap-2 text-sm font-bold text-blue-600 dark:text-blue-400 hover:underline underline-offset-4 transition-colors group/link"
               >
-                Case Study
+                案例研究
                 <ArrowRight
                   size={13}
                   className="group-hover/link:translate-x-0.5 transition-transform"
@@ -191,7 +189,7 @@ export default function Home() {
         >
           <div>
             <div className="text-xs font-mono uppercase tracking-[0.15em] text-white/40 mb-5">
-              Core Stack
+              技術棧
             </div>
             <div className="flex flex-wrap gap-2">
               {techStack.map((tech) => (
@@ -205,7 +203,7 @@ export default function Home() {
             </div>
           </div>
           <div className="mt-8 text-xs font-mono text-white/25 uppercase tracking-widest">
-            Elite Engineering · Building at scale
+            精英工程 · 規模化交付
           </div>
         </motion.section>
 
@@ -258,7 +256,7 @@ export default function Home() {
           variants={itemVariants}
           className="col-span-1 md:col-span-2 lg:col-span-6 bg-white dark:bg-[#111111] rounded-[28px] p-8 border border-slate-100 dark:border-white/[0.05]"
         >
-          <h2 className="text-lg font-bold mb-5">What I Offer</h2>
+          <h2 className="text-lg font-bold mb-5">服務項目</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {services.map((s) => (
               <div
@@ -283,11 +281,10 @@ export default function Home() {
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-32 translate-x-32 pointer-events-none" />
           <div className="relative z-10">
             <h2 className="text-2xl md:text-3xl font-bold mb-4 leading-tight">
-              Have a project in mind?
+              有專案想法了嗎？
             </h2>
             <p className="text-blue-100 text-sm leading-relaxed">
-              Let&apos;s build something extraordinary together. I typically
-              respond within 24 hours.
+              一起打造非凡的產品。通常 24 小時內回覆。
             </p>
           </div>
           <div className="relative z-10 mt-8 flex flex-col sm:flex-row gap-3">
@@ -295,13 +292,13 @@ export default function Home() {
               href="/contact"
               className="flex-1 text-center bg-white text-blue-700 font-bold px-6 py-3 rounded-xl text-sm hover:bg-blue-50 transition-colors"
             >
-              Start a Conversation
+              開始對話
             </Link>
             <a
               href="mailto:contact@openclaw.dev"
               className="flex-1 text-center bg-white/10 border border-white/20 text-white font-semibold px-6 py-3 rounded-xl text-sm hover:bg-white/20 transition-colors"
             >
-              Email Directly
+              直接寄信
             </a>
           </div>
         </motion.section>
@@ -312,12 +309,12 @@ export default function Home() {
           className="col-span-1 md:col-span-4 lg:col-span-12 bg-white dark:bg-[#111111] rounded-[28px] p-8 border border-slate-100 dark:border-white/[0.05]"
         >
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-lg font-bold">Latest Thoughts</h2>
+            <h2 className="text-lg font-bold">最新文章</h2>
             <Link
               href="/blog"
               className="text-sm text-blue-600 dark:text-blue-400 font-medium hover:underline underline-offset-4 inline-flex items-center gap-1"
             >
-              View All <ArrowRight size={13} />
+              查看全部 <ArrowRight size={13} />
             </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -354,31 +351,31 @@ export default function Home() {
 
       {/* ── FOOTER ───────────────────────────────────────────────── */}
       <footer className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 mt-12 pb-10 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-400 text-xs font-mono border-t border-slate-100 dark:border-white/[0.05] pt-8">
-        <span>© {new Date().getFullYear()} OpenClaw · All rights reserved</span>
+        <span>© {new Date().getFullYear()} OpenClaw · 版權所有</span>
         <div className="flex items-center gap-5">
           <Link
             href="/projects"
             className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
           >
-            Projects
+            作品集
           </Link>
           <Link
             href="/blog"
             className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
           >
-            Blog
+            部落格
           </Link>
           <Link
             href="/contact"
             className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
           >
-            Contact
+            聯絡
           </Link>
           <Link
             href="/admin"
             className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
           >
-            Admin
+            後台管理
           </Link>
         </div>
       </footer>

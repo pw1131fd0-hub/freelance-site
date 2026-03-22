@@ -15,7 +15,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { id } = await params;
   const project = projects.find((p) => p.id === id);
-  if (!project) return { title: "Project Not Found | OpenClaw" };
+  if (!project) return { title: "找不到專案 | OpenClaw" };
   return {
     title: `${project.emoji} ${project.name} | OpenClaw`,
     description: project.description,
@@ -55,14 +55,14 @@ export default async function ProjectDetail({
           className="inline-flex items-center gap-1.5 text-sm text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors mb-10"
         >
           <ArrowLeft size={14} />
-          All Projects
+          所有作品
         </Link>
 
         {/* Hero */}
         <div className="mb-10">
           <div className="flex items-center gap-3 mb-4 flex-wrap">
             <span className="text-xs font-mono uppercase tracking-[0.15em] text-blue-600 dark:text-blue-400">
-              Case Study
+              案例研究
             </span>
             <span className="text-xs px-2.5 py-1 bg-emerald-100 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 rounded-full font-medium">
               {project.status}
@@ -80,7 +80,7 @@ export default async function ProjectDetail({
           {/* Long Description */}
           <div className="lg:col-span-2 bg-white dark:bg-[#111111] rounded-[24px] p-8 border border-slate-100 dark:border-white/[0.05]">
             <h2 className="text-sm font-mono uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-4">
-              About This Project
+              關於此專案
             </h2>
             <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-base">
               {project.longDescription}
@@ -90,7 +90,7 @@ export default async function ProjectDetail({
           {/* Tech Stack */}
           <div className="bg-[#0F172A] dark:bg-[#0A0F1E] rounded-[24px] p-7 text-white flex flex-col">
             <div className="text-xs font-mono uppercase tracking-[0.15em] text-white/40 mb-5">
-              Tech Stack
+              技術棧
             </div>
             <div className="flex flex-wrap gap-2 flex-1">
               {project.techStack.map((t) => (
@@ -110,7 +110,7 @@ export default async function ProjectDetail({
                 className="inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-blue-300 transition-colors"
               >
                 <Github size={14} />
-                View Source
+                查看原始碼
                 <ExternalLink size={11} />
               </Link>
               {project.liveUrl && (
@@ -121,7 +121,7 @@ export default async function ProjectDetail({
                   className="inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-blue-300 transition-colors"
                 >
                   <ExternalLink size={14} />
-                  Live Demo
+                  線上展示
                 </Link>
               )}
             </div>
@@ -131,7 +131,7 @@ export default async function ProjectDetail({
         {/* Highlights */}
         <div className="bg-white dark:bg-[#111111] rounded-[24px] p-8 border border-slate-100 dark:border-white/[0.05] mb-8">
           <h2 className="text-sm font-mono uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-6">
-            Key Highlights
+            亮點功能
           </h2>
           <ul className="space-y-3">
             {project.highlights.map((highlight, i) => (
@@ -161,7 +161,7 @@ export default async function ProjectDetail({
               />
               <div>
                 <div className="text-xs font-mono text-slate-400 mb-0.5">
-                  Previous
+                  上一個
                 </div>
                 <div className="text-sm font-semibold group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                   {prev.emoji} {prev.name}
@@ -179,7 +179,7 @@ export default async function ProjectDetail({
             >
               <div>
                 <div className="text-xs font-mono text-slate-400 mb-0.5">
-                  Next
+                  下一個
                 </div>
                 <div className="text-sm font-semibold group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                   {next.emoji} {next.name}

@@ -1,13 +1,13 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Thoughts & Insights | OpenClaw',
+  title: '思想與見解 | OpenClaw',
   description:
-    'Writing about AI, engineering practices, Kubernetes, and building things that matter.',
+    '撰寫關於 AI、工程實踐、Kubernetes 及各種值得探討的主題。',
   openGraph: {
-    title: 'Thoughts & Insights | OpenClaw',
+    title: '思想與見解 | OpenClaw',
     description:
-      'Writing about AI, engineering practices, Kubernetes, and building things that matter.',
+      '撰寫關於 AI、工程實踐、Kubernetes 及各種值得探討的主題。',
     type: 'website',
   },
 };

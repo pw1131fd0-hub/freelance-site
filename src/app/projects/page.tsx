@@ -41,14 +41,13 @@ export default function Projects() {
             className="inline-flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors mb-6 font-medium"
           >
             <ArrowLeft size={14} />
-            Back to Home
+            返回首頁
           </Link>
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
-            Projects
+            作品集
           </h1>
           <p className="mt-3 text-slate-500 dark:text-slate-400 max-w-xl text-base leading-relaxed">
-            A selection of things I&apos;ve built — from AI-powered platforms to
-            Kubernetes tooling and beyond.
+            精選作品——從 AI 驅動平台到 Kubernetes 工具與更多。
           </p>
         </motion.div>
 
@@ -63,7 +62,7 @@ export default function Projects() {
             <div className="relative z-10 flex flex-col h-full">
               <div className="flex items-start justify-between mb-4">
                 <span className="text-xs font-mono uppercase tracking-widest text-blue-600 dark:text-blue-400">
-                  Featured
+                  精選
                 </span>
                 <span
                   className={`text-xs font-medium px-2.5 py-1 rounded-full ${
@@ -95,7 +94,7 @@ export default function Projects() {
                   href={`/projects/${featured.id}`}
                   className="inline-flex items-center gap-2 text-sm font-bold text-blue-600 dark:text-blue-400 hover:underline underline-offset-4 transition-colors group/link"
                 >
-                  View Case Study
+                  查看案例研究
                   <ArrowRight
                     size={13}
                     className="group-hover/link:translate-x-0.5 transition-transform"
@@ -121,7 +120,7 @@ export default function Projects() {
             className="lg:col-span-5 bg-[#0F172A] dark:bg-[#0A0F1E] rounded-[28px] p-8 text-white flex flex-col justify-between"
           >
             <div className="text-xs font-mono uppercase tracking-[0.15em] text-white/40 mb-6">
-              Open Source Work
+              開源作品
             </div>
             <div className="space-y-5 flex-1">
               <div>
@@ -129,19 +128,19 @@ export default function Projects() {
                   {projects.length}
                 </div>
                 <div className="text-sm text-white/50 mt-1">
-                  Projects Shipped
+                  已交付專案
                 </div>
               </div>
               <div>
                 <div className="text-4xl font-bold leading-none">100%</div>
                 <div className="text-sm text-white/50 mt-1">
-                  Production-Ready
+                  生產就緒
                 </div>
               </div>
               <div>
                 <div className="text-4xl font-bold leading-none">2026</div>
                 <div className="text-sm text-white/50 mt-1">
-                  Active Development
+                  積極開發中
                 </div>
               </div>
             </div>
@@ -193,7 +192,7 @@ export default function Projects() {
                   href={`/projects/${project.id}`}
                   className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline underline-offset-4 transition-colors"
                 >
-                  Case Study <ArrowRight size={10} />
+                  案例研究 <ArrowRight size={10} />
                 </Link>
                 <Link
                   href={project.githubUrl}
@@ -220,7 +219,7 @@ export default function Projects() {
             href="/contact"
             className="text-blue-600 dark:text-blue-400 hover:underline underline-offset-4"
           >
-            Interested in working together?
+            有興趣合作嗎？
           </Link>
         </motion.footer>
       </motion.div>
