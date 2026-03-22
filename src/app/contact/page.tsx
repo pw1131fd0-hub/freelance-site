@@ -95,7 +95,7 @@ export default function Contact() {
             聯絡我
           </h1>
           <p className="mt-3 text-slate-500 dark:text-slate-400 max-w-xl text-base leading-relaxed">
-            想建立 AI 解決方案，或有具體挑戰想討論嗎？讓我們來聊聊。
+            有資料科學或機器學習專案想合作嗎？無論是預測模型、資料分析、NLP 還是 MLOps——讓我們來聊聊。
           </p>
         </motion.div>
 

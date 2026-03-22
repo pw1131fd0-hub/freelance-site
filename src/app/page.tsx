@@ -24,43 +24,43 @@ const itemVariants: Variants = {
 
 const services = [
   {
-    icon: "⚡",
-    title: "全端開發",
-    desc: "以 Next.js、TypeScript 與現代資料庫打造端對端 Web 應用。",
-  },
-  {
     icon: "🤖",
-    title: "AI 整合",
-    desc: "LLM 驅動功能、RAG 流水線與 Agent 架構設計。",
+    title: "機器學習建模",
+    desc: "端對端 ML 解決方案：特徵工程、模型訓練、SHAP 解釋性分析與生產部署。",
   },
   {
-    icon: "☸️",
-    title: "DevOps 與基礎架構",
-    desc: "Kubernetes、CI/CD、Docker——規模化交付，穩定可靠。",
+    icon: "📊",
+    title: "資料分析與視覺化",
+    desc: "從原始資料到洞察報告——互動式儀表板、統計分析與 BI 系統整合。",
   },
   {
-    icon: "💡",
-    title: "技術顧問",
-    desc: "架構審查、技術選型與效能稽核。",
+    icon: "⚙️",
+    title: "MLOps 與資料工程",
+    desc: "ML Pipeline 自動化、實驗追蹤、模型監控與資料版本控制。",
+  },
+  {
+    icon: "🧠",
+    title: "深度學習 / NLP / CV",
+    desc: "Transformer 微調、GAN 圖像生成、多語言 NLP 與電腦視覺應用開發。",
   },
 ];
 
 const stats = [
-  { value: "5+", label: "已交付專案" },
-  { value: "1.2k+", label: "2026 年 Commits" },
+  { value: "5+", label: "ML 專案交付" },
+  { value: "93%", label: "最高模型準確率" },
   { value: "<24h", label: "回覆時間" },
 ];
 
 const techStack = [
-  { name: "Next.js", bg: "bg-white/10 dark:bg-white/5" },
-  { name: "TypeScript", bg: "bg-blue-400/20" },
-  { name: "Kubernetes", bg: "bg-purple-400/20" },
   { name: "Python", bg: "bg-yellow-400/20" },
-  { name: "LLMs / AI", bg: "bg-emerald-400/20" },
-  { name: "Prisma", bg: "bg-indigo-400/20" },
-  { name: "Docker", bg: "bg-cyan-400/20" },
-  { name: "PostgreSQL", bg: "bg-orange-400/20" },
-  { name: "Tailwind CSS", bg: "bg-teal-400/20" },
+  { name: "PyTorch", bg: "bg-orange-400/20" },
+  { name: "scikit-learn", bg: "bg-blue-400/20" },
+  { name: "Transformers", bg: "bg-yellow-300/20" },
+  { name: "pandas / NumPy", bg: "bg-cyan-400/20" },
+  { name: "LightGBM / XGBoost", bg: "bg-emerald-400/20" },
+  { name: "MLflow / DVC", bg: "bg-indigo-400/20" },
+  { name: "Airflow", bg: "bg-red-400/20" },
+  { name: "FastAPI", bg: "bg-teal-400/20" },
 ];
 
 export default function Home() {
@@ -89,10 +89,10 @@ export default function Home() {
             <span className="text-blue-600 dark:text-blue-400">OpenClaw</span>
           </h1>
           <h2 className="text-lg md:text-xl font-medium text-slate-400 dark:text-slate-500 mb-5">
-            全端暨 AI 架構師
+            資料科學家 &amp; ML 工程師
           </h2>
           <p className="text-base md:text-lg text-slate-500 dark:text-slate-400 max-w-2xl leading-relaxed mb-8">
-            打造以 AI 為核心的解決方案，解決以往無法突破的高價值問題——從 LLM 流水線到生產級 Kubernetes 叢集。
+            以機器學習與深度學習解決真實業務問題——從客戶流失預測、NLP 情感分析到 GAN 圖像生成，資料驅動，結果可解釋。
           </p>
 
           <div className="flex flex-wrap gap-3">
@@ -203,7 +203,7 @@ export default function Home() {
             </div>
           </div>
           <div className="mt-8 text-xs font-mono text-white/25 uppercase tracking-widest">
-            精英工程 · 規模化交付
+            資料驅動 · 結果可解釋
           </div>
         </motion.section>
 

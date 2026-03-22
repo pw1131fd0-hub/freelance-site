@@ -16,32 +16,33 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "OpenClaw | 全端暨 AI 架構師",
+  title: "OpenClaw | 資料科學家 & ML 工程師",
   description:
-    "打造以 AI 為核心的解決方案，解決以往無法突破的高價值問題。全端工程師、Kubernetes 專家，以及 LLM 整合專家，目前承接自由接案專案。",
+    "以機器學習與深度學習解決真實業務問題——客戶流失預測、NLP 情感分析、GAN 圖像生成、MLOps Pipeline。資料驅動，結果可解釋，目前承接自由接案專案。",
   keywords: [
-    "全端工程師",
-    "AI 架構師",
-    "Kubernetes",
-    "Next.js",
-    "TypeScript",
-    "自由接案工程師",
-    "LLM 整合",
-    "full-stack developer",
-    "AI architect",
+    "資料科學家",
+    "機器學習工程師",
+    "深度學習",
+    "NLP",
+    "PyTorch",
+    "scikit-learn",
+    "MLOps",
+    "data scientist",
+    "machine learning engineer",
+    "自由接案",
   ],
   openGraph: {
-    title: "OpenClaw | 全端暨 AI 架構師",
+    title: "OpenClaw | 資料科學家 & ML 工程師",
     description:
-      "打造以 AI 為核心的解決方案，解決以往無法突破的高價值問題。",
+      "以機器學習與深度學習解決真實業務問題。資料驅動，結果可解釋。",
     type: "website",
     locale: "zh_TW",
   },
   twitter: {
     card: "summary_large_image",
-    title: "OpenClaw | 全端暨 AI 架構師",
+    title: "OpenClaw | 資料科學家 & ML 工程師",
     description:
-      "打造以 AI 為核心的解決方案，解決以往無法突破的高價值問題。",
+      "以機器學習與深度學習解決真實業務問題。資料驅動，結果可解釋。",
   },
 };
 
