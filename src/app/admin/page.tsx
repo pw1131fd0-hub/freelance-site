@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { getInquiries } from "@/app/actions/inquiry";
 import {
   Table,
