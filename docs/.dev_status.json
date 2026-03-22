@@ -21,7 +21,7 @@
     "data_science_alignment": 100
   },
   "completeness": 100,
-  "summary": "老闆回饋（data-sci.info）已落實。識別老闆為資料科學家/ML工程師（Learning by Hacking 站長，深度學習/GAN 作者），將整站定位從「全端暨 AI 架構師」全面更新為「資料科學家 & ML 工程師」。更新範圍：projects.ts（5 個 ML 專案：CycleGAN、客戶流失 ML Pipeline、BI 儀表板、NLP 情感分析、MLOps 平台）、blog.ts（4 篇 DS 文章：CycleGAN 解析、ML Pipeline 生產化、SHAP 解釋性、pandas 效能優化）、首頁 hero/services/tech stack（Python/PyTorch/scikit-learn 等）、SEO metadata 全站。Build 驗證通過。",
+  "summary": "全站完成。識別老闆為資料科學家/ML工程師（data-sci.info，Learning by Hacking 站長），整站定位為「資料科學家 & ML 工程師」。繁體中文界面、Bento 格局、CRM 後台（NextAuth + Prisma/SQLite）、SSG/SSR 混合渲染、單元測試、admin 路由 force-dynamic 均已到位。Build 穩定通過（19/19 頁面）。",
   "next_action": "專案完成。可選後續：多語系切換（中/英）、Stripe 支付整合、Email 通知（Resend）。",
-  "updated_at": "2026-03-22T17:00:00Z"
+  "updated_at": "2026-03-22T22:30:00Z"
 }
