@@ -1,10 +1,10 @@
 
-> freelance-site@0.1.0 start
-> next start -p 3001
+> freelance-site-tmp@0.1.0 start
+> next start
 
 ▲ Next.js 16.1.6
-- Local:         http://localhost:3001
-- Network:       http://72.61.149.134:3001
+- Local:         http://localhost:3000
+- Network:       http://72.61.149.134:3000
 
 ✓ Starting...
-✓ Ready in 432ms
+✓ Ready in 441ms
