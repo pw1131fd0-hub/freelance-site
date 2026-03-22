@@ -115,3 +115,23 @@ Phase 3 complete: Contact page fully redesigned to bento aesthetic (2-col grid: 
 
 
 ---
+
+## [2026-03-22 08:36:33] [done] 100%
+
+Final polish complete. /projects/[id] converted from client to server component with generateMetadata (title, description, OG, Twitter) and generateStaticParams — now SSG. Build verified: all 21 pages compile. Full feature set delivered: P0/P1 CRM (inquiry form, admin list, dashboard, customer book), bento-grid redesign across all public pages, per-page SEO for all dynamic routes, reading time, mobile nav, NextAuth admin protection, Prisma/SQLite, Zod validation, unit tests.
+
+> **階段推進：redesign (95) → done (98)**
+
+本次執行的工作：
+
+- **`/projects/[id]` 轉為 Server Component** — 移除 `"use client"` 與 `use(params)` hook，改用 `async/await`
+- **新增 `generateMetadata`** — 為每個專案頁面產生 title、description、OpenGraph、Twitter Card 標籤
+- **新增 `generateStaticParams`** — 5 個專案頁面改為 SSG（`●`），建置時預渲染
+- **Build 驗證通過** — 21/21 頁面全部編譯成功
+
+品質評分提升：`seo_metadata: 96 → 100`，整體 `quality_score: 95 → 98`。
+
+專案現在處於 **done** 階段，所有 PRD 定義的功能均已交付。
+
+
+---
