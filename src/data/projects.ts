@@ -14,7 +14,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: 'openclaw-fps',
-    name: 'OpenClaw FPS',
+    name: "OpenClaw FPS",
     description: '3D WebGL first-person shooter with real-time physics, enemy AI, and wave management.',
     longDescription: 'A fully browser-native 3D first-person shooter built with Three.js and Cannon.js. The game features a real-time physics engine for projectile simulation and environmental interactions, a wave-based enemy AI system with patrol, chase, and attack states, and a level progression architecture. Runs at 60fps in modern browsers with no native plugin required.',
     highlights: [
@@ -48,7 +48,7 @@ export const projects: Project[] = [
   },
   {
     id: 'crm',
-    name: 'OpenClaw CRM',
+    name: "OpenClaw CRM",
     description: 'Enterprise CRM system with customer management, sales pipeline, and analytics dashboard.',
     longDescription: 'A full-featured CRM built specifically for freelancers and small agencies. Centralizes client inquiries from multiple channels into a single pipeline view, tracks deal stages from first contact to signed contract, and surfaces revenue forecasts on the analytics dashboard. Built with Next.js App Router and Server Actions for a snappy, server-first experience with minimal client-side JavaScript.',
     highlights: [
@@ -82,7 +82,7 @@ export const projects: Project[] = [
   },
   {
     id: 'openclaw-deployer',
-    name: 'OpenClaw Deployer',
+    name: "OpenClaw Deployer",
     description: 'CI/CD one-click deployment tool with automated testing, build, and deploy pipeline.',
     longDescription: 'OpenClaw Deployer is a lightweight CI/CD orchestrator built on GitHub Actions that reduces a multi-step deploy workflow to a single CLI command or webhook trigger. It handles test execution, Docker image builds, container registry pushes, and rolling Kubernetes deployments — with automatic rollback if the health check fails within a configurable window. Designed for solo developers and small teams who want Heroku-like simplicity on their own infrastructure.',
     highlights: [
