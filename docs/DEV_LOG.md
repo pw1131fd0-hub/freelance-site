@@ -225,3 +225,29 @@ Final polish complete. /projects/[id] converted from client to server component 
 | Sub-l
 
 ---
+
+## [2026-03-22 22:31:49] [done] 100%
+
+全站完成。識別老闆為資料科學家/ML工程師（data-sci.info，Learning by Hacking 站長），整站定位為「資料科學家 & ML 工程師」。繁體中文界面、Bento 格局、CRM 後台（NextAuth + Prisma/SQLite）、SSG/SSR 混合渲染、單元測試、admin 路由 force-dynamic 均已到位。Build 穩定通過（19/19 頁面）。
+
+> 專案狀態確認完成：
+
+**現況：done — 100/100**
+
+- Build 穩定通過（19/19 頁面，編譯時間 11.8s）
+- 全站繁體中文，定位資料科學家 & ML 工程師（對齊 data-sci.info）
+- 已重建遺失的 `docs/.dev_status.json` 並推送
+
+**已交付所有 PRD 功能：**
+- 客戶詢問表單 + CRM 後台（NextAuth + Prisma/SQLite）
+- 作品集展示（5 個 ML 專案）、部落格（4 篇 DS 文章）
+- Bento 格局、RWD、Dark Mode、SEO metadata
+- 單元測試、admin force-dynamic 修復
+
+**可選後續工作（需指示才執行）：**
+- 多語系切換（中文 / English toggle）
+- Email 通知（Resend 整合）
+- Stripe 支付整合
+
+
+---
