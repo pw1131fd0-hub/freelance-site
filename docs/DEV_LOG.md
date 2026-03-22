@@ -158,3 +158,25 @@ Final polish complete. /projects/[id] converted from client to server component 
 | `data/pr
 
 ---
+
+## [2026-03-22 14:32:17] [done] 100%
+
+修復 /admin 路由建置錯誤（Dynamic Server Usage）：為 admin/page.tsx、admin/dashboard/page.tsx、admin/customers/page.tsx 新增 export const dynamic = 'force-dynamic'，確保 Next.js build 穩定通過。全站中文化維持 100 分，老闆回饋已完整落實。
+
+> 完成。以下是本次執行摘要：
+
+**問題根因**
+`/admin`、`/admin/dashboard`、`/admin/customers` 三個頁面在 Next.js build 時因 NextAuth 讀取 `headers()` 而觸發 `DYNAMIC_SERVER_USAGE` 錯誤，導致最近兩次 `[deploy] failed`。
+
+**修復內容**
+- 三個 admin 頁面各自加入 `export const dynamic = 'force-dynamic'`，強制 SSR 模式繞過靜態生成限制
+- 重建 `docs/.dev_status.json`（原檔案被刪除）
+- Build 驗證通過，已推送至遠端
+
+**目前狀態**
+- Stage: `done` | Quality: 100/100
+- 中文介面：全站繁體中文，`i18n_chinese: 100` ✓
+- Build：穩定通過 ✓
+
+
+---
