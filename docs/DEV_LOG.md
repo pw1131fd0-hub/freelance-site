@@ -94,3 +94,24 @@ Phase 2 complete: /projects page (bento grid + individual case study pages per p
 - **Navigati
 
 ---
+
+## [2026-03-22 08:07:32] [redesign] 95%
+
+Phase 3 complete: Contact page fully redesigned to bento aesthetic (2-col grid: form card + availability/direct-contact sidebar cards, framer-motion stagger, rounded-[28px] bento cards matching other pages). Per-page generateMetadata added to blog/[slug]/page.tsx with title, description, og/twitter tags. Sub-layout metadata files created for /contact, /projects, and /blog routes. Reading time (200 WPM) added to blog list cards (featured + grid) and blog post header. All 16 routes compile successfully.
+
+> Phase 3 完成，品質分數從 **88 → 95**。本次變更：
+
+**Contact Page 重設計**
+- 從極簡風格升級為全 bento 格局：左側 8 欄為樣式化表單卡片，右側 4 欄為 Availability 統計卡（藍底）+ Direct Contact 資訊卡
+- framer-motion stagger 動畫、`rounded-[28px]` 圓角、styled inputs，與其他頁面完全一致
+
+**Per-Page SEO Metadata**
+- `blog/[slug]/page.tsx` 新增 `generateMetadata`（title, description, og, twitter）
+- 新增 `blog/layout.tsx`、`contact/layout.tsx`、`projects/layout.tsx` 各自定義靜態 metadata
+
+**Reading Time**
+- 部落格列表（精選卡 + 格狀卡）顯示估計閱讀時間
+- 個別文章 header 在發布日期旁顯示閱讀時間（200 WPM 計算）
+
+
+---
