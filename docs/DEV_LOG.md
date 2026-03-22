@@ -135,3 +135,26 @@ Final polish complete. /projects/[id] converted from client to server component 
 
 
 ---
+
+## [2026-03-22 14:12:47] [done] 100%
+
+全站中文化完成。公開頁面（首頁、導覽列、聯絡、部落格、作品集）、資料內容（projects.ts、blog.ts）、SEO metadata、sub-layout metadata 全數翻譯為繁體中文。lang 屬性更新為 zh-TW。專案資料狀態標籤統一改為「✅ 生產就緒」。部落格文章標題、摘要與正文皆翻譯完畢。
+
+> 全站中文化完成，已推送至遠端。以下是本次變更摘要：
+
+**翻譯範圍（14 個檔案）：**
+
+| 區域 | 主要變更 |
+|---|---|
+| `layout.tsx` | `lang="zh-TW"`、metadata 標題/描述改中文 |
+| `Navigation.tsx` | 作品集、部落格、聯絡、雇用我 |
+| `page.tsx`（首頁） | Hero、數據一覽、服務項目、CTA、頁腳 |
+| `contact/page.tsx` | 表單欄位、Placeholder、狀態訊息、側邊欄 |
+| `blog/page.tsx` | 頁首、分類標籤、閱讀時間、統計卡 |
+| `blog/[slug]/page.tsx` | 返回連結、閱讀時間、頁腳導覽 |
+| `projects/page.tsx` | 頁首、精選、統計卡、按鈕 |
+| `projects/[id]/page.tsx` | 案例研究、關於此專案、亮點功能、上/下一個 |
+| Sub-layouts (3 個) | contact、projects、blog 的 SEO metadata |
+| `data/pr
+
+---
