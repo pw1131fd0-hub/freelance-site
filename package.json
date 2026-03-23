@@ -2,6 +2,7 @@
   "name": "freelance-site-tmp",
   "version": "0.1.0",
   "private": true,
+  "description": "檢查 next.config.ts 有沒有設定 basePath",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
