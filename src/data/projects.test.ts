@@ -1,25 +1,25 @@
-import { projects } from './projects';
+import test from "node:test";
+import assert from "node:assert";
+import { projects } from "./projects.ts";
 
-describe('Projects Data', () => {
-  it('should have a list of projects', () => {
-    expect(projects.length).toBeGreaterThan(0);
-  });
+test("Projects Data - should have a list of projects", () => {
+  assert.ok(projects.length > 0, "projects array should not be empty");
+});
 
-  it('should have required fields for each project', () => {
-    projects.forEach(project => {
-      expect(project.id).toBeDefined();
-      expect(project.name).toBeDefined();
-      expect(project.description).toBeDefined();
-      expect(project.techStack).toBeDefined();
-      expect(project.githubUrl).toBeDefined();
-      expect(project.status).toBeDefined();
-      expect(project.emoji).toBeDefined();
-    });
+test("Projects Data - should have required fields for each project", () => {
+  projects.forEach(project => {
+    assert.ok(project.id, "project.id is required");
+    assert.ok(project.name, "project.name is required");
+    assert.ok(project.description, "project.description is required");
+    assert.ok(project.techStack, "project.techStack is required");
+    assert.ok(project.githubUrl, "project.githubUrl is required");
+    assert.ok(project.status, "project.status is required");
+    assert.ok(project.emoji, "project.emoji is required");
   });
+});
 
-  it('should have the specific openclaw-fps project', () => {
-    const fps = projects.find(p => p.id === 'openclaw-fps');
-    expect(fps).toBeDefined();
-    expect(fps?.name).toBe('OpenClaw FPS');
-  });
+test("Projects Data - should have CycleGAN project", () => {
+  const cyclegan = projects.find(p => p.id === 'cyclegan-style-transfer');
+  assert.ok(cyclegan, "CycleGAN project should exist");
+  assert.strictEqual(cyclegan?.name, 'CycleGAN 圖像風格轉換');
 });
