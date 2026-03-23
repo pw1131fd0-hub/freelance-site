@@ -8,7 +8,13 @@ import { useEffect, useState } from "react";
 
 const navLinks = [
   { href: "/projects", label: "作品集" },
+  { href: "/services", label: "服務" },
+  { href: "/case-studies", label: "案例" },
+  { href: "/testimonials", label: "評價" },
+  { href: "/about", label: "關於" },
+  { href: "/pricing", label: "報價" },
   { href: "/blog", label: "部落格" },
+  { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "聯絡" },
 ];
 
