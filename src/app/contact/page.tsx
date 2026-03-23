@@ -22,8 +22,10 @@ export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    subject: '',
+    phone: '',
+    projectType: '',
     message: '',
+    budget: '',
     captcha: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -31,7 +33,7 @@ export default function Contact() {
   const [isSuccess, setIsSuccess] = useState(false);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -59,16 +61,16 @@ export default function Contact() {
 
       if (response.ok) {
         setIsSuccess(true);
-        setStatusMsg('訊息已送出！我將在 24–48 小時內回覆您。');
-        setFormData({ name: '', email: '', subject: '', message: '', captcha: '' });
+        setStatusMsg('詢問已提交！我將在 24–48 小時內回覆您。');
+        setFormData({ name: '', email: '', phone: '', projectType: '', message: '', budget: '', captcha: '' });
       } else {
         const errorData = await response.json();
         setIsSuccess(false);
-        setStatusMsg(errorData.error || '訊息傳送失敗。');
+        setStatusMsg(errorData.error || '提交失敗，請稍後重試。');
       }
     } catch {
       setIsSuccess(false);
-      setStatusMsg('傳送訊息時發生錯誤，請稍後再試。');
+      setStatusMsg('提交時發生錯誤，請稍後再試。');
     } finally {
       setIsSubmitting(false);
     }
@@ -107,13 +109,20 @@ export default function Contact() {
             className="lg:col-span-8 bg-white dark:bg-[#111111] rounded-[28px] p-8 md:p-10 border border-slate-100 dark:border-white/[0.05]"
           >
             <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Header */}
+              <div>
+                <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-1">提交專案詢問</h2>
+                <p className="text-sm text-slate-500 dark:text-slate-400">請填寫以下資訊，我會盡快與您聯繫。</p>
+              </div>
+
+              {/* Name and Email */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
                   <label
                     htmlFor="name"
                     className="block text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-2"
                   >
-                    姓名
+                    姓名 *
                   </label>
                   <input
                     type="text"
@@ -131,7 +140,7 @@ export default function Contact() {
                     htmlFor="email"
                     className="block text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-2"
                   >
-                    電子郵件
+                    電子郵件 *
                   </label>
                   <input
                     type="email"
@@ -146,30 +155,83 @@ export default function Contact() {
                 </div>
               </div>
 
-              <div>
-                <label
-                  htmlFor="subject"
-                  className="block text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-2"
-                >
-                  主旨
-                </label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  className="w-full bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.08] rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-400 dark:focus:border-blue-500 transition-colors"
-                  placeholder="這是關於什麼的？"
-                />
+              {/* Phone and Project Type */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div>
+                  <label
+                    htmlFor="phone"
+                    className="block text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-2"
+                  >
+                    電話
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    className="w-full bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.08] rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-400 dark:focus:border-blue-500 transition-colors"
+                    placeholder="+886 9xx-xxx-xxx"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="projectType"
+                    className="block text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-2"
+                  >
+                    專案類型
+                  </label>
+                  <select
+                    id="projectType"
+                    name="projectType"
+                    value={formData.projectType}
+                    onChange={handleChange}
+                    className="w-full bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.08] rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-400 dark:focus:border-blue-500 transition-colors"
+                  >
+                    <option value="">選擇專案類型</option>
+                    <option value="ML">機器學習模型開發</option>
+                    <option value="DATA_ANALYSIS">資料分析與視覺化</option>
+                    <option value="NLP">自然語言處理</option>
+                    <option value="COMPUTER_VISION">電腦視覺</option>
+                    <option value="MLOPS">MLOps / 模型部署</option>
+                    <option value="CONSULTING">數據科學諮詢</option>
+                    <option value="OTHER">其他</option>
+                  </select>
+                </div>
               </div>
 
+              {/* Budget */}
+              <div>
+                <label
+                  htmlFor="budget"
+                  className="block text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-2"
+                >
+                  預算範圍
+                </label>
+                <select
+                  id="budget"
+                  name="budget"
+                  value={formData.budget}
+                  onChange={handleChange}
+                  className="w-full bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.08] rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-400 dark:focus:border-blue-500 transition-colors"
+                >
+                  <option value="">選擇預算範圍</option>
+                  <option value="UNDER_20K">20,000 以下</option>
+                  <option value="20K_50K">20,000 - 50,000</option>
+                  <option value="50K_100K">50,000 - 100,000</option>
+                  <option value="100K_200K">100,000 - 200,000</option>
+                  <option value="OVER_200K">200,000 以上</option>
+                  <option value="NEGOTIABLE">面議</option>
+                </select>
+              </div>
+
+              {/* Message */}
               <div>
                 <label
                   htmlFor="message"
                   className="block text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-2"
                 >
-                  訊息
+                  需求描述 *
                 </label>
                 <textarea
                   id="message"
@@ -179,7 +241,7 @@ export default function Contact() {
                   required
                   rows={5}
                   className="w-full bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.08] rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-400 dark:focus:border-blue-500 transition-colors resize-none"
-                  placeholder="告訴我您的專案或想法……"
+                  placeholder="請詳細說明您的專案需求、目標和預期成果……"
                 />
               </div>
 
