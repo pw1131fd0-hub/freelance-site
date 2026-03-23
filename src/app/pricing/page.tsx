@@ -17,86 +17,95 @@ const itemVariants: Variants = {
   show: { opacity: 1, y: 0 },
 };
 
-const pricingPlans = [
+const plans = [
   {
-    name: "諮詢與評估",
-    emoji: "💡",
-    description: "適合剛開始探索 AI 的企業或新創",
-    price: "$1,500",
-    period: "/ 次",
+    name: "小時顧詢",
+    emoji: "📞",
+    price: "$150",
+    unit: "/ 小時",
+    description: "適合快速問題、代碼審查或指導",
     features: [
-      "業務需求分析（2 小時）",
-      "技術可行性評估",
-      "初步方案設計",
-      "成本與時間估計",
-      "後續合作建議",
+      "即時技術諮詢",
+      "代碼審查與反饋",
+      "架構指導",
+      "知識轉移會話",
+      "按需彈性預約",
     ],
     cta: "預約諮詢",
     highlighted: false,
   },
   {
-    name: "中型項目",
+    name: "小型項目",
     emoji: "🚀",
-    description: "單個 ML 模型或數據分析系統",
-    price: "$15k - $45k",
-    period: "/ 項目",
+    price: "$5,000",
+    unit: "起",
+    description: "4-8 週的獨立項目或模型開發",
     features: [
-      "完整的需求分析與設計",
-      "數據準備與探索性分析",
-      "模型開發與優化",
-      "性能評估與文檔",
-      "部署支援與初期監控",
-      "30 天技術支援",
+      "完整項目交付",
+      "定期進度同步",
+      "30 天免費支援",
+      "源代碼和文檔",
+      "代碼審查",
+      "生產部署協助",
     ],
-    cta: "討論項目",
+    cta: "開始項目",
     highlighted: true,
   },
   {
-    name: "複雜系統",
+    name: "中型項目",
     emoji: "⚙️",
-    description: "端對端 AI 平台或 MLOps 基礎設施",
-    price: "$45k - $150k+",
-    period: "/ 項目",
+    price: "$15,000",
+    unit: "起",
+    description: "8-16 週的複雜系統或完整 ML 管道",
     features: [
-      "完整的系統架構設計",
-      "多模型協調與優化",
-      "生產級別的代碼與測試",
-      "MLOps Pipeline 建構",
-      "實時監控與告警系統",
-      "完整交接與培訓",
-      "90 天技術支援",
+      "端對端開發",
+      "架構設計與實施",
+      "完整 MLOps 管道",
+      "60 天免費支援",
+      "團隊知識轉移",
+      "生產監控設置",
+      "雲基礎設施配置",
     ],
-    cta: "規劃合作",
+    cta: "討論項目",
     highlighted: false,
   },
   {
-    name: "長期顧問",
-    emoji: "🤝",
-    description: "持續的技術支援與指導",
-    price: "$5k - $15k",
-    period: "/ 月",
+    name: "企業合作",
+    emoji: "🏢",
+    price: "定制",
+    unit: "/ 季度或年度",
+    description: "長期策略性合作、團隊擴展或多項目",
     features: [
-      "每週技術諮詢會議",
-      "架構設計與代碼審查",
-      "性能優化建議",
-      "團隊能力建設",
-      "新技術探索評估",
-      "優先問題響應",
+      "專屬技術顧問",
+      "優先支援",
+      "團隊培訓計畫",
+      "多項目優化定價",
+      "SLA 保障",
+      "全年知識轉移",
+      "戰略規劃會議",
     ],
-    cta: "開啟合作",
+    cta: "聯絡我們",
     highlighted: false,
   },
 ];
 
-const comparison = [
-  { feature: "需求分析", base: true, pro: true, enterprise: true },
-  { feature: "模型開發", base: false, pro: true, enterprise: true },
-  { feature: "性能優化", base: false, pro: true, enterprise: true },
-  { feature: "生產部署", base: false, pro: true, enterprise: true },
-  { feature: "系統架構", base: false, pro: true, enterprise: true },
-  { feature: "MLOps Pipeline", base: false, pro: false, enterprise: true },
-  { feature: "團隊培訓", base: false, pro: false, enterprise: true },
-  { feature: "技術支援", base: "5 天", pro: "30 天", enterprise: "90 天+" },
+const addOns = [
+  {
+    title: "快速交付 (+50%)",
+    description: "加速項目進度，優先完成",
+  },
+  {
+    title: "額外培訓 ($2,000)",
+    description: "為團隊提供定制化培訓課程",
+  },
+  {
+    title: "部署與監控 ($3,000)",
+    description: "完整的生產環境設置和 24/7 監控",
+  },
+  {
+    title: "持續支援 ($500/月)",
+    description: "無限的技術支援和優化",
+  },
 ];
 
 export default function Pricing() {
@@ -118,53 +127,71 @@ export default function Pricing() {
             返回首頁
           </Link>
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
-            定價方案
+            透明的定價
           </h1>
-          <p className="text-slate-500 dark:text-slate-400 max-w-2xl text-base leading-relaxed mx-auto">
-            透明、靈活的定價，根據您的需求和預算進行調整。沒有隱藏費用。
+          <p className="text-slate-600 dark:text-slate-400 max-w-2xl text-base leading-relaxed mx-auto">
+            無隱藏費用，無驚喜。選擇適合您需求和預算的方案。
           </p>
         </motion.div>
 
-        {/* Pricing Plans */}
+        {/* Pricing Cards */}
         <motion.div
           variants={itemVariants}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12"
         >
-          {pricingPlans.map((plan) => (
+          {plans.map((plan, idx) => (
             <div
-              key={plan.name}
+              key={idx}
               className={`rounded-[28px] p-8 border transition-all ${
                 plan.highlighted
-                  ? "bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950/40 dark:to-blue-900/30 border-blue-300 dark:border-blue-700/50 ring-2 ring-blue-400/50 dark:ring-blue-600/50 md:col-span-2 lg:col-span-1"
+                  ? "bg-blue-600 text-white border-blue-600 md:scale-105 shadow-2xl"
                   : "bg-white dark:bg-[#111111] border-slate-100 dark:border-white/[0.05] hover:border-blue-200 dark:hover:border-blue-800/50"
               }`}
             >
-              <div className="flex items-start justify-between mb-4">
-                <div>
-                  <span className="text-4xl mb-2 block">{plan.emoji}</span>
-                  <h3 className="text-2xl font-bold mb-1">{plan.name}</h3>
-                  <p className="text-sm text-slate-600 dark:text-slate-400">
-                    {plan.description}
-                  </p>
-                </div>
-              </div>
+              <div className="text-4xl mb-4">{plan.emoji}</div>
+              <h3 className={`text-xl font-bold mb-2 ${plan.highlighted ? "text-white" : ""}`}>
+                {plan.name}
+              </h3>
+              <p className={`text-sm mb-6 ${
+                plan.highlighted
+                  ? "text-blue-100"
+                  : "text-slate-600 dark:text-slate-400"
+              }`}>
+                {plan.description}
+              </p>
 
-              <div className="my-6">
-                <span className="text-4xl font-bold">{plan.price}</span>
-                <span className="text-slate-500 dark:text-slate-400 text-sm">
-                  {plan.period}
-                </span>
+              <div className="mb-6">
+                <div className="flex items-baseline gap-2">
+                  <span className={`text-4xl font-bold ${
+                    plan.highlighted ? "text-white" : "text-blue-600 dark:text-blue-400"
+                  }`}>
+                    {plan.price}
+                  </span>
+                  <span className={`text-sm ${
+                    plan.highlighted
+                      ? "text-blue-100"
+                      : "text-slate-600 dark:text-slate-400"
+                  }`}>
+                    {plan.unit}
+                  </span>
+                </div>
               </div>
 
               <ul className="space-y-3 mb-8">
                 {plan.features.map((feature, i) => (
                   <li
                     key={i}
-                    className="flex items-start gap-3 text-sm text-slate-700 dark:text-slate-300"
+                    className={`flex items-start gap-3 text-sm ${
+                      plan.highlighted
+                        ? "text-blue-100"
+                        : "text-slate-600 dark:text-slate-400"
+                    }`}
                   >
                     <Check
                       size={16}
-                      className="text-emerald-500 flex-shrink-0 mt-0.5"
+                      className={`flex-shrink-0 mt-0.5 ${
+                        plan.highlighted ? "text-blue-200" : "text-emerald-500"
+                      }`}
                     />
                     <span>{feature}</span>
                   </li>
@@ -173,130 +200,108 @@ export default function Pricing() {
 
               <Link
                 href="/contact"
-                className={`w-full py-3 px-4 rounded-xl font-bold text-center transition-colors inline-flex items-center justify-center gap-2 ${
+                className={`w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-bold text-sm transition-colors ${
                   plan.highlighted
-                    ? "bg-blue-600 text-white hover:bg-blue-700"
-                    : "bg-slate-100 dark:bg-white/[0.06] text-slate-900 dark:text-white hover:bg-slate-200 dark:hover:bg-white/10 border border-slate-200 dark:border-white/[0.08]"
+                    ? "bg-white text-blue-600 hover:bg-blue-50"
+                    : "bg-blue-600 text-white hover:bg-blue-700"
                 }`}
               >
-                {plan.cta} <ArrowRight size={16} />
+                {plan.cta} <ArrowRight size={14} />
               </Link>
             </div>
           ))}
         </motion.div>
 
-        {/* Comparison Table */}
+        {/* Add-ons */}
         <motion.div variants={itemVariants} className="mb-12">
-          <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">
-            方案對比
+          <h2 className="text-3xl font-bold mb-8 text-center">
+            增值服務
           </h2>
-          <div className="bg-white dark:bg-[#111111] rounded-[28px] p-8 border border-slate-100 dark:border-white/[0.05] overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b border-slate-100 dark:border-white/[0.05]">
-                  <th className="text-left py-4 px-4 font-bold">功能</th>
-                  <th className="text-center py-4 px-4 font-bold text-blue-600 dark:text-blue-400">
-                    諮詢
-                  </th>
-                  <th className="text-center py-4 px-4 font-bold text-blue-600 dark:text-blue-400">
-                    中型項目
-                  </th>
-                  <th className="text-center py-4 px-4 font-bold text-blue-600 dark:text-blue-400">
-                    複雜系統
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {comparison.map((row, i) => (
-                  <tr
-                    key={i}
-                    className="border-b border-slate-100 dark:border-white/[0.05] last:border-b-0"
-                  >
-                    <td className="py-4 px-4 font-medium">{row.feature}</td>
-                    <td className="text-center py-4 px-4">
-                      {typeof row.base === "boolean" ? (
-                        row.base ? (
-                          <Check size={18} className="text-emerald-500 mx-auto" />
-                        ) : (
-                          <span className="text-slate-300 dark:text-slate-600">
-                            —
-                          </span>
-                        )
-                      ) : (
-                        <span className="text-xs font-medium text-slate-600 dark:text-slate-400">
-                          {row.base}
-                        </span>
-                      )}
-                    </td>
-                    <td className="text-center py-4 px-4">
-                      {typeof row.pro === "boolean" ? (
-                        row.pro ? (
-                          <Check size={18} className="text-emerald-500 mx-auto" />
-                        ) : (
-                          <span className="text-slate-300 dark:text-slate-600">
-                            —
-                          </span>
-                        )
-                      ) : (
-                        <span className="text-xs font-medium text-slate-600 dark:text-slate-400">
-                          {row.pro}
-                        </span>
-                      )}
-                    </td>
-                    <td className="text-center py-4 px-4">
-                      {typeof row.enterprise === "boolean" ? (
-                        row.enterprise ? (
-                          <Check size={18} className="text-emerald-500 mx-auto" />
-                        ) : (
-                          <span className="text-slate-300 dark:text-slate-600">
-                            —
-                          </span>
-                        )
-                      ) : (
-                        <span className="text-xs font-medium text-slate-600 dark:text-slate-400">
-                          {row.enterprise}
-                        </span>
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {addOns.map((addon, idx) => (
+              <div
+                key={idx}
+                className="bg-white dark:bg-[#111111] rounded-[28px] p-6 border border-slate-100 dark:border-white/[0.05] hover:border-blue-200 dark:hover:border-blue-800/50 transition-colors"
+              >
+                <h3 className="font-bold mb-2">{addon.title}</h3>
+                <p className="text-sm text-slate-600 dark:text-slate-400">
+                  {addon.description}
+                </p>
+              </div>
+            ))}
           </div>
         </motion.div>
 
-        {/* FAQ Mini */}
-        <motion.div variants={itemVariants} className="mb-12 bg-white dark:bg-[#111111] rounded-[28px] p-8 border border-slate-100 dark:border-white/[0.05]">
-          <h2 className="text-2xl font-bold mb-8">定價常見問題</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* How Pricing Works */}
+        <motion.div
+          variants={itemVariants}
+          className="bg-white dark:bg-[#111111] rounded-[28px] p-8 border border-slate-100 dark:border-white/[0.05] mb-12"
+        >
+          <h2 className="text-2xl font-bold mb-6">定價是如何計算的？</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
-              <h3 className="font-bold mb-2">這些費用包括什麼？</h3>
-              <p className="text-slate-600 dark:text-slate-400 text-sm">
-                費用包括所有開發工作、文檔、部署支援和初期技術支援。不包括客戶提供的基礎設施成本（如雲端服務）。
+              <h3 className="font-bold mb-3 flex items-center gap-2">
+                <span className="text-2xl">1</span> 需求評估
+              </h3>
+              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                我們進行免費的初期咨詢，了解您的項目範圍、複雜度和時程要求。
               </p>
             </div>
             <div>
-              <h3 className="font-bold mb-2">支付方式如何安排？</h3>
-              <p className="text-slate-600 dark:text-slate-400 text-sm">
-                通常分三期：簽約時 30%，中期 40%，完成時 30%。可根據項目大小和風險進行調整。
+              <h3 className="font-bold mb-3 flex items-center gap-2">
+                <span className="text-2xl">2</span> 詳細提案
+              </h3>
+              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                根據需求，我提供帶有固定價格或 T&M 估計的詳細提案。
               </p>
             </div>
             <div>
-              <h3 className="font-bold mb-2">可以提供自定義定價嗎？</h3>
-              <p className="text-slate-600 dark:text-slate-400 text-sm">
-                當然可以。這些是標準方案，但我很樂意根據您的具體需求和預算提供定制方案。
-              </p>
-            </div>
-            <div>
-              <h3 className="font-bold mb-2">超期或超支會怎樣？</h3>
-              <p className="text-slate-600 dark:text-slate-400 text-sm">
-                對於固定價格合同，我確保在合理的範圍內。對於 T&M 模式，會提前通知任何額外費用。
+              <h3 className="font-bold mb-3 flex items-center gap-2">
+                <span className="text-2xl">3</span> 透明合同
+              </h3>
+              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                所有費用、交付物和條款都在合同中明確列出，無隱藏費用。
               </p>
             </div>
           </div>
         </motion.div>
 
-        {/* CTA Section */}
+        {/* FAQ */}
+        <motion.div
+          variants={itemVariants}
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12"
+        >
+          <div className="bg-white dark:bg-[#111111] rounded-[28px] p-8 border border-slate-100 dark:border-white/[0.05]">
+            <h3 className="font-bold mb-4">如何選擇合適的方案？</h3>
+            <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+              如果您有一個簡單問題或需要快速的代碼審查，選擇「小時諮詢」。
+              對於完整的項目或模型開發，選擇「小型」或「中型項目」。
+              對於長期合作或多項目，選擇「企業合作」。
+            </p>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 font-bold text-sm hover:underline underline-offset-4"
+            >
+              我還是不確定 <ArrowRight size={14} />
+            </Link>
+          </div>
+
+          <div className="bg-white dark:bg-[#111111] rounded-[28px] p-8 border border-slate-100 dark:border-white/[0.05]">
+            <h3 className="font-bold mb-4">可以分期付款嗎？</h3>
+            <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+              當然。對於項目超過 $10,000，我提供靈活的分期付款選項：
+              初始 50%，完成 50%。企業客戶可以協商自定義計費周期。
+            </p>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 font-bold text-sm hover:underline underline-offset-4"
+            >
+              討論付款選項 <ArrowRight size={14} />
+            </Link>
+          </div>
+        </motion.div>
+
+        {/* CTA */}
         <motion.div
           variants={itemVariants}
           className="bg-gradient-to-br from-blue-600 via-blue-600 to-blue-700 rounded-[28px] p-12 text-white relative overflow-hidden"
@@ -304,16 +309,16 @@ export default function Pricing() {
           <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none" />
           <div className="relative z-10">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              找不到適合的方案？
+              準備好啟動您的項目了嗎？
             </h2>
             <p className="text-blue-100 text-lg mb-8 max-w-xl">
-              我很樂意根據您的具體情況設計一個客製化的方案。讓我們聊聊您的需求。
+              讓我們進行免費的初期咨詢，了解您的需求並提供精準的報價。
             </p>
             <Link
               href="/contact"
               className="inline-flex items-center gap-2 px-8 py-3 bg-white text-blue-700 font-bold rounded-xl hover:bg-blue-50 transition-colors"
             >
-              開始對話 <ArrowRight size={18} />
+              預約免費咨詢 <ArrowRight size={16} />
             </Link>
           </div>
         </motion.div>
@@ -325,10 +330,10 @@ export default function Pricing() {
         >
           <span>© {new Date().getFullYear()} OpenClaw</span>
           <Link
-            href="/faq"
+            href="/contact"
             className="text-blue-600 dark:text-blue-400 hover:underline underline-offset-4"
           >
-            查看常見問題
+            有興趣合作嗎？
           </Link>
         </motion.footer>
       </motion.div>
