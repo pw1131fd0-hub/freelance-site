@@ -50,37 +50,47 @@ export default function Home() {
     <main className="min-h-screen bg-[#F8FAFC] dark:bg-[#080808] text-[#0F172A] dark:text-[#F1F5F9] font-sans">
       <HomeAnimatedGrid>
         {/* ── 1. HERO ─────────────────────────────────────────── */}
-        <AnimatedItem className="col-span-1 md:col-span-3 lg:col-span-8 bg-white dark:bg-[#111111] rounded-[28px] p-8 md:p-12 border border-slate-100 dark:border-white/[0.05] flex flex-col justify-center min-h-[340px]">
-          <div className="flex items-center gap-2.5 mb-6">
+        <AnimatedItem className="col-span-1 md:col-span-3 lg:col-span-8 bg-gradient-to-br from-white via-blue-50/30 to-white dark:from-[#111111] dark:via-blue-950/10 dark:to-[#111111] rounded-[28px] p-8 md:p-12 border border-slate-100 dark:border-white/[0.05] flex flex-col justify-center min-h-[340px] relative overflow-hidden group">
+          <div className="absolute top-0 right-0 w-72 h-72 bg-blue-200/30 dark:bg-blue-900/20 rounded-full -translate-y-1/2 translate-x-1/4 blur-3xl pointer-events-none group-hover:opacity-75 transition-opacity duration-500" />
+
+          <div className="relative z-10 flex items-center gap-2.5 mb-6">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
             <span className="text-xs font-bold tracking-[0.15em] uppercase text-emerald-600 dark:text-emerald-400 font-mono">
-              接受專案委託
+              接受專案委託 · 台灣 🇹🇼
             </span>
           </div>
 
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05] mb-3">
+          <h1 className="relative z-10 text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05] mb-3">
             嗨，我是{" "}
-            <span className="text-blue-600 dark:text-blue-400">OpenClaw</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-700 dark:from-blue-400 dark:to-blue-500">
+              OpenClaw
+            </span>
           </h1>
-          <h2 className="text-lg md:text-xl font-medium text-slate-400 dark:text-slate-500 mb-5">
+          <h2 className="relative z-10 text-lg md:text-xl font-medium text-slate-500 dark:text-slate-400 mb-5">
             資料科學家 &amp; ML 工程師
           </h2>
-          <p className="text-base md:text-lg text-slate-500 dark:text-slate-400 max-w-2xl leading-relaxed mb-8">
-            以機器學習與深度學習解決真實業務問題——從客戶流失預測、NLP 情感分析到 GAN 圖像生成，資料驅動，結果可解釋。
+          <p className="relative z-10 text-base md:text-lg text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed mb-8">
+            以機器學習與深度學習解決真實業務問題。從客戶流失預測、NLP 情感分析到圖像生成，資料驅動，結果可解釋。
           </p>
 
-          <div className="flex flex-wrap gap-3">
+          <div className="relative z-10 flex flex-col sm:flex-row flex-wrap gap-3">
             <Link
               href="/projects"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white rounded-xl font-semibold text-sm hover:bg-blue-700 active:scale-[0.98] transition-all"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-xl font-semibold text-sm hover:bg-blue-700 active:scale-[0.98] transition-all shadow-lg hover:shadow-xl"
             >
-              查看作品集 <ArrowRight size={15} />
+              查看作品集 <ArrowRight size={16} />
+            </Link>
+            <Link
+              href="/services"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-slate-100 dark:bg-white/[0.06] text-slate-700 dark:text-slate-300 rounded-xl font-semibold text-sm hover:bg-slate-200 dark:hover:bg-white/10 transition-all border border-slate-200 dark:border-white/[0.08] hover:border-blue-200 dark:hover:border-blue-800/30"
+            >
+              服務項目
             </Link>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-slate-100 dark:bg-white/[0.06] text-slate-700 dark:text-slate-300 rounded-xl font-semibold text-sm hover:bg-slate-200 dark:hover:bg-white/10 transition-all border border-slate-200 dark:border-white/[0.08]"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white/80 dark:bg-white/[0.08] text-slate-700 dark:text-slate-300 rounded-xl font-semibold text-sm hover:bg-white dark:hover:bg-white/[0.12] transition-all border border-slate-200 dark:border-white/[0.08]"
             >
-              <Mail size={15} /> 立刻聯絡
+              <Mail size={16} /> 立刻聯絡
             </Link>
           </div>
         </AnimatedItem>
@@ -305,30 +315,46 @@ export default function Home() {
       </HomeAnimatedGrid>
 
       {/* ── FOOTER ───────────────────────────────────────────────── */}
-      <footer className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 mt-12 pb-10 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-400 text-xs font-mono border-t border-slate-100 dark:border-white/[0.05] pt-8">
-        <span>© {new Date().getFullYear()} OpenClaw · 版權所有</span>
-        <div className="flex items-center gap-5">
-          <Link
-            href="/projects"
-            className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-          >
-            作品集
-          </Link>
-          <Link
-            href="/blog"
-            className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-          >
-            部落格
-          </Link>
-          <Link
-            href="/contact"
-            className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-          >
-            聯絡
-          </Link>
+      <footer className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 mt-12 pb-10 flex flex-col gap-6 text-slate-400 text-xs font-mono border-t border-slate-100 dark:border-white/[0.05] pt-8">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+          <div>
+            <p className="font-semibold text-slate-600 dark:text-slate-300 mb-2">產品</p>
+            <div className="space-y-1 text-xs">
+              <Link href="/projects" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors block">作品集</Link>
+              <Link href="/services" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors block">服務項目</Link>
+              <Link href="/pricing" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors block">定價方案</Link>
+            </div>
+          </div>
+          <div>
+            <p className="font-semibold text-slate-600 dark:text-slate-300 mb-2">案例</p>
+            <div className="space-y-1 text-xs">
+              <Link href="/case-studies" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors block">案例研究</Link>
+              <Link href="/testimonials" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors block">客戶評價</Link>
+            </div>
+          </div>
+          <div>
+            <p className="font-semibold text-slate-600 dark:text-slate-300 mb-2">關於</p>
+            <div className="space-y-1 text-xs">
+              <Link href="/about" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors block">關於我</Link>
+              <Link href="/blog" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors block">部落格</Link>
+              <Link href="/faq" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors block">常見問題</Link>
+            </div>
+          </div>
+          <div className="col-span-2 sm:col-span-3 md:col-span-3 flex flex-col gap-2">
+            <p className="font-semibold text-slate-600 dark:text-slate-300">聯繫</p>
+            <Link
+              href="/contact"
+              className="px-4 py-2 text-xs bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors w-fit"
+            >
+              開始對話
+            </Link>
+          </div>
+        </div>
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-100 dark:border-white/[0.05]">
+          <span>© {new Date().getFullYear()} OpenClaw · 版權所有</span>
           <Link
             href="/admin"
-            className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+            className="text-slate-500 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 transition-colors text-xs"
           >
             後台管理
           </Link>
