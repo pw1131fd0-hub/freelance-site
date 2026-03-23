@@ -251,3 +251,23 @@ Final polish complete. /projects/[id] converted from client to server component 
 
 
 ---
+
+## [2026-03-23 10:50:34] [done] 100%
+
+改善馬的 (Performance Optimization) - Iteration 3: 根據老闆回饋「想辦法改善馬的」進行性能優化。首頁從 'use client' 改為 Server Component 以加快 LCP（Largest Contentful Paint）。動畫邏輯提取到客戶端組件 HomeAnimatedGrid 實現漸進增強。優化 next.config.ts 啟用生產設置（compress、productionBrowserSourceMaps: false）。預期 LCP 從 2.5s 優化至 < 2 秒。所有 11 個測試通過，Build 穩定。
+
+> 
+╔══════════════════════════════════════════════════════════════════╗
+║                    Ralph Wiggum Loop                            ║
+║         Iterative AI Development with Claude Code                 ║
+╚══════════════════════════════════════════════════════════════════╝
+
+Task: .gemini_instructions.tmp
+Preview: 專案名稱：接案網站 (Freelance Portfolio) v9。 【現有 PRD（作為核心參考）】 # PRD: 🌐 接案網站 CRM 客戶管理系統 #...
+Completion promise: COMPLETE
+Min iterations: 1
+Max iterations: 3
+Agent: Claude Code
+Permissions: a
+
+---
