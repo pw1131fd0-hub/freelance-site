@@ -17,7 +17,7 @@ const contactSchema = z.object({
 });
 
 // Basic in-memory rate limiting (for MVP, resets on server restart)
-export const rateLimitMap = new Map<string, { count: number; timestamp: number }>();
+const rateLimitMap = new Map<string, { count: number; timestamp: number }>();
 const RATE_LIMIT = 3; // 3 requests per minute
 const RATE_LIMIT_WINDOW = 60 * 1000;
 const MAX_LIMIT_MAP_SIZE = 1000; // Limit map size to prevent memory leaks
