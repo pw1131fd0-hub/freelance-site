@@ -1,6 +1,7 @@
 export const dynamic = 'force-dynamic';
 
 import { prisma } from "@/lib/prisma";
+import { Prisma } from "@prisma/client";
 import {
   Table,
   TableBody,
@@ -12,7 +13,7 @@ import {
 import { format } from "date-fns";
 
 export default async function CustomersPage() {
-  const customers = await prisma.customer.findMany({
+  const customers: Prisma.CustomerGetPayload<{ include: { inquiries: true } }>[] = await prisma.customer.findMany({
     include: {
       inquiries: true,
     },
