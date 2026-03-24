@@ -13,13 +13,9 @@ import { format } from "date-fns";
 
 export default async function CustomersPage() {
   const customers = await prisma.customer.findMany({
-    include: {
-      inquiries: true,
-    },
-    orderBy: {
-      updatedAt: "desc",
-    },
-  });
+    include: { inquiries: true },
+    orderBy: { updatedAt: 'desc' },
+  }) as { id: string; name: string; email: string; phone: string | null; notes: string | null; updatedAt: Date; inquiries: { id: string }[] }[];
 
   return (
     <div className="container mx-auto py-10 px-4">
