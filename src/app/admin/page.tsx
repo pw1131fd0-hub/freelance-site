@@ -40,7 +40,7 @@ export default async function AdminPage() {
                 </TableCell>
               </TableRow>
             ) : (
-              inquiries.map((inquiry) => (
+              inquiries.map((inquiry: any) => (
                 <TableRow key={inquiry.id}>
                   <TableCell className="whitespace-nowrap">
                     {format(new Date(inquiry.createdAt), "yyyy/MM/dd HH:mm")}
