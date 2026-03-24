@@ -30,7 +30,10 @@ export function Navigation() {
 
   // Close mobile menu on route change
   useEffect(() => {
-    setMobileOpen(false);
+    const handleRouteChange = () => {
+      setMobileOpen(false);
+    };
+    handleRouteChange();
   }, [pathname]);
 
   if (pathname.startsWith("/admin") || pathname.startsWith("/login")) {
@@ -45,7 +48,7 @@ export function Navigation() {
             href="/"
             className="text-sm font-bold tracking-tight text-slate-900 dark:text-white"
           >
-            Pe's Lab<span className="text-blue-500">.</span>
+            Pe&apos;s Lab<span className="text-blue-500">.</span>
           </Link>
 
           {/* Desktop nav */}
