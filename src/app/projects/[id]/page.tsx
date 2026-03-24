@@ -15,18 +15,18 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { id } = await params;
   const project = projects.find((p) => p.id === id);
-  if (!project) return { title: "找不到專案 | OpenClaw" };
+  if (!project) return { title: "找不到專案 | Pe's Lab" };
   return {
-    title: `${project.emoji} ${project.name} | OpenClaw`,
+    title: `${project.emoji} ${project.name} | Pe's Lab`,
     description: project.description,
     openGraph: {
-      title: `${project.name} | OpenClaw`,
+      title: `${project.name} | Pe's Lab`,
       description: project.description,
       type: "website",
     },
     twitter: {
       card: "summary",
-      title: `${project.name} | OpenClaw`,
+      title: `${project.name} | Pe's Lab`,
       description: project.description,
     },
   };

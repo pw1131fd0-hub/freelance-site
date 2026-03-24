@@ -45,7 +45,7 @@ export function Navigation() {
             href="/"
             className="text-sm font-bold tracking-tight text-slate-900 dark:text-white"
           >
-            OpenClaw<span className="text-blue-500">.</span>
+            Pe's Lab<span className="text-blue-500">.</span>
           </Link>
 
           {/* Desktop nav */}

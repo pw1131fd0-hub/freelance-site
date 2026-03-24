@@ -24,7 +24,7 @@ const testimonials = [
     role: "技術總監",
     company: "電商平台 TechStore",
     content:
-      "與 OpenClaw 合作是我們團隊最好的決定。他的客戶流失預測模型在短短 3 個月內就幫我們回收了投資成本，而且他非常專業和易於溝通。",
+      "與 Pe's Lab 合作是我們團隊最好的決定。他的客戶流失預測模型在短短 3 個月內就幫我們回收了投資成本，而且他非常專業和易於溝通。",
     rating: 5,
     avatar: "👨‍💼",
   },
@@ -44,7 +44,7 @@ const testimonials = [
     role: "執行長",
     company: "製造企業 SmartFactory",
     content:
-      "在 OpenClaw 的幫助下，我們的品質檢驗從人工變成了全自動化。不僅提升了效率，還大幅降低了誤檢率。他的 MLOps 架構讓我們能自主迭代模型。",
+      "在 Pe's Lab 的幫助下，我們的品質檢驗從人工變成了全自動化。不僅提升了效率，還大幅降低了誤檢率。他的 MLOps 架構讓我們能自主迭代模型。",
     rating: 5,
     avatar: "👨‍💼",
   },
@@ -64,7 +64,7 @@ const testimonials = [
     role: "運營總監",
     company: "物流平台 LogiNext",
     content:
-      "時間序列預測模型幫助我們的庫存管理節省了 22% 的成本。OpenClaw 在整個項目中提供的指導和技術支援都無可挑剔。",
+      "時間序列預測模型幫助我們的庫存管理節省了 22% 的成本。Pe's Lab 在整個項目中提供的指導和技術支援都無可挑剔。",
     rating: 5,
     avatar: "👨‍💼",
   },
@@ -188,7 +188,7 @@ export default function Testimonials() {
               ))}
             </div>
             <p className="text-xl md:text-2xl font-semibold mb-8 leading-relaxed max-w-2xl">
-              "OpenClaw 在 AI 領域的專業知識和執行能力令人難以置信。他不只是一名技術顧問，更是一位策略合作夥伴。"
+              "Pe's Lab 在 AI 領域的專業知識和執行能力令人難以置信。他不只是一名技術顧問，更是一位策略合作夥伴。"
             </p>
             <div className="flex items-center gap-3">
               <span className="text-5xl">👨‍💼</span>
@@ -226,7 +226,7 @@ export default function Testimonials() {
           variants={itemVariants}
           className="mt-12 pb-10 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-400 text-xs font-mono border-t border-slate-100 dark:border-white/[0.05] pt-8"
         >
-          <span>© {new Date().getFullYear()} OpenClaw</span>
+          <span>© {new Date().getFullYear()} Pe's Lab</span>
           <Link
             href="/contact"
             className="text-blue-600 dark:text-blue-400 hover:underline underline-offset-4"

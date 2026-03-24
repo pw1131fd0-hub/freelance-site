@@ -369,7 +369,7 @@ export default function Contact() {
           variants={itemVariants}
           className="mt-12 pb-10 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-400 text-xs font-mono border-t border-slate-100 dark:border-white/[0.05] pt-8"
         >
-          <span>© {new Date().getFullYear()} OpenClaw</span>
+          <span>© {new Date().getFullYear()} Pe's Lab</span>
           <Link
             href="/projects"
             className="text-blue-600 dark:text-blue-400 hover:underline underline-offset-4"

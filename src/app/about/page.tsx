@@ -99,7 +99,7 @@ export default function About() {
             <div className="text-7xl">🧑‍💻</div>
             <div className="flex-1">
               <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-3">
-                關於 OpenClaw
+                關於 Pe's Lab
               </h1>
               <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
                 機器學習工程師 | 數據科學家 | 創業者
@@ -117,7 +117,7 @@ export default function About() {
             <h2 className="text-2xl font-bold mb-6">我的故事</h2>
             <div className="space-y-6 text-slate-600 dark:text-slate-400 leading-relaxed">
               <p>
-                我叫 OpenClaw，一位熱衷於用機器學習解決真實業務問題的工程師。從
+                我叫 Pe's Lab，一位熱衷於用機器學習解決真實業務問題的工程師。從
                 2018 年開始從事數據工作，我見證了 AI
                 如何從實驗室概念轉變成企業級資產。
               </p>
@@ -310,7 +310,7 @@ export default function About() {
           variants={itemVariants}
           className="mt-12 pb-10 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-400 text-xs font-mono border-t border-slate-100 dark:border-white/[0.05] pt-8"
         >
-          <span>© {new Date().getFullYear()} OpenClaw</span>
+          <span>© {new Date().getFullYear()} Pe's Lab</span>
           <Link
             href="/contact"
             className="text-blue-600 dark:text-blue-400 hover:underline underline-offset-4"

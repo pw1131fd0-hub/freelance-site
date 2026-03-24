@@ -6,7 +6,7 @@ describe('Home Page (Static Rendering)', () => {
     const html = renderToString(<Home />);
     
     // Check for the main heading
-    expect(html).toContain('OpenClaw | Full-stack &amp; AI Engineer');
+    expect(html).toContain('Pe's Lab | Full-stack &amp; AI Engineer');
     
     // Check for the subheadings
     expect(html).toContain('The Leading AI &amp; System Architect');
@@ -23,7 +23,7 @@ describe('Home Page (Static Rendering)', () => {
     expect(html).toContain('Featured Projects');
     
     // Check for specific projects
-    expect(html).toContain('OpenClaw FPS');
+    expect(html).toContain('Pe's Lab FPS');
   });
 
   it('renders the footer / connect section', () => {

@@ -17,9 +17,9 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const post = blogPosts.find((p) => p.slug === slug);
-  if (!post) return { title: "找不到文章 | OpenClaw" };
+  if (!post) return { title: "找不到文章 | Pe's Lab" };
   return {
-    title: `${post.title} | OpenClaw`,
+    title: `${post.title} | Pe's Lab`,
     description: post.excerpt,
     openGraph: {
       title: post.title,

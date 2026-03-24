@@ -63,7 +63,7 @@ export default function Home() {
           <h1 className="relative z-10 text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05] mb-3">
             嗨，我是{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-700 dark:from-blue-400 dark:to-blue-500">
-              OpenClaw
+              Pe's Lab
             </span>
           </h1>
           <h2 className="relative z-10 text-lg md:text-xl font-medium text-slate-500 dark:text-slate-400 mb-5">
@@ -351,7 +351,7 @@ export default function Home() {
           </div>
         </div>
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-100 dark:border-white/[0.05]">
-          <span>© {new Date().getFullYear()} OpenClaw · 版權所有</span>
+          <span>© {new Date().getFullYear()} Pe's Lab · 版權所有</span>
           <Link
             href="/admin"
             className="text-slate-500 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 transition-colors text-xs"

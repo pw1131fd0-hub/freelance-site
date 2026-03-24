@@ -2,10 +2,12 @@
 > freelance-site-tmp@0.1.0 start
 > next start
 
-▲ Next.js 16.1.6
-- Local:         http://localhost:3000
-- Network:       http://72.61.149.134:3000
+   ▲ Next.js 15.1.0
+   - Local:        http://localhost:3000
+   - Network:      http://72.61.149.134:3000
 
-✓ Starting...
-✓ Ready in 499ms
-Killed
+ ✓ Starting...
+ ⚠ Invalid next.config.ts options detected: 
+ ⚠     Unrecognized key(s) in object: 'turbopack'
+ ⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+[Error: Could not find a production build in the '.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id]
