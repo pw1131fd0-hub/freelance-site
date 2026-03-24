@@ -1,4 +1,5 @@
-import { PrismaClient } from "@prisma/client";
+// Using require for Prisma v7 compatibility
+const { PrismaClient } = require("@prisma/client");
 
 const globalForPrisma = global as any;
 
