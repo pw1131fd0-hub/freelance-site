@@ -1,0 +1,61 @@
+
+> freelance-site-tmp@0.1.0 build
+> next build --no-lint
+
+ ⚠ Linting is disabled.
+   ▲ Next.js 15.5.14
+   - Environments: .env.local, .env
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 5.8s
+   Checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/26) ...
+   Generating static pages (6/26) 
+   Generating static pages (12/26) 
+   Generating static pages (19/26) 
+ ✓ Generating static pages (26/26)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                 Size  First Load JS
+┌ ○ /                                      471 B         145 kB
+├ ○ /_not-found                            993 B         103 kB
+├ ○ /about                               4.54 kB         149 kB
+├ ƒ /admin                               47.3 kB         174 kB
+├ ƒ /admin/customers                       692 B         111 kB
+├ ƒ /admin/dashboard                       137 B         102 kB
+├ ƒ /api/auth/[...nextauth]                137 B         102 kB
+├ ƒ /api/contact                           137 B         102 kB
+├ ○ /blog                                7.73 kB         153 kB
+├ ● /blog/[slug]                           165 B         106 kB
+├   ├ /blog/cyclegan-image-translation
+├   ├ /blog/ml-pipeline-production
+├   ├ /blog/shap-model-explainability
+├   └ /blog/pandas-performance-tips
+├ ○ /case-studies                        4.22 kB         149 kB
+├ ○ /contact                             4.41 kB         149 kB
+├ ○ /faq                                 4.21 kB         149 kB
+├ ○ /inquiry                                8 kB         162 kB
+├ ○ /login                               3.85 kB         139 kB
+├ ○ /pricing                              4.1 kB         149 kB
+├ ○ /projects                            6.52 kB         151 kB
+├ ● /projects/[id]                         165 B         106 kB
+├   ├ /projects/cyclegan-style-transfer
+├   ├ /projects/customer-churn-ml
+├   ├ /projects/realtime-bi-dashboard
+├   └ [+2 more paths]
+├ ○ /services                            3.73 kB         149 kB
+└ ○ /testimonials                        4.08 kB         149 kB
++ First Load JS shared by all             102 kB
+  ├ chunks/255-38b49df12a94ee57.js         46 kB
+  ├ chunks/4bd1b696-c023c6e3521b1417.js  54.2 kB
+  └ other shared chunks (total)          1.92 kB
+
+
+ƒ Middleware                             61.3 kB
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+
